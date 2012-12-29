@@ -1,0 +1,1 @@
+This project assumes you have visual studio 2010 and an environmental variable named OPENCV_BUILD which points to the opencv\build directory
