@@ -39,12 +39,12 @@ void Projector::init(void){
 
 	glClearColor(0, 0, 0, 0);
  
-    glViewport(0, 0, 640, 480);
+    glViewport(0, 0, 1280, 800);
  
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
  
-    glOrtho(0, 640, 480, 0, 1, -1);
+    glOrtho(0, 1280, 800, 0, 1, -1000);
  
     glMatrixMode(GL_MODELVIEW);
  
@@ -73,17 +73,32 @@ void Projector::init(void){
    // SDL_Quit();
 }
 
-void Projector::renderFrame(void){
+void Projector::renderFrame(int x, int y){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
  
-    glBegin(GL_QUADS);/*
-        glColor3f(1, 0, 0); glVertex3f(0, 0, 0);
-        glColor3f(1, 1, 0); glVertex3f(100, 0, 0);
-        glColor3f(1, 0, 1); glVertex3f(100, 100, 0);
-        glColor3f(1, 1, 1); glVertex3f(0, 100, 0);*/
-    glEnd();
- 
+	if(x == 0){
+    //glBegin(GL_QUADS);
+    //    glColor3f(1, 0, 0); glVertex3f(0, 0, 0);
+    //    glColor3f(1, 1, 0); glVertex3f(1280, 0, 0);
+    //    glColor3f(1, 0, 1); glVertex3f(1280, 800, 0);
+    //    glColor3f(1, 1, 1); glVertex3f(0, 800, 0);
+    //glEnd();
+	}
+	else{
+
+		 GLUquadric *sphere=gluNewQuadric();
+    gluQuadricDrawStyle( sphere, GLU_FILL);
+    gluQuadricNormals( sphere, GLU_SMOOTH);
+    gluQuadricOrientation( sphere, GLU_OUTSIDE);
+    gluQuadricTexture( sphere, GL_TRUE);
+
+		glPushMatrix();
+		glTranslatef(x,y,0.0);
+		gluSphere(sphere,1,100,100);
+		glPopMatrix();
+	}
+
     SDL_GL_SwapBuffers();
 }
 

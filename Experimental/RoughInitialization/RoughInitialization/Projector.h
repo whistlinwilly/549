@@ -12,6 +12,6 @@ class Projector
 public:
 	Projector();
 	void init(void);
-	void renderFrame(void);
+	void renderFrame(int x, int y);
 	void destroy(void);
 };

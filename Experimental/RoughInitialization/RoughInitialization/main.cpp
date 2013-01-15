@@ -3,19 +3,20 @@
 
 #include "Projector.h"
 #include "Camera.h"
+#include "ControlBoard.h"
 
-Projector tPro;
-Camera tCam;
+ControlBoard cb;
 
 
 int main(int argc, char* argv[])
 {
-	tPro.init();
-	tPro.renderFrame();
-	Sleep(10);
-	tCam.init();
+//	tPro.init();
+//	tPro.renderFrame();
+//	Sleep(10);
+//	tCam.init();
 	Sleep(5000);
-	tPro.destroy();
+//	tPro.destroy();
+	cb.init();
 	return 0;
 }
 
