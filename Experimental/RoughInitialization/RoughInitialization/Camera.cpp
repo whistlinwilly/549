@@ -358,16 +358,25 @@ cameraPerspective Camera::getBackground(cameraPerspective cp){
 RotatedRect Camera::extractPoint(cameraPerspective cp){
 	Mat bg, grey, thresh;
 	vector<Vec4i> hierarchy;
-	vector<vector<Point> > contour;
+	std::vector<std::vector<cv::Point> > contour;
 	cameraPerspective test;
 	RotatedRect myRect;
 	test = getBackground(cp);
+//	imshow("CamRotation", test.background);
+//	waitKey();
 	cvtColor( test.background, grey, CV_RGB2GRAY );
-	threshold( grey, thresh, 130.0, 255.0, 0);
+	//imshow("CamRotation",grey);
+	//waitKey();
+	 threshold( grey, thresh, 130.0, 255.0, THRESH_BINARY);
+	//	imshow("CamRotation",thresh);
+	//waitKey();
 	findContours( thresh, contour, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
 	if(contour.size() >= 1){
 		myRect = fitEllipse(Mat(contour[0]));
+		return myRect;
 	}
-	return myRect;
+	else
+ 		return RotatedRect(Point2f(0.0,0.0),Size2f(1.0,1.0),1.0);
+	
 }
 

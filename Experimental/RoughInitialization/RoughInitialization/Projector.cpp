@@ -1,4 +1,5 @@
 #include "Projector.h"
+#include <opencv\cv.h>
 
 Projector::Projector(){
 }
@@ -73,11 +74,11 @@ void Projector::init(void){
    // SDL_Quit();
 }
 
-void Projector::renderFrame(int x, int y){
+void Projector::renderFrame(cv::Point2f point){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
  
-	if(x == 0){
+	if(point.x == 0){
     //glBegin(GL_QUADS);
     //    glColor3f(1, 0, 0); glVertex3f(0, 0, 0);
     //    glColor3f(1, 1, 0); glVertex3f(1280, 0, 0);
@@ -94,7 +95,7 @@ void Projector::renderFrame(int x, int y){
     gluQuadricTexture( sphere, GL_TRUE);
 
 		glPushMatrix();
-		glTranslatef(x,y,0.0);
+		glTranslatef(point.x,point.y,0.0);
 		gluSphere(sphere,1,100,100);
 		glPopMatrix();
 	}
