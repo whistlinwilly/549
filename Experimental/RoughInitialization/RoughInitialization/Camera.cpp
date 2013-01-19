@@ -356,21 +356,29 @@ cameraPerspective Camera::getBackground(cameraPerspective cp){
 
 
 RotatedRect Camera::extractPoint(cameraPerspective cp){
-	Mat bg, grey, thresh;
+	Mat bg, grey, thresh, can;
 	vector<Vec4i> hierarchy;
 	std::vector<std::vector<cv::Point> > contour;
 	cameraPerspective test;
 	RotatedRect myRect;
+	float i = 130.0;
 	test = getBackground(cp);
-//	imshow("CamRotation", test.background);
-//	waitKey();
+	imshow("CamRotation", test.background);
+	waitKey();
 	cvtColor( test.background, grey, CV_RGB2GRAY );
-	//imshow("CamRotation",grey);
-	//waitKey();
-	 threshold( grey, thresh, 130.0, 255.0, THRESH_BINARY);
-	//	imshow("CamRotation",thresh);
-	//waitKey();
-	findContours( thresh, contour, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
+	imshow("CamRotation",grey);
+	waitKey();
+	 threshold( grey, thresh, i, 255.0, THRESH_BINARY);
+		imshow("CamRotation",thresh);
+	while(waitKey() != 121){
+		i+=5.0;
+		threshold( grey, thresh, i, 255.0, THRESH_BINARY);
+		imshow("CamRotation",thresh);
+	};
+	Canny(thresh,can,10, 250, 3);
+		imshow("CamRotation",can);
+		waitKey();
+	findContours( can, contour, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
 	if(contour.size() >= 1){
 		myRect = fitEllipse(Mat(contour[0]));
 		return myRect;

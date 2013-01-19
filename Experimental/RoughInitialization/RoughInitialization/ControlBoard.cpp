@@ -17,7 +17,7 @@ Camera tCam;
 String curWindow;
 cameraPerspective cp;
 Point2f myMapping[4];
-Point2f myPoints[] = {Point2f(450.0, 450.0), Point2f(500.0, 500.0), Point2f(400.0,500.0), Point2f(500.0, 400.0)};
+Point2f myPoints[] = {Point2f(550.0, 550.0), Point2f(510.0, 510.0), Point2f(500.0,600.0), Point2f(575.0, 500.0)};
 
 ControlBoard::ControlBoard(){
 }
@@ -68,20 +68,29 @@ void camRotationTest(void){
 Mat getPointMapping(){
 
 RotatedRect rect;
+Mat homey;
+float x1y1, x2y1, x3y1,x1y2,x2y2,x3y2,x1y3,x2y3,x3y3;
 
 	for(int i = 0; i<4; i++){
 		tProj.renderFrame(myPoints[i]);
 			rect = tCam.extractPoint(cp);
 				myMapping[i] = rect.center;
 	}
-	Mat homey;
-	homey = getPerspectiveTransform(myPoints,myMapping);
-		Point newCircles[2];
-	Point myCircles[] = {Point(240,240), Point(480,480)};
-	float testdata[] = {240.0,240.0,1.0};
-Mat testPoint = Mat(3, 1, CV_32F, testdata).clone();
 	
-	testPoint = homey * testPoint;
+	homey = getPerspectiveTransform(myPoints,myMapping);
+
+	x1y1 = homey.at<double>(0);
+	x2y1 = homey.at<double>(1);
+	x3y1 = homey.at<double>(2);
+		x1y2 = homey.at<double>(3);
+	x2y2 = homey.at<double>(4);
+	x3y2 = homey.at<double>(5);
+		x1y3 = homey.at<double>(6);
+	x2y3 = homey.at<double>(7);
+	x3y3 = homey.at<double>(8);
+
 	waitKey();
+
+
 	return homey;
 }

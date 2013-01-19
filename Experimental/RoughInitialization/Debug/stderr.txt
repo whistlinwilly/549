@@ -1,1 +1,0 @@
-OpenCV Error: Incorrect size of input array (Number of points should be >= 5) in unknown function, file ..\..\..\src\opencv\modules\imgproc\src\shapedescr.cpp, line 799
