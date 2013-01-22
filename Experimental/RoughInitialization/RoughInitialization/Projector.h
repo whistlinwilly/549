@@ -14,5 +14,6 @@ public:
 	Projector();
 	void init(void);
 	void renderFrame(cv::Point2f point);
+	void renderStar(cv::Point2f point0, cv::Point2f point1, cv::Point2f point2, cv::Point2f point3, cv::Point2f point4);
 	void destroy(void);
 };
