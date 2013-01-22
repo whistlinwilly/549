@@ -1,19 +1,13 @@
-﻿Build started 1/19/2013 1:41:11 PM.
+﻿Build started 1/21/2013 7:42:32 PM.
      1>Project "C:\Users\549\Documents\GitHub\549\Experimental\RoughInitialization\RoughInitialization\RoughInitialization.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\RoughInitialization.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\Users\549\Documents\opencv\build\include /I"C:\Users\549\Documents\GitHub\549\glew-1.9.0\include\GL\\" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ControlBoard.cpp
-         ControlBoard.cpp
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(82): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(83): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(84): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(85): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(86): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(87): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(88): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(89): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(90): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\Users\549\Documents\opencv\build\include /I"C:\Users\549\Documents\GitHub\549\glew-1.9.0\include\GL\\" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Projector.cpp
+         Projector.cpp
+     1>c:\users\549\documents\opencv\build\include\opencv2\flann\logger.h(66): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : see declaration of 'fopen'
+     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(9): warning C4101: 'event' : unreferenced local variable
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
@@ -35,4 +29,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:05.09
+Time Elapsed 00:00:04.64

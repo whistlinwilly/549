@@ -17,7 +17,7 @@ Camera tCam;
 String curWindow;
 cameraPerspective cp;
 Point2f myMapping[4];
-Point2f myPoints[] = {Point2f(550.0, 550.0), Point2f(510.0, 510.0), Point2f(500.0,600.0), Point2f(575.0, 500.0)};
+Point2f myPoints[] = {Point2f(550.0, 650.0), Point2f(710.0, 610.0), Point2f(750.0,580.0), Point2f(500.0, 700.0)};
 
 ControlBoard::ControlBoard(){
 }
@@ -69,28 +69,36 @@ Mat getPointMapping(){
 
 RotatedRect rect;
 Mat homey;
+Mat inverse;
 float x1y1, x2y1, x3y1,x1y2,x2y2,x3y2,x1y3,x2y3,x3y3;
-
+float ans1, ans2, ans3;
 	for(int i = 0; i<4; i++){
 		tProj.renderFrame(myPoints[i]);
 			rect = tCam.extractPoint(cp);
 				myMapping[i] = rect.center;
 	}
 	
-	homey = getPerspectiveTransform(myPoints,myMapping);
+	homey = getPerspectiveTransform(myPoints, myMapping);
 
-	x1y1 = homey.at<double>(0);
-	x2y1 = homey.at<double>(1);
-	x3y1 = homey.at<double>(2);
-		x1y2 = homey.at<double>(3);
-	x2y2 = homey.at<double>(4);
-	x3y2 = homey.at<double>(5);
-		x1y3 = homey.at<double>(6);
-	x2y3 = homey.at<double>(7);
-	x3y3 = homey.at<double>(8);
+	inverse = homey.inv();
+
+	x1y1 = inverse.at<double>(0);
+	x2y1 = inverse.at<double>(1);
+	x3y1 = inverse.at<double>(2);
+	x1y2 = inverse.at<double>(3);
+	x2y2 = inverse.at<double>(4);
+	x3y2 = inverse.at<double>(5);
+	x1y3 = inverse.at<double>(6);
+	x2y3 = inverse.at<double>(7);
+	x3y3 = inverse.at<double>(8);
 
 	waitKey();
 
+	 ans1 = x1y1 * 324.0 + x2y1 * 240.0 + x3y1 * 1.0;
+	 ans2 = x1y2 * 324.0 + x2y2 * 240.0 + x3y2 * 1.0;
+	 ans3 = x1y3 * 324.0 + x2y3 * 240.0 + x3y3 * 1.0;
+
+	 tProj.renderFrame(Point2f(ans1 / ans3, ans2 / ans3));
 
 	return homey;
 }

@@ -34,7 +34,7 @@ Mat Camera::init(void){
 	Mat cam, grey, gat, ht, dht, out, gauss, can, newMat;
 	int thresh = 1;
 	Point2f corners[4];
-	Point2f cornerSquare[4] = {Point2f(0,0),Point2f(0,480),Point2f(480,480),Point2f(480,0)};
+	Point2f cornerSquare[4] = {Point2f(0,0),Point2f(0,480),Point2f(647,480),Point2f(647,0)};
 	int found = 0;
 
 	try{
@@ -185,10 +185,11 @@ cameraPerspective Camera::tryRotation(void){
 
 	VideoCapture cap;
 	cameraPerspective nullCP;
-	Mat cam, grey, gat, ht, dht, out, gauss, can, newMat;
+	Mat cam, grey, gat, ht, dht, out, gauss, can, newMat, thre;
 	int thresh = 1;
+	float i = 20.0;
 	Point2f corners[4];
-	Point2f cornerSquare[4] = {Point2f(0,0),Point2f(0,480),Point2f(480,480),Point2f(480,0)};
+	Point2f cornerSquare[4] = {Point2f(0,0),Point2f(0,480),Point2f(647,480),Point2f(647,0)};
 	int found = 0;
 
 	try{
@@ -204,13 +205,22 @@ cameraPerspective Camera::tryRotation(void){
 	cvtColor( cam, grey, CV_RGB2GRAY);
 
 	GaussianBlur( grey, gauss, Size( 3, 3 ), 0, 0 );
+	namedWindow("new", CV_WINDOW_AUTOSIZE);
+	imshow("new", gauss);
+	waitKey();
 
 	Canny(gauss, can, 10, 250, 3);
+		imshow("new", can);
+	waitKey();
+
 
 	vector<vector<Point> > contours;
 	findContours(can, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
 
 	RotatedRect box = minAreaRect(contours[0]);
+
+	if(box.angle < 0)
+		box.angle = 90 + box.angle;
 
 	Mat rot_mat = getRotationMatrix2D(box.center,box.angle,1);
 
@@ -226,8 +236,16 @@ cameraPerspective Camera::tryRotation(void){
 
 	GaussianBlur( grey, gauss, Size( 3, 3 ), 0, 0 );
 
-	Canny(gauss, can, 10, 250, 3);
-
+		 threshold( gauss, thre, i, 255.0, THRESH_BINARY);
+		imshow("new",thre);
+	while(waitKey() != 121){
+		i+=5.0;
+		threshold( gauss, thre, i, 255.0, THRESH_BINARY);
+		imshow("new",thre);
+	};
+	Canny(thre, can, 10, 250, 3);
+		imshow("new", can);
+	waitKey();
 	vector<Vec2f> lines;
 	HoughLines(can, lines, 1, CV_PI/180, 25, 0, 0 );
 
@@ -263,7 +281,7 @@ cameraPerspective Camera::findCorners(void){
 
 	Point2f corners[4];
 	int found = 0;
-	Point2f cornerSquare[4] = {Point2f(0,0),Point2f(0,480),Point2f(480,480),Point2f(480,0)};
+	Point2f cornerSquare[4] = {Point2f(0,0),Point2f(0,480),Point2f(647,480),Point2f(647,0)};
 
 	for(int i = 0; i < 8; i +=2){
 		for(int j = i + 2; j < 8; j+=2){

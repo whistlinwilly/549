@@ -96,7 +96,7 @@ void Projector::renderFrame(cv::Point2f point){
 
 		glPushMatrix();
 		glTranslatef(point.x,point.y,0.0);
-		gluSphere(sphere,8,200,200);
+		gluSphere(sphere,1,200,200);
 		glPopMatrix();
 	}
 
