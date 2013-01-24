@@ -103,7 +103,37 @@ void Projector::renderFrame(cv::Point2f point){
     SDL_GL_SwapBuffers();
 }
 
-void Projector::renderStar(cv::Point2f point0, cv::Point2f point1, cv::Point2f point2, cv::Point2f point3, cv::Point2f point4){
+
+void Projector::renderDisk(cv::Point2f point, cv::Mat transform){
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+	glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+ 
+    glOrtho(0, 1280, 800, 0, 1, -1000);
+ 
+    glMatrixMode(GL_MODELVIEW);
+ 
+    glEnable(GL_TEXTURE_2D);
+ 
+    glLoadIdentity();
+
+		 GLUquadric *sphere=gluNewQuadric();
+    gluQuadricDrawStyle( sphere, GLU_FILL);
+    gluQuadricNormals( sphere, GLU_SMOOTH);
+    gluQuadricOrientation( sphere, GLU_OUTSIDE);
+    gluQuadricTexture( sphere, GL_TRUE);
+
+		glPushMatrix();
+		glTranslatef(point.x,point.y,0.0);
+		gluDisk(sphere,30.0f,50.0f,32,32);
+		glPopMatrix();
+	
+
+    SDL_GL_SwapBuffers();
+}
+
+void Projector::renderStar(cv::Point2f point0, cv::Point2f point1, cv::Point2f point2, cv::Point2f point3, cv::Point2f point4, cv::Point2f point5, cv::Point2f point6, cv::Point2f point7, cv::Point2f point8){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
@@ -135,6 +165,26 @@ void Projector::renderStar(cv::Point2f point0, cv::Point2f point1, cv::Point2f p
 
 				glPushMatrix();
 		glTranslatef(point4.x,point4.y,0.0);
+		gluSphere(sphere,2,200,200);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(point5.x,point5.y,0.0);
+		gluSphere(sphere,2,200,200);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(point6.x,point6.y,0.0);
+		gluSphere(sphere,2,200,200);
+		glPopMatrix();
+
+				glPushMatrix();
+		glTranslatef(point7.x,point7.y,0.0);
+		gluSphere(sphere,2,200,200);
+		glPopMatrix();
+
+				glPushMatrix();
+		glTranslatef(point8.x,point8.y,0.0);
 		gluSphere(sphere,2,200,200);
 		glPopMatrix();
 

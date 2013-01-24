@@ -206,12 +206,8 @@ cameraPerspective Camera::tryRotation(void){
 
 	GaussianBlur( grey, gauss, Size( 3, 3 ), 0, 0 );
 	namedWindow("new", CV_WINDOW_AUTOSIZE);
-	imshow("new", gauss);
-	waitKey();
 
 	Canny(gauss, can, 10, 250, 3);
-		imshow("new", can);
-	waitKey();
 
 
 	vector<vector<Point> > contours;
@@ -300,8 +296,8 @@ cameraPerspective Camera::findCorners(void){
 	//the below is a super shitty method of positioning the corners in the array so
 	//corners[0] is top left, corners[1] bottom left, corners[2] bottom right, corners[3] top right
 
-	int min = 500;
-	int max = -500;
+	int min = 10000;
+	int max = 0;
 	int minI = 0;
 	int maxI = 0;
 
@@ -310,15 +306,18 @@ cameraPerspective Camera::findCorners(void){
 			min = corners[i].x + corners[i].y;
 			minI = i;
 		}
-		if(corners[i].x + corners[i].y > max){
-			max = corners[i].x + corners[i].y;
-			maxI = i;
-		}
 	}
 
 	Point2f temp = corners[0];
 	corners[0] = corners[minI];
 	corners[minI] = temp;
+
+	for(int i = 0; i < 4; i++){
+		if(corners[i].x + corners[i].y > max){
+			max = corners[i].x + corners[i].y;
+			maxI = i;
+		}
+	}
 
 	temp = corners[2];
 	corners[2] = corners[maxI];
@@ -343,7 +342,12 @@ cameraPerspective Camera::findCorners(void){
 
 	myObj.pic = nullMat;
 	myObj.perspectiveWarp = homey;
-
+	myObj.tCorners[0] = corners[0];
+	myObj.tCorners[1] = corners[1];
+	myObj.tCorners[2] = corners[2];
+	myObj.tCorners[3] = corners[3];
+	imshow("camRotation", nullMat);
+	//waitKey();
 	return myObj;
 }
 
@@ -379,30 +383,50 @@ RotatedRect Camera::extractPoint(cameraPerspective cp){
 	std::vector<std::vector<cv::Point> > contour;
 	cameraPerspective test;
 	RotatedRect myRect;
-	float i = 130.0;
+	float i = 50.0;
 	test = getBackground(cp);
-	imshow("CamRotation", test.background);
-	waitKey();
 	cvtColor( test.background, grey, CV_RGB2GRAY );
-	imshow("CamRotation",grey);
-	waitKey();
-	 threshold( grey, thresh, i, 255.0, THRESH_BINARY);
-		imshow("CamRotation",thresh);
-	while(waitKey() != 121){
-		i+=5.0;
+
+	while(contour.size() < 500){
+		i+=15.0;
 		threshold( grey, thresh, i, 255.0, THRESH_BINARY);
-		imshow("CamRotation",thresh);
-	};
 	Canny(thresh,can,10, 250, 3);
-		imshow("CamRotation",can);
-		waitKey();
 	findContours( can, contour, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
-	if(contour.size() >= 1){
-		myRect = fitEllipse(Mat(contour[0]));
-		return myRect;
+	if(contour.size() == 0)
+		return RotatedRect(Point2f(0.0,0.0),Size2f(1.0,1.0),1.0);
 	}
-	else
- 		return RotatedRect(Point2f(0.0,0.0),Size2f(1.0,1.0),1.0);
+
+		while(contour.size() < 1000){
+		i+=8.0;
+		threshold( grey, thresh, i, 255.0, THRESH_BINARY);
+	Canny(thresh,can,10, 250, 3);
+	findContours( can, contour, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
+	if(contour.size() == 0)
+		return RotatedRect(Point2f(0.0,0.0),Size2f(1.0,1.0),1.0);
+	}
+
+
+	while(contour.size() > 2){
+		i+=3.0;
+		threshold( grey, thresh, i, 255.0, THRESH_BINARY);
+	Canny(thresh,can,10, 250, 3);
+	findContours( can, contour, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
+	if(contour.size() == 0)
+		return RotatedRect(Point2f(0.0,0.0),Size2f(1.0,1.0),1.0);
+	};
+	//	drawContours(test.background,contour,0,Scalar(255.0,0.0,0.0),0.5);
+	//imshow("camRotation",test.background);
+	//	waitKey();
+
+		if(contour[0].size() < 10)
+			return RotatedRect(Point2f(0.0,0.0),Size2f(1.0,1.0),1.0);
+
+	myRect = fitEllipse(Mat(contour[0]));
+	if(myRect.size.width * myRect.size.height < 15.0)
+		return RotatedRect(Point2f(0.0,0.0),Size2f(1.0,1.0),1.0);
+
+		return myRect;
+ 		
 	
 }
 

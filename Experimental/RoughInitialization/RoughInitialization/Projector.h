@@ -14,6 +14,7 @@ public:
 	Projector();
 	void init(void);
 	void renderFrame(cv::Point2f point);
-	void renderStar(cv::Point2f point0, cv::Point2f point1, cv::Point2f point2, cv::Point2f point3, cv::Point2f point4);
+	void renderDisk(cv::Point2f point, cv::Mat transform);
+	void renderStar(cv::Point2f point0, cv::Point2f point1, cv::Point2f point2, cv::Point2f point3, cv::Point2f point4, cv::Point2f point5, cv::Point2f point6, cv::Point2f point7, cv::Point2f point8);
 	void destroy(void);
 };
