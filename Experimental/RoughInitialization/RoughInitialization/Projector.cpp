@@ -45,7 +45,7 @@ void Projector::init(void){
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
  
-    glOrtho(0, 1280, 800, 0, 1, -1000);
+    glOrtho(0, 1280, 800, 0, 3000, -3000);
  
     glMatrixMode(GL_MODELVIEW);
  
@@ -104,30 +104,120 @@ void Projector::renderFrame(cv::Point2f point){
 }
 
 
-void Projector::renderDisk(cv::Point2f point, cv::Mat transform){
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
+void Projector::renderDisk(){
+   
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
  
-    glOrtho(0, 1280, 800, 0, 1, -1000);
+    gluPerspective(20.5f,1.6f,0.1f,100.0f);
  
     glMatrixMode(GL_MODELVIEW);
  
     glEnable(GL_TEXTURE_2D);
- 
+	glClearDepth(1.0f);                         // Depth Buffer Setup
+glEnable(GL_DEPTH_TEST);                        // Enables Depth Testing
+glDepthFunc(GL_LEQUAL); 
+ 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-		 GLUquadric *sphere=gluNewQuadric();
-    gluQuadricDrawStyle( sphere, GLU_FILL);
-    gluQuadricNormals( sphere, GLU_SMOOTH);
-    gluQuadricOrientation( sphere, GLU_OUTSIDE);
-    gluQuadricTexture( sphere, GL_TRUE);
+//glRotatef(90.0, 0, 0, 1);
+
+glTranslatef(0.0f,0.0f,-26.3f);   
+
+glRotatef(-73.0, 1, 0, 0);
+
+glBegin(GL_QUADS);                      // Draw A Quad
+        glVertex3f(-1.75, 1.12f, 0.0f);              // Top Left
+        glVertex3f( 1.75f, 1.12f, 0.0f);              // Top Right
+        glVertex3f( 1.75f,-1.12f, 0.0f);              // Bottom Right
+        glVertex3f(-1.75f,-1.12f, 0.0f);              // Bottom Left
+    glEnd();
+
+glBegin(GL_QUADS);                      // Draw A Quad
+        glVertex3f(-1.70, 1.10f, 1.0f);              // Top Left
+        glVertex3f( 1.70f, 1.10f, 1.0f);              // Top Right
+        glVertex3f( 1.70f,-1.10f, 1.0f);              // Bottom Right
+        glVertex3f(-1.70f,-1.10f, 1.0f);              // Bottom Left
+    glEnd();
+	
+
+    SDL_GL_SwapBuffers();
+}
+
+void Projector::renderInitPattern(){
+
+	glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+ 
+    gluPerspective(PROJ_FOV,1.6f,0.1f,1000.0f);
+ 
+    glMatrixMode(GL_MODELVIEW);
+ 
+    glEnable(GL_TEXTURE_2D);
+	glClearDepth(1.0f);                         // Depth Buffer Setup
+glEnable(GL_DEPTH_TEST);                        // Enables Depth Testing
+glDepthFunc(GL_LEQUAL); 
+ 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
+
+glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+glColor3f(1.0f,0.0f,0.0f);
+
+glTranslatef(0.0,0.0,DEFAULT_DISTANCE);
+
+//glTranslatef(0.0,0.0,-52.5);
+//glRotatef(-68.5,1,0,0);
+//glRotatef(44.0,0,0,1);
+//glTranslatef(0.255f, -1.95f, 0.0f);
 
 		glPushMatrix();
-		glTranslatef(point.x,point.y,0.0);
-		gluDisk(sphere,30.0f,50.0f,32,32);
+		
+		
+	//	glRotatef(100.8,0,0,1);
+	//	glTranslatef(0.0,0.0,90.0);
+		glRectf(-640.0f,0.0f, 0.0f, 400.0f);
+		glRectf(0.0f,-400.0f, 640.0f, 0.0f);
 		glPopMatrix();
+
+		glColor3f(1.0f, 1.0f, 1.0f);
+
+		float x1,y1,x2,y2;
+		float angle;
+		double radius=1.0;
+ 
+		x1 = 0.0,y1=0.0;
+
+		glPushMatrix();
+	//	glTranslatef(10.0,10.0,0.0);
+	//	glRotatef(-73.0,1,0,0);
+		glBegin(GL_LINE_STRIP);
+ 
+		for (angle=1.0f;angle<361.0f;angle+=0.2)
+	{
+	    x2 = x1+sin(angle)*radius;
+	    y2 = y1+cos(angle)*radius;
+	    glVertex2f(x2,y2);
+	}
+ 
+		glEnd();
+		glPopMatrix();
+
+//glColor3f(0.0f,1.0f,0.0f);
+//		glBegin(GL_QUADS);                      // Draw A Quad
+//        glVertex3f(-1.75, 1.12f, -1.0f);              // Top Left
+//        glVertex3f( 1.75f, 1.12f, -1.0f);              // Top Right
+//        glVertex3f( 1.75f,-1.12f, -1.0f);              // Bottom Right
+//        glVertex3f(-1.75f,-1.12f, -1.0f);              // Bottom Left
+//    glEnd();
+//
+//glBegin(GL_QUADS);                      // Draw A Quad
+//        glVertex3f(-1.70, 1.10f, 1.0f);              // Top Left
+//        glVertex3f( 1.70f, 1.10f, 1.0f);              // Top Right
+//        glVertex3f( 1.70f,-1.10f, 1.0f);              // Bottom Right
+//        glVertex3f(-1.70f,-1.10f, 1.0f);              // Bottom Left
+//    glEnd();
+
+
 	
 
     SDL_GL_SwapBuffers();
@@ -195,3 +285,211 @@ void Projector::destroy(void){
 	SDL_Quit();
 }
 
+void Projector::renderPatternWithPerspective(float distanceFromTable, float incidentAngle, float projRotation, float deltaX, float deltaY){
+
+	glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+ 
+    gluPerspective(PROJ_FOV,1.6f,0.1f,1000.0f);
+ 
+    glMatrixMode(GL_MODELVIEW);
+ 
+    glEnable(GL_TEXTURE_2D);
+	glClearDepth(1.0f);                         // Depth Buffer Setup
+glEnable(GL_DEPTH_TEST);                        // Enables Depth Testing
+glDepthFunc(GL_LEQUAL); 
+ 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
+
+glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+glColor3f(1.0f,0.0f,0.0f);
+
+//glTranslatef(0.0,0.0,-52.5);
+//glRotatef(-68.5,1,0,0);
+//glRotatef(44.0,0,0,1);
+//glTranslatef(0.255f, -1.95f, 0.0f);
+
+glTranslatef(0.0,0.0,distanceFromTable);
+glRotatef(incidentAngle,1,0,0);
+glRotatef(projRotation,0,0,1);
+glTranslatef(deltaX, deltaY, 0.0f);
+
+	//	glPushMatrix();
+	//	
+	//	
+	////	glRotatef(100.8,0,0,1);
+	////	glTranslatef(0.0,0.0,90.0);
+	//	glRectf(-640.0f,0.0f, 0.0f, 400.0f);
+	//	glRectf(0.0f,-400.0f, 640.0f, 0.0f);
+	//	glPopMatrix();
+
+		glColor3f(0.0f, 0.0f, 1.0f);
+
+		float x1,y1,x2,y2;
+		float angle;
+		double radius=1.656;
+ 
+		x1 = 0.0,y1=0.0;
+
+		glPushMatrix();
+	//	glTranslatef(10.0,10.0,0.0);
+	//	glRotatef(-73.0,1,0,0);
+		glBegin(GL_LINE_STRIP);
+ 
+		for (angle=1.0f;angle<361.0f;angle+=0.2)
+	{
+	    x2 = x1+sin(angle)*radius;
+	    y2 = y1+cos(angle)*radius;
+	    glVertex3f(x2,y2,0.0);
+	}
+ 
+		glEnd();
+		glPopMatrix();
+
+				glPushMatrix();
+	//	glTranslatef(10.0,10.0,0.0);
+	//	glRotatef(-73.0,1,0,0);
+		glBegin(GL_LINE_STRIP);
+ 
+		for (angle=1.0f;angle<361.0f;angle+=0.2)
+	{
+	    x2 = x1+sin(angle)*radius;
+	    y2 = y1+cos(angle)*radius;
+	    glVertex3f(x2,y2,2.0);
+	}
+ 
+		glEnd();
+		glPopMatrix();
+//
+//glColor3f(0.0f,1.0f,0.0f);
+//		glBegin(GL_QUADS);                      // Draw A Quad
+//        glVertex3f(-1.75, 1.12f, 0.0f);              // Top Left
+//        glVertex3f( 1.75f, 1.12f, 0.0f);              // Top Right
+//        glVertex3f( 1.75f,-1.12f, 0.0f);              // Bottom Right
+//        glVertex3f(-1.75f,-1.12f, 0.0f);              // Bottom Left
+//    glEnd();
+//
+//glBegin(GL_QUADS);                      // Draw A Quad
+//        glVertex3f(-1.70, 1.10f, 1.0f);              // Top Left
+//        glVertex3f( 1.70f, 1.10f, 1.0f);              // Top Right
+//        glVertex3f( 1.70f,-1.10f, 1.0f);              // Bottom Right
+//        glVertex3f(-1.70f,-1.10f, 1.0f);              // Bottom Left
+//    glEnd();
+
+
+	
+
+    SDL_GL_SwapBuffers();
+}
+
+void Projector::renderInitPattern2(float distanceFromTable, float incidentAngle, float projRotation, float deltaX, float deltaY, float xDist, float yDist){
+
+	glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+ 
+    gluPerspective(PROJ_FOV,1.6f,0.1f,1000.0f);
+ 
+    glMatrixMode(GL_MODELVIEW);
+ 
+    glEnable(GL_TEXTURE_2D);
+	glClearDepth(1.0f);                         // Depth Buffer Setup
+glEnable(GL_DEPTH_TEST);                        // Enables Depth Testing
+glDepthFunc(GL_LEQUAL); 
+ 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
+
+glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+glColor3f(1.0f,0.0f,0.0f);
+
+//glTranslatef(0.0,0.0,-52.5);
+//glRotatef(-68.5,1,0,0);
+//glRotatef(44.0,0,0,1);
+//glTranslatef(0.255f, -1.95f, 0.0f);
+
+glTranslatef(0.0,0.0,distanceFromTable);
+glRotatef(incidentAngle,1,0,0);
+glRotatef(projRotation,0,0,1);
+glTranslatef(deltaX, deltaY, 0.0f);
+
+	//	glPushMatrix();
+	//	
+	//	
+	////	glRotatef(100.8,0,0,1);
+	////	glTranslatef(0.0,0.0,90.0);
+	//	glRectf(-640.0f,0.0f, 0.0f, 400.0f);
+	//	glRectf(0.0f,-400.0f, 640.0f, 0.0f);
+	//	glPopMatrix();
+
+		glColor3f(0.0f, 0.35f, 1.0f);
+
+		float x1,y1,x2,y2;
+		float angle;
+		double radius=1.5;
+ 
+		x1 = 0.0,y1=0.0;
+
+		glPushMatrix();
+		glTranslatef(xDist,0.0,0.0);
+	//	glRotatef(-73.0,1,0,0);
+		glBegin(GL_LINE_STRIP);
+ 
+		for (angle=1.0f;angle<361.0f;angle+=0.2)
+	{
+	    x2 = x1+sin(angle)*radius;
+	    y2 = y1+cos(angle)*radius;
+	    glVertex3f(x2,y2,0.0);
+	}
+ 
+		glEnd();
+		glPopMatrix();
+
+				glPushMatrix();
+		glTranslatef(-xDist,0.0,0.0);
+	//	glRotatef(-73.0,1,0,0);
+		glBegin(GL_LINE_STRIP);
+ 
+		for (angle=1.0f;angle<361.0f;angle+=0.2)
+	{
+	    x2 = x1+sin(angle)*radius;
+	    y2 = y1+cos(angle)*radius;
+	    glVertex3f(x2,y2,0.0);
+	}
+ 
+		glEnd();
+		glPopMatrix();
+
+
+		glColor3f(1.0,0.7,0.0);
+		glPushMatrix();
+		glTranslatef(0.0,yDist,0.0);
+	//	glRotatef(-73.0,1,0,0);
+		glBegin(GL_LINE_STRIP);
+ 
+		for (angle=1.0f;angle<361.0f;angle+=0.2)
+	{
+	    x2 = x1+sin(angle)*radius;
+	    y2 = y1+cos(angle)*radius;
+	    glVertex3f(x2,y2,0.0);
+	}
+ 
+		glEnd();
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(0.0,-yDist,0.0);
+	//	glRotatef(-73.0,1,0,0);
+		glBegin(GL_LINE_STRIP);
+ 
+		for (angle=1.0f;angle<361.0f;angle+=0.2)
+	{
+	    x2 = x1+sin(angle)*radius;
+	    y2 = y1+cos(angle)*radius;
+	    glVertex3f(x2,y2,0.0);
+	}
+ 
+		glEnd();
+		glPopMatrix();
+
+		
+    SDL_GL_SwapBuffers();
+}

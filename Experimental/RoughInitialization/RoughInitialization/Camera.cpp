@@ -34,7 +34,7 @@ Mat Camera::init(void){
 	Mat cam, grey, gat, ht, dht, out, gauss, can, newMat;
 	int thresh = 1;
 	Point2f corners[4];
-	Point2f cornerSquare[4] = {Point2f(0,0),Point2f(0,480),Point2f(647,480),Point2f(647,0)};
+	Point2f cornerSquare[4] = {Point2f(0,0),Point2f(0,480),Point2f(640,480),Point2f(640,0)};
 	int found = 0;
 
 	try{
@@ -189,7 +189,7 @@ cameraPerspective Camera::tryRotation(void){
 	int thresh = 1;
 	float i = 20.0;
 	Point2f corners[4];
-	Point2f cornerSquare[4] = {Point2f(0,0),Point2f(0,480),Point2f(647,480),Point2f(647,0)};
+	Point2f cornerSquare[4] = {Point2f(0,0),Point2f(0,480),Point2f(640,480),Point2f(640,0)};
 	int found = 0;
 
 	try{
@@ -215,7 +215,7 @@ cameraPerspective Camera::tryRotation(void){
 
 	RotatedRect box = minAreaRect(contours[0]);
 
-	if(box.angle < 0)
+	if(box.angle < -10)
 		box.angle = 90 + box.angle;
 
 	Mat rot_mat = getRotationMatrix2D(box.center,box.angle,1);
@@ -277,7 +277,7 @@ cameraPerspective Camera::findCorners(void){
 
 	Point2f corners[4];
 	int found = 0;
-	Point2f cornerSquare[4] = {Point2f(0,0),Point2f(0,480),Point2f(647,480),Point2f(647,0)};
+	Point2f cornerSquare[4] = {Point2f(0,0),Point2f(0,480),Point2f(640,480),Point2f(640,0)};
 
 	for(int i = 0; i < 8; i +=2){
 		for(int j = i + 2; j < 8; j+=2){
@@ -429,4 +429,217 @@ RotatedRect Camera::extractPoint(cameraPerspective cp){
  		
 	
 }
+
+Point2f Camera::findCircle(cameraPerspective cp){
+
+	float coX = 20.0;
+	float coY = 20.0;
+	cameraPerspective test;
+	Mat hls, thresh, can;
+	vector<Vec4i> hierarchy;
+	std::vector<std::vector<cv::Point> > contour;
+	RotatedRect myRect;
+
+	float centerX = 0;
+	float centerY = 0;
+	float num = 0;
+
+	test = getBackground(cp);
+
+	cvtColor(test.background, hls, CV_RGB2HLS_FULL);
+
+		IplImage rgb = hls;
+
+
+
+
+	IplImage* h = cvCreateImage( cvGetSize(&rgb), rgb.depth,1 );
+	IplImage* l = cvCreateImage( cvGetSize(&rgb), rgb.depth,1 );
+	IplImage* s = cvCreateImage( cvGetSize(&rgb), rgb.depth,1 );
+
+	cvSplit(&rgb,h,l,s,NULL);
+
+	Mat hue = h;
+	Mat luminance = l;
+	Mat saturation = s;
+
+	imshow("capture", luminance);
+	waitKey();
+
+	Rect roi = Rect(coX,coY,640 - 2 * coX, 480 - 2 * coY);
+	Mat roiImg = luminance(roi);
+	imshow("capture", roiImg);
+	waitKey();
+
+	threshold(roiImg, thresh, 45.0, 255.0,THRESH_BINARY_INV);
+	imshow("capture", thresh);
+	waitKey();
+
+	Canny(thresh, can, 100, 250, 3);
+
+	imshow("capture", can);
+
+	waitKey();
+
+	findContours( can, contour, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE, Point(0, 0) );
+
+	for(int i=0; i<contour.size(); i++){
+		if(contour[i].size() > 200){
+			myRect = fitEllipse(contour[i]);
+		if(myRect.size.area() > 1000.0){
+			centerX += myRect.center.x + coX;
+			centerY += myRect.center.y + coY;
+			num++;
+			drawContours(test.background,contour,i,Scalar(0.0,255.0,0.0),0.5);
+		}
+		//	drawContours(test.background,contour,i,Scalar(0.0,255.0,0.0),0.5);
+		}
+	}
+
+
+
+	imshow("capture", test.background);
+	waitKey();
+
+	return Point2f(centerX / num , centerY / num);
+
+}
+
+void Camera::extractPattern2(cameraPerspective cp){
+	
+	cameraPerspective test;
+	Mat hls, thresh, can;
+	vector<Vec4i> hierarchy;
+	std::vector<std::vector<cv::Point> > contour;
+	RotatedRect myRect;
+	Point2f points[4];
+
+	float centerX1 = 0;
+	float centerY1 = 0;
+	float centerX2 = 0;
+	float centerY2 = 0;
+	float num = 0;
+
+	test = getBackground(cp);
+
+	IplImage rgb = test.background;
+	
+	IplImage* r = cvCreateImage( cvGetSize(&rgb), rgb.depth,1 );
+	IplImage* g = cvCreateImage( cvGetSize(&rgb), rgb.depth,1 );
+	IplImage* b = cvCreateImage( cvGetSize(&rgb), rgb.depth,1 );
+
+	cvSplit(&rgb,b,g,r,NULL);
+
+	Mat red = r;
+	Mat green = g;
+	Mat blue = b;
+
+	imshow("capture2", red);
+	waitKey();
+
+	threshold(red, thresh, 150.0, 255.0,THRESH_BINARY);
+	imshow("capture2", thresh);
+	waitKey();
+
+	Canny(thresh, can, 100, 250, 3);
+
+	imshow("capture2", can);
+
+	waitKey();
+
+	findContours( can, contour, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE, Point(0, 0) );
+
+	for(int i=0; i<contour.size(); i++){
+		if(contour[i].size() > 100){
+			myRect = fitEllipse(contour[i]);
+		if(myRect.size.area() > 860.0){
+			if(num == 0){
+				centerX1 += myRect.center.x;
+				centerY1 += myRect.center.y;
+				num++;
+			}
+			else{
+				if(abs(myRect.center.x - centerX1) < 10.0){
+					centerX1 = centerX1 * num + myRect.center.x;
+					centerX1 /= ++num;
+					centerY1 = centerY1 * num + myRect.center.y;
+					centerY1 /= num;
+				}
+				else{
+					centerX2 = centerX2 * num + myRect.center.x;
+					centerX2 /= ++num;
+					centerY2 = centerY2 * num + myRect.center.y;
+					centerY2 /= num;
+				}
+			}
+			drawContours(test.background,contour,i,Scalar(255.0,0.0,0.0),0.5);
+		}
+		//	drawContours(test.background,contour,i,Scalar(0.0,255.0,0.0),0.5);
+		}
+	}
+
+
+
+	imshow("capture2", test.background);
+	waitKey();
+
+	points[0] = Point2f(centerX1, centerY1);
+	points[1] = Point2f(centerX2, centerY2);
+
+	imshow("capture2", blue);
+	waitKey();
+
+	threshold(blue, thresh, 180.0, 255.0,THRESH_BINARY);
+	imshow("capture2", thresh);
+	waitKey();
+
+	Canny(thresh, can, 100, 250, 3);
+
+	imshow("capture2", can);
+
+	waitKey();
+
+	centerX1 = 0;
+	centerX2 = 0;
+	centerY1 = 0;
+	centerY2 = 0;
+	num = 0;
+
+	findContours( can, contour, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE, Point(0, 0) );
+
+	for(int i=0; i<contour.size(); i++){
+		if(contour[i].size() > 100){
+			myRect = fitEllipse(contour[i]);
+		if(myRect.size.area() > 860.0){
+			if(num == 0){
+				centerX1 += myRect.center.x;
+				centerY1 += myRect.center.y;
+				num++;
+			}
+			else{
+				if(abs(myRect.center.x - centerX1) < 10.0){
+					centerX1 = centerX1 * num + myRect.center.x;
+					centerX1 /= ++num;
+					centerY1 = centerY1 * num + myRect.center.y;
+					centerY1 /= num;
+				}
+				else{
+					centerX2 = centerX2 * num + myRect.center.x;
+					centerX2 /= ++num;
+					centerY2 = centerY2 * num + myRect.center.y;
+					centerY2 /= num;
+				}
+			}
+			drawContours(test.background,contour,i,Scalar(255.0,0.0,0.0),0.5);
+		}
+		//	drawContours(test.background,contour,i,Scalar(0.0,255.0,0.0),0.5);
+		}
+	}
+
+
+
+	imshow("capture2", test.background);
+	waitKey();
+	return;
+};
 

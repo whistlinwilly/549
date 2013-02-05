@@ -6,15 +6,16 @@
 #include "ControlBoard.h"
 
 ControlBoard cb;
+Projector tPro;
 
 
 int main(int argc, char* argv[])
 {
 //	tPro.init();
-//	tPro.renderFrame();
+//	tPro.renderInitPattern();
 //	Sleep(10);
 //	tCam.init();
-	Sleep(5000);
+//	Sleep(7000);
 //	tPro.destroy();
 	cb.init();
 	return 0;

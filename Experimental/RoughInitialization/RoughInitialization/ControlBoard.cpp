@@ -5,12 +5,18 @@
 #include <opencv\highgui.h>
 
 
+#define _USE_MATH_DEFINES
+
+#include <math.h>
+
+
 using namespace std;
 using namespace cv;
 
 void projInit( int event, int x, int y, int flags, void* param );
 void camRotationTest(void);
 Mat getPointMapping(void);
+Mat getPerspectiveMapping(void);
 
 Projector tProj;
 Camera tCam;
@@ -33,7 +39,8 @@ void ControlBoard::init(void){
 	setMouseCallback(curWindow, projInit, (void*) NULL);
 	imshow(curWindow, imread("projInit.jpg"));
 	waitKey();
-	myMat = getPointMapping();
+	myMat = getPerspectiveMapping();
+	//myMat = getPointMapping();
 
 }
 
@@ -62,7 +69,7 @@ void camRotationTest(void){
 	else if(keyPressed == 110)
 		camRotationTest();
 	else
-		exit(0);
+ 		exit(0);
 }
 
 Mat getPointMapping(){
@@ -191,4 +198,136 @@ int found = 0;
 
 
 	return homey;
+}
+
+Mat getPerspectiveMapping(void){
+	cameraPerspective test;
+	Mat bThresh, bCan, grey;
+	vector<Vec4i> hierarchy;
+	std::vector<std::vector<cv::Point> > contour;
+	RotatedRect myRect;
+
+	float width = 0;
+	float height = 0;
+	float num = 0;
+	float rot = 0;
+	float centerX = 0;
+	float centerY = 0;
+	float diffX = 0;
+	float diffY = 0;
+	float temp;
+
+	tProj.renderInitPattern();
+	test = tCam.getBackground(cp);
+
+	//Works for brighter projector with multicolored test pattern
+	//IplImage rgb = test.background;
+
+
+	//IplImage* r = cvCreateImage( cvGetSize(&rgb), rgb.depth,1 );
+	//IplImage* g = cvCreateImage( cvGetSize(&rgb), rgb.depth,1 );
+	//IplImage* b = cvCreateImage( cvGetSize(&rgb), rgb.depth,1 );
+
+	//cvSplit(&rgb,b,g,r,NULL);
+
+	//Mat red = r;
+	//Mat blue = b;
+	//Mat green = g;
+
+	cvtColor(test.background, grey, CV_RGB2GRAY);
+
+	threshold(grey, bThresh, 157.0, 255.0,THRESH_BINARY);
+
+	imshow("circle", bThresh);
+
+	waitKey();
+
+	Canny(bThresh, bCan, 100, 250, 3);
+
+	imshow("circle", bCan);
+
+	waitKey();
+
+	findContours( bCan, contour, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE, Point(0, 0) );
+
+	for(int i=0; i<contour.size(); i++){
+		if(contour[i].size() > 200){
+			myRect = fitEllipse(contour[i]);
+		if(myRect.size.area() > 1000.0){
+			width += myRect.size.width;
+			height += myRect.size.height;
+			num++;
+			rot += myRect.angle;
+			centerX += myRect.center.x;
+			centerY += myRect.center.y;
+			drawContours(test.background,contour,i,Scalar(0.0,255.0,0.0),0.5);
+		}
+		//	drawContours(test.background,contour,i,Scalar(0.0,255.0,0.0),0.5);
+		}
+	}
+
+	if(num != 0){
+
+	width /= num;
+	height /=num;
+	rot /=num;
+
+	centerX /=num;
+	centerY /=num;
+
+	centerX = (320.0 - centerX) * TABLE_WIDTH / 640.0;
+	centerY = (centerY - 240.0) * TABLE_HEIGHT / 480.0;
+
+	//	if(height > width){
+	//	temp = centerX;
+	//	centerX = centerY;
+	//	centerY = temp;
+	//}
+
+// OLD DISTANCES / INCIDENTS
+//	float distanceFromTable = DEFAULT_DISTANCE / 640.0 * width * (DEFAULT_DISTANCE/-2.0);
+	float incidentAngle = ((atan(height / width) / (2*M_PI)) * -360.0);
+	
+float distanceFromTable = (width / -2.0) / tan(PROJ_FOV / 2.0);
+
+	//if(rot > 90)
+	//	rot -= 90.0; 
+
+	tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, centerY, centerX);
+
+//	tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, 0.0, 0.0, 5, 7);
+
+//	tCam.extractPattern2(cp);
+
+	while(waitKey() != 121){
+	Point2f diff = tCam.findCircle(cp);
+
+	diffX = (320.0 - diff.x) * TABLE_WIDTH / 640.0;
+	diffY = (diff.y - 240.0) * TABLE_HEIGHT / 480.0;
+ 	tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, 0.0, 0.0);
+
+ 	tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, centerY, centerX);
+	//centerX = (diff.x - 350.0) * 23.5 / 640.0;
+	//centerY = (diff.y - 240.0) * -17.55 / 480.0;
+
+	tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, centerY + diffY, centerX - diffX);
+	//centerX = (diff.x - 350.0) * 23.75 / 640.0;
+	//centerY = (diff.y - 240.0) * -17.55 / 480.0;
+
+	//tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, centerY, centerX);
+	//centerX = (diff.x - 350.0) * 24.0 / 640.0;
+	//centerY = (diff.y - 240.0) * -17.55 / 480.0;
+
+	//tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, centerY, centerX);
+	//}
+	}
+
+	}
+
+	imshow("circle",test.background);
+
+	waitKey();
+
+	return Mat();
+
 }
