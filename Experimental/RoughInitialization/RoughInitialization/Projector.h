@@ -3,7 +3,7 @@
 #include <opencv\cv.h>
 
 #ifndef DEFAULT_DISTANCE
-#define DEFAULT_DISTANCE (-48.0)
+#define DEFAULT_DISTANCE (65.0)
 #endif 
 
 #ifndef TABLE_WIDTH
@@ -15,7 +15,7 @@
 #endif 
 
 #ifndef PROJ_FOV
-#define PROJ_FOV (19.9)
+#define PROJ_FOV (19.87)
 #endif 
 
 #define WIDTH 1280
@@ -35,5 +35,6 @@ public:
 	void destroy(void);
 	void renderInitPattern();
 	void renderPatternWithPerspective(float distanceFromTable, float incidentAngle, float projRotation, float deltaX, float deltaY);
+	void renderInitWithPerspective(float distanceFromTable, float incidentAngle, float projRotation, float deltaX, float deltaY);
 	void renderInitPattern2(float distanceFromTable, float incidentAngle, float projRotation, float deltaX, float deltaY, float xDist, float yDist);
 };

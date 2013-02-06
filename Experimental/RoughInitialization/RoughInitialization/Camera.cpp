@@ -357,7 +357,7 @@ Point2f Camera::findPoint(Mat bg, cameraPerspective cp){
 
 cameraPerspective Camera::getBackground(cameraPerspective cp){
 	VideoCapture nCam;
-	Mat m, rot, warp;
+	Mat m, rot, warp, mirror;
 
 	try{
 	nCam.open(0);
@@ -371,6 +371,12 @@ cameraPerspective Camera::getBackground(cameraPerspective cp){
 	Mat rot_mat = getRotationMatrix2D(cp.center,cp.angle,1);
 	warpAffine(m, rot, rot_mat, m.size(), INTER_CUBIC);
 	warpPerspective(rot,warp,myObj.perspectiveWarp,rot.size());
+
+	IplImage* warpI = &IplImage(warp);
+	IplImage* mirrorI = &IplImage(warp);
+	cvConvertImage(warpI,mirrorI,CV_CVTIMG_FLIP);
+
+	//imshow("FLIPPED", Mat(mirrorI));
 
 	cp.background = warp.clone();
 	return cp;
@@ -432,8 +438,8 @@ RotatedRect Camera::extractPoint(cameraPerspective cp){
 
 Point2f Camera::findCircle(cameraPerspective cp){
 
-	float coX = 20.0;
-	float coY = 20.0;
+	float coX = 40.0;
+	float coY = 40.0;
 	cameraPerspective test;
 	Mat hls, thresh, can;
 	vector<Vec4i> hierarchy;
@@ -534,10 +540,11 @@ void Camera::extractPattern2(cameraPerspective cp){
 	Mat green = g;
 	Mat blue = b;
 
-	imshow("capture2", red);
+	imshow("capture2", green);
 	waitKey();
-
-	threshold(red, thresh, 150.0, 255.0,THRESH_BINARY);
+	//red thresh
+//	threshold(green, thresh, 110.0, 255.0,THRESH_BINARY);
+	threshold(green, thresh, 120.0, 255.0, THRESH_BINARY);
 	imshow("capture2", thresh);
 	waitKey();
 
@@ -550,9 +557,9 @@ void Camera::extractPattern2(cameraPerspective cp){
 	findContours( can, contour, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE, Point(0, 0) );
 
 	for(int i=0; i<contour.size(); i++){
-		if(contour[i].size() > 100){
+		if(contour[i].size() > 300){
 			myRect = fitEllipse(contour[i]);
-		if(myRect.size.area() > 860.0){
+		if(myRect.size.area() > 900.0){
 			if(num == 0){
 				centerX1 += myRect.center.x;
 				centerY1 += myRect.center.y;
@@ -589,7 +596,7 @@ void Camera::extractPattern2(cameraPerspective cp){
 	imshow("capture2", blue);
 	waitKey();
 
-	threshold(blue, thresh, 180.0, 255.0,THRESH_BINARY);
+	threshold(blue, thresh, 156.0, 255.0,THRESH_BINARY);
 	imshow("capture2", thresh);
 	waitKey();
 
@@ -608,9 +615,9 @@ void Camera::extractPattern2(cameraPerspective cp){
 	findContours( can, contour, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE, Point(0, 0) );
 
 	for(int i=0; i<contour.size(); i++){
-		if(contour[i].size() > 100){
+		if(contour[i].size() > 300){
 			myRect = fitEllipse(contour[i]);
-		if(myRect.size.area() > 860.0){
+		if(myRect.size.area() > 900.0){
 			if(num == 0){
 				centerX1 += myRect.center.x;
 				centerY1 += myRect.center.y;
