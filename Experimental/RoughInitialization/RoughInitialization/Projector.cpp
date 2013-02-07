@@ -327,8 +327,8 @@ glTranslatef(deltaX, deltaY, 0.0f);
 
 		float x1,y1,x2,y2;
 		float angle;
-		//double radius=1.656;
-		double radius = 2.12;
+		double radius=1.656;
+		//double radius = 2.12;
 		x1 = 0.0,y1=0.0;
 
 		glPushMatrix();
@@ -354,13 +354,13 @@ glTranslatef(deltaX, deltaY, 0.0f);
 
 		//NOTENOTENOTENOTE
 		//RADIUS CHANGES HERE
-		radius = 2.12;
+		//radius = 2.12;
  
 		for (angle=1.0f;angle<361.0f;angle+=0.2)
 	{
 	    x2 = x1+sin(angle)*radius;
 	    y2 = y1+cos(angle)*radius;
-	    glVertex3f(x2,y2,8.5);
+	    glVertex3f(x2,y2,2.0);
 	}
  
 		glEnd();
@@ -533,16 +533,16 @@ glTranslatef(deltaX, deltaY, 0.0f);
 	//	glRectf(0.0f,-400.0f, 640.0f, 0.0f);
 	//	glPopMatrix();
 
-		glColor3f(0.2f, 0.2f, 1.0f);
+		glColor3f(1.0f, 1.0f, 1.0f);
 
 		float x1,y1,x2,y2;
 		float angle;
-		double radius=1.5;
+		double radius=1.0;
  
 		x1 = 0.0,y1=0.0;
 
 		glPushMatrix();
-		glTranslatef(xDist,0.0,0.0);
+		glTranslatef(-xDist,-yDist,0.0);
 	//	glRotatef(-73.0,1,0,0);
 		glBegin(GL_TRIANGLE_FAN);
  
@@ -557,24 +557,7 @@ glTranslatef(deltaX, deltaY, 0.0f);
 		glPopMatrix();
 
 				glPushMatrix();
-		glTranslatef(-xDist,0.0,0.0);
-	//	glRotatef(-73.0,1,0,0);
-		glBegin(GL_TRIANGLE_FAN);
- 
-		for (angle=1.0f;angle<361.0f;angle+=0.2)
-	{
-	    x2 = x1+sin(angle)*radius;
-	    y2 = y1+cos(angle)*radius;
-	    glVertex3f(x2,y2,0.0);
-	}
- 
-		glEnd();
-		glPopMatrix();
-
-
-		glColor3f(0.7,1.0,0.0);
-		glPushMatrix();
-		glTranslatef(0.0,yDist,0.0);
+		glTranslatef(-xDist,yDist,0.0);
 	//	glRotatef(-73.0,1,0,0);
 		glBegin(GL_TRIANGLE_FAN);
  
@@ -589,7 +572,22 @@ glTranslatef(deltaX, deltaY, 0.0f);
 		glPopMatrix();
 
 		glPushMatrix();
-		glTranslatef(0.0,-yDist,0.0);
+		glTranslatef(xDist,-yDist,0.0);
+	//	glRotatef(-73.0,1,0,0);
+		glBegin(GL_TRIANGLE_FAN);
+ 
+		for (angle=1.0f;angle<361.0f;angle+=0.2)
+	{
+	    x2 = x1+sin(angle)*radius;
+	    y2 = y1+cos(angle)*radius;
+	    glVertex3f(x2,y2,0.0);
+	}
+ 
+		glEnd();
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(xDist,yDist,0.0);
 	//	glRotatef(-73.0,1,0,0);
 		glBegin(GL_TRIANGLE_FAN);
  

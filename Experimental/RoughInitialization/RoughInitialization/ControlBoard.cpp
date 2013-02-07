@@ -206,6 +206,7 @@ Mat getPerspectiveMapping(void){
 	vector<Vec4i> hierarchy;
 	std::vector<std::vector<cv::Point> > contour;
 	RotatedRect myRect;
+	Mat fixedPts;
 
 	float width = 0;
 	float height = 0;
@@ -220,6 +221,8 @@ Mat getPerspectiveMapping(void){
 	float incidentAngle = 0;
 	float curX = 0;
 	float curY = 0;
+	float x1y1, x2y1, x3y1,x1y2,x2y2,x3y2,x1y3,x2y3,x3y3;
+	float ans1, ans2, ans3;
 	
 float distanceFromTable = DEFAULT_DISTANCE;
 
@@ -243,17 +246,17 @@ float distanceFromTable = DEFAULT_DISTANCE;
 
 	//cvtColor(test.background, grey, CV_RGB2GRAY);
 
-	threshold(blue, bThresh, 155.0, 255.0,THRESH_BINARY);
+	threshold(blue, bThresh, 182.0, 255.0,THRESH_BINARY);
 
 	imshow("circle", bThresh);
 
-//	waitKey();
+	waitKey();
 
 	Canny(bThresh, bCan, 100, 250, 3);
 
 	imshow("circle", bCan);
 
-//	waitKey();
+	waitKey();
 
 	findContours( bCan, contour, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE, Point(0, 0) );
 
@@ -300,25 +303,43 @@ float distanceFromTable = DEFAULT_DISTANCE;
 
  	tProj.renderInitWithPerspective(distanceFromTable, incidentAngle, rot, curX, curY);
 
-	tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, curX, curY, 5, 4);
+	tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, curX, curY, X_DIST, Y_DIST);
 
-	tCam.extractPattern2(cp);
+	fixedPts = tCam.extractCircles(cp);
 
 	int k = waitKey();
 	while(k != 121){
 		if(k == 102){
 	Point2f diff = tCam.findCircle(cp);
 
-	diffX = (diff.x - 320.0) * TABLE_WIDTH / 640.0;
-	diffY = (240.0 - diff.y) * TABLE_HEIGHT / 480.0;
+	x1y1 = fixedPts.at<double>(0);
+	x2y1 = fixedPts.at<double>(1);
+	x3y1 = fixedPts.at<double>(2);
+	x1y2 = fixedPts.at<double>(3);
+	x2y2 = fixedPts.at<double>(4);
+	x3y2 = fixedPts.at<double>(5);
+	x1y3 = fixedPts.at<double>(6);
+	x2y3 = fixedPts.at<double>(7);
+	x3y3 = fixedPts.at<double>(8);
+
+	ans1 = x1y1 * diff.x + x2y1 * diff.y + x3y1 * 1.0;
+	ans2 = x1y2 * diff.x + x2y2 * diff.y + x3y2 * 1.0;
+	ans3 = x1y3 * diff.x + x2y3 * diff.y + x3y3 * 1.0;
+
+	ans1 = ans1 / ans3;
+	ans2 = ans2 / ans3;
+
+	diffX = (320.0 - ans1) * TABLE_WIDTH / 640.0;
+	diffY = (ans2 - 240.0) * TABLE_WIDTH / 640.0;
  	tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, 0.0, 0.0);
 
- 	tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY);
+ 	tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, diffX, diffY);
+
+//	tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, diffX + curX, diffY + curY);
 	//centerX = (diff.x - 350.0) * 23.5 / 640.0;
 	//centerY = (diff.y - 240.0) * -17.55 / 480.0;
-
-	tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, -1.0 * diffX,-1.0 * diffY);
-		}
+		
+	}
 		//w == up
 		else if( k == 119){
 			centerY += 0.12;

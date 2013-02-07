@@ -438,8 +438,8 @@ RotatedRect Camera::extractPoint(cameraPerspective cp){
 
 Point2f Camera::findCircle(cameraPerspective cp){
 
-	float coX = 40.0;
-	float coY = 40.0;
+	float coX = 7.0;
+	float coY = 7.0;
 	cameraPerspective test;
 	Mat hls, thresh, can;
 	vector<Vec4i> hierarchy;
@@ -477,7 +477,7 @@ Point2f Camera::findCircle(cameraPerspective cp){
 	imshow("capture", roiImg);
 	waitKey();
 
-	threshold(roiImg, thresh, 45.0, 255.0,THRESH_BINARY_INV);
+	threshold(roiImg, thresh, 57.0, 255.0,THRESH_BINARY_INV);
 	imshow("capture", thresh);
 	waitKey();
 
@@ -490,13 +490,13 @@ Point2f Camera::findCircle(cameraPerspective cp){
 	findContours( can, contour, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE, Point(0, 0) );
 
 	for(int i=0; i<contour.size(); i++){
-		if(contour[i].size() > 200){
+		if(contour[i].size() > 150){
 			myRect = fitEllipse(contour[i]);
-		if(myRect.size.area() > 1000.0){
+		if(myRect.size.area() > 2000.0){
 			centerX += myRect.center.x + coX;
 			centerY += myRect.center.y + coY;
 			num++;
-			drawContours(test.background,contour,i,Scalar(0.0,255.0,0.0),0.5);
+			drawContours(test.background,contour,i,Scalar(0.0,255.0,0.0),0.5,NULL,NULL,NULL,Point2f(coX,coY));
 		}
 		//	drawContours(test.background,contour,i,Scalar(0.0,255.0,0.0),0.5);
 		}
@@ -648,5 +648,69 @@ void Camera::extractPattern2(cameraPerspective cp){
 	imshow("capture2", test.background);
 	waitKey();
 	return;
+};
+
+cv::Mat Camera::extractCircles(cameraPerspective cp){
+	
+	cameraPerspective test;
+	Mat hls, thresh, can, grey, homey;
+	vector<Vec4i> hierarchy;
+	std::vector<std::vector<cv::Point> > contour;
+	RotatedRect myRect;
+	Point2f points[4];
+	Point2f idealPts[4] = {Point2f((TABLE_WIDTH / 2.0 - X_DIST) / TABLE_WIDTH * 640, (TABLE_HEIGHT / 2.0 - Y_DIST) / TABLE_WIDTH * 640),
+							Point2f((TABLE_WIDTH / 2.0 - X_DIST) / TABLE_WIDTH * 640, (TABLE_HEIGHT / 2.0 + Y_DIST) / TABLE_WIDTH * 640),
+							Point2f((TABLE_WIDTH / 2.0 + X_DIST) / TABLE_WIDTH * 640, (TABLE_HEIGHT / 2.0 + Y_DIST) / TABLE_WIDTH * 640),
+							Point2f((TABLE_WIDTH / 2.0 + X_DIST) / TABLE_WIDTH * 640, (TABLE_HEIGHT / 2.0 - Y_DIST) / TABLE_WIDTH * 640)};
+
+	//Point2f idealPts[4] = {Point2f((TABLE_WIDTH / 2.0 - X_DIST), (TABLE_HEIGHT / 2.0 - Y_DIST)),
+	//						Point2f((TABLE_WIDTH / 2.0 - X_DIST), (TABLE_HEIGHT / 2.0 + Y_DIST)),
+	//						Point2f((TABLE_WIDTH / 2.0 + X_DIST), (TABLE_HEIGHT / 2.0 + Y_DIST)),
+	//						Point2f((TABLE_WIDTH / 2.0 + X_DIST), (TABLE_HEIGHT / 2.0 - Y_DIST))};
+
+
+	float centerX1 = 0;
+	float centerY1 = 0;
+	float centerX2 = 0;
+	float centerY2 = 0;
+	float num = 0;
+
+	test = getBackground(cp);
+
+	cvtColor( test.background, grey, CV_RGB2GRAY );
+	imshow("capture2", grey);
+	waitKey();
+
+	threshold(grey, thresh, 210.0, 255.0, THRESH_BINARY);
+	imshow("capture2", thresh);
+	waitKey();
+
+	Canny(thresh, can, 100, 250, 3);
+
+	imshow("capture2", can);
+
+	waitKey();
+
+	findCircles(points, can, 4, 150, 2500, 100);
+
+	orderCorners(points);
+
+	circle(test.background, points[0], 1, Scalar(255.0,0.0,0.0), 2);
+	circle(test.background, points[1], 1, Scalar(255.0,0.0,0.0), 2);
+	circle(test.background, points[2], 1, Scalar(0.0,255.0,0.0), 2);
+	circle(test.background, points[3], 1, Scalar(0.0,255.0,0.0), 2);
+
+	imshow("CIRCLES", test.background);
+	waitKey();
+
+	homey = getPerspectiveTransform(idealPts, points);
+	warpPerspective(test.background, hls ,homey, test.background.size());
+
+
+	//imshow("FIXED", hls);
+	//waitKey();
+
+	return homey.clone();
+
 };
 

@@ -82,6 +82,7 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ControlBoard.cpp" />
+    <ClCompile Include="ImageManip.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Projector.cpp" />
   </ItemGroup>
@@ -89,6 +90,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ControlBoard.h" />
     <ClInclude Include="DefinedObjects.h" />
+    <ClInclude Include="ImageManip.h" />
     <ClInclude Include="Projector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

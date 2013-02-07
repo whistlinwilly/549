@@ -1,4 +1,17 @@
 #include "DefinedObjects.h"
+#include "ImageManip.h"
+
+#define X_DIST (7)
+#define Y_DIST (5)
+
+#ifndef TABLE_WIDTH
+#define TABLE_WIDTH (23.5)
+#endif 
+
+#ifndef TABLE_HEIGHT
+#define TABLE_HEIGHT (17.5)
+#endif 
+
 
 class Camera
 {
@@ -13,4 +26,5 @@ public:
 	cv::RotatedRect extractPoint(cameraPerspective cp);
 	cv::Point2f findCircle(cameraPerspective cp);
 	void extractPattern2(cameraPerspective cp);
+	cv::Mat extractCircles(cameraPerspective cp);
 };
