@@ -190,13 +190,13 @@ glTranslatef(0.0,0.0, -1.0 * DEFAULT_DISTANCE);
 		glPushMatrix();
 	//	glTranslatef(10.0,10.0,0.0);
 	//	glRotatef(-73.0,1,0,0);
-		glBegin(GL_LINE_STRIP);
+		glBegin(GL_TRIANGLE_FAN);
  
 		for (angle=1.0f;angle<361.0f;angle+=0.2)
 	{
 	    x2 = x1+sin(angle)*radius;
 	    y2 = y1+cos(angle)*radius;
-	    glVertex2f(x2,y2);
+	    glVertex3f(x2,y2, 0.0);
 	}
  
 		glEnd();
@@ -285,7 +285,7 @@ void Projector::destroy(void){
 	SDL_Quit();
 }
 
-void Projector::renderPatternWithPerspective(float distanceFromTable, float incidentAngle, float projRotation, float deltaX, float deltaY){
+void Projector::renderPatternWithPerspective(float distanceFromTable, float incidentAngle, float projRotation, float deltaX, float deltaY, float twist){
 
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -309,10 +309,11 @@ glColor3f(1.0f,1.0f,1.0f);
 //glRotatef(44.0,0,0,1);
 //glTranslatef(0.255f, -1.95f, 0.0f);
 
+glRotatef(twist,0,0,1);
 glTranslatef(0.0,0.0,distanceFromTable);
-glRotatef(incidentAngle,1,0,0);
-glRotatef(projRotation,0,0,1);
 glTranslatef(deltaX, deltaY, 0.0f);
+glRotatef(projRotation,0,0,1);
+glRotatef(incidentAngle,1,0,0);
 
 	//	glPushMatrix();
 	//	
@@ -360,7 +361,7 @@ glTranslatef(deltaX, deltaY, 0.0f);
 	{
 	    x2 = x1+sin(angle)*radius;
 	    y2 = y1+cos(angle)*radius;
-	    glVertex3f(x2,y2,2.0);
+	    glVertex3f(x2,y2,1.9);
 	}
  
 		glEnd();
@@ -399,7 +400,7 @@ glTranslatef(deltaX, deltaY, 0.0f);
 
 
 
-void Projector::renderInitWithPerspective(float distanceFromTable, float incidentAngle, float projRotation, float deltaX, float deltaY){
+void Projector::renderInitWithPerspective(float distanceFromTable, float incidentAngle, float projRotation, float deltaX, float deltaY, float twist){
 
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -423,10 +424,16 @@ glColor3f(1.0f,1.0f,1.0f);
 //glRotatef(44.0,0,0,1);
 //glTranslatef(0.255f, -1.95f, 0.0f);
 
+
+
 glTranslatef(0.0,0.0,distanceFromTable);
-glRotatef(incidentAngle,1,0,0);
-glRotatef(projRotation,0,0,1);
 glTranslatef(deltaX, deltaY, 0.0f);
+glRotatef(projRotation,0,0,1);
+glRotatef(incidentAngle,1,0,0);
+glRotatef(twist,0,0,1);
+
+
+
 
 glPushMatrix();
 		glColor3f(1.0f, 0.0f, 0.0f);
@@ -441,7 +448,7 @@ glPushMatrix();
 
 		float x1,y1,x2,y2;
 		float angle;
-		double radius=1.0;
+		double radius=4.0;
  
 		x1 = 0.0,y1=0.0;
 
@@ -454,7 +461,7 @@ glPushMatrix();
 	{
 	    x2 = x1+sin(angle)*radius;
 	    y2 = y1+cos(angle)*radius;
-	    glVertex2f(x2,y2);
+	    glVertex3f(x2,y2,0.0);
 	}
  
 		glEnd();
@@ -495,7 +502,7 @@ glPushMatrix();
 
 
 
-void Projector::renderInitPattern2(float distanceFromTable, float incidentAngle, float projRotation, float deltaX, float deltaY, float xDist, float yDist){
+void Projector::renderInitPattern2(float distanceFromTable, float incidentAngle, float projRotation, float deltaX, float deltaY, float xDist, float yDist, float twist){
 
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -520,9 +527,10 @@ glColor3f(1.0f,0.0f,0.0f);
 //glTranslatef(0.255f, -1.95f, 0.0f);
 
 glTranslatef(0.0,0.0,distanceFromTable);
-glRotatef(incidentAngle,1,0,0);
-glRotatef(projRotation,0,0,1);
 glTranslatef(deltaX, deltaY, 0.0f);
+glRotatef(projRotation,0,0,1);
+glRotatef(incidentAngle,1,0,0);
+glRotatef(twist,0,0,1);
 
 	//	glPushMatrix();
 	//	
@@ -539,10 +547,9 @@ glTranslatef(deltaX, deltaY, 0.0f);
 		float angle;
 		double radius=1.0;
  
-		x1 = 0.0,y1=0.0;
+		x1 = -xDist,y1=yDist;
 
 		glPushMatrix();
-		glTranslatef(-xDist,-yDist,0.0);
 	//	glRotatef(-73.0,1,0,0);
 		glBegin(GL_TRIANGLE_FAN);
  
@@ -556,8 +563,9 @@ glTranslatef(deltaX, deltaY, 0.0f);
 		glEnd();
 		glPopMatrix();
 
-				glPushMatrix();
-		glTranslatef(-xDist,yDist,0.0);
+		x1 = -xDist,y1=-yDist;
+
+		glPushMatrix();
 	//	glRotatef(-73.0,1,0,0);
 		glBegin(GL_TRIANGLE_FAN);
  
@@ -571,8 +579,10 @@ glTranslatef(deltaX, deltaY, 0.0f);
 		glEnd();
 		glPopMatrix();
 
+
+		x1 = xDist,y1=yDist;
+
 		glPushMatrix();
-		glTranslatef(xDist,-yDist,0.0);
 	//	glRotatef(-73.0,1,0,0);
 		glBegin(GL_TRIANGLE_FAN);
  
@@ -586,8 +596,9 @@ glTranslatef(deltaX, deltaY, 0.0f);
 		glEnd();
 		glPopMatrix();
 
+		x1 = xDist,y1=-yDist;
+
 		glPushMatrix();
-		glTranslatef(xDist,yDist,0.0);
 	//	glRotatef(-73.0,1,0,0);
 		glBegin(GL_TRIANGLE_FAN);
  

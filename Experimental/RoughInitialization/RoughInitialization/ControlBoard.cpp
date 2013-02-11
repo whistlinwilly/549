@@ -223,6 +223,7 @@ Mat getPerspectiveMapping(void){
 	float curY = 0;
 	float x1y1, x2y1, x3y1,x1y2,x2y2,x3y2,x1y3,x2y3,x3y3;
 	float ans1, ans2, ans3;
+	float twist = 0.0;
 	
 float distanceFromTable = DEFAULT_DISTANCE;
 
@@ -246,7 +247,7 @@ float distanceFromTable = DEFAULT_DISTANCE;
 
 	//cvtColor(test.background, grey, CV_RGB2GRAY);
 
-	threshold(blue, bThresh, 182.0, 255.0,THRESH_BINARY);
+	threshold(blue, bThresh, 245.0, 255.0,THRESH_BINARY);
 
 	imshow("circle", bThresh);
 
@@ -270,7 +271,8 @@ float distanceFromTable = DEFAULT_DISTANCE;
 			rot += myRect.angle;
 			centerX += myRect.center.x;
 			centerY += myRect.center.y;
-			drawContours(test.background,contour,i,Scalar(0.0,255.0,0.0),0.5);
+			//drawContours(test.background,contour,i,Scalar(0.0,255.0,0.0),1.0);
+			ellipse(test.background, myRect.center, cv::Size(myRect.size.width/2, myRect.size.height/2), myRect.angle, 0.0, 360.0, Scalar(0.0,0.0,255.0),2.0);
 		}
 		//	drawContours(test.background,contour,i,Scalar(0.0,255.0,0.0),0.5);
 		}
@@ -286,8 +288,12 @@ float distanceFromTable = DEFAULT_DISTANCE;
 	centerY /=num;
 	}
 
-	centerX = (centerX - 320.0) * TABLE_WIDTH / 640.0;
-	centerY = (240.0 - centerY) * TABLE_HEIGHT / 480.0;
+	if(rot >= 90){
+		rot -= 180;
+	}
+
+	centerX = (centerX - 320.0) * TABLE_WIDTH / 1280.0;
+	centerY = (centerY - 240.0) * TABLE_HEIGHT / 960.0;
 
 	curX += centerX;
 	curY += centerY;
@@ -295,20 +301,32 @@ float distanceFromTable = DEFAULT_DISTANCE;
 	incidentAngle = (atan(height/width));
 	incidentAngle = incidentAngle / (2*M_PI) * -360.0;
 
-	distanceFromTable = -1.0 * DEFAULT_DISTANCE / 2.0 * width / 640.0 - (DEFAULT_DISTANCE);
+	//distanceFromTable = -1.0 * DEFAULT_DISTANCE / 2.0 * width / 640.0 - (DEFAULT_DISTANCE);
+
+	//FIXING FACTOR
+	width -=5.0;
+
+
+	distanceFromTable = (width / 2 / -640.0 * TABLE_WIDTH) * DEFAULT_DISTANCE;
 
 	//distanceFromTable = width / 2.0 / 640.0 * TABLE_WIDTH;
 
 	//distanceFromTable *= -1.0 * DEFAULT_DISTANCE;
 
- 	tProj.renderInitWithPerspective(distanceFromTable, incidentAngle, rot, curX, curY);
+	imshow("CONTOUR", test.background);
+	waitKey();
 
-	tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, curX, curY, X_DIST, Y_DIST);
+	float oldIncidentAngle = incidentAngle;
+	incidentAngle=0.0;
 
-	fixedPts = tCam.extractCircles(cp);
+		float oldrot = rot;
+	rot=0.0;
 
 	int k = waitKey();
 	while(k != 121){
+		centerX = 0;
+		centerY = 0;
+		
 		if(k == 102){
 	Point2f diff = tCam.findCircle(cp);
 
@@ -329,11 +347,11 @@ float distanceFromTable = DEFAULT_DISTANCE;
 	ans1 = ans1 / ans3;
 	ans2 = ans2 / ans3;
 
-	diffX = (320.0 - ans1) * TABLE_WIDTH / 640.0;
-	diffY = (ans2 - 240.0) * TABLE_WIDTH / 640.0;
- 	tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, 0.0, 0.0);
+	diffX = (ans1 - 320.0) * TABLE_WIDTH / 1280.0;
+	diffY = (ans2 - 240.0) * TABLE_WIDTH / 960.0;
+	tProj.renderPatternWithPerspective(-50.0, incidentAngle, rot, curX, curY, 0.0);
 
- 	tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, diffX, diffY);
+	tProj.renderPatternWithPerspective(-50.0, incidentAngle, rot, curX + diffX, curY + diffY, 0.0);
 
 //	tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, diffX + curX, diffY + curY);
 	//centerX = (diff.x - 350.0) * 23.5 / 640.0;
@@ -343,52 +361,70 @@ float distanceFromTable = DEFAULT_DISTANCE;
 		//w == up
 		else if( k == 119){
 			centerY += 0.12;
-			tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY);
+		tProj.renderInitWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY, twist);
 		}
 		//a == left
 				else if( k == 97){
 			centerX -= 0.12;
-			tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY);
+		tProj.renderInitWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY, twist);
 		}
 				//s == down
 						else if( k == 115){
 			centerY -= 0.12;
-			tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY);
+		tProj.renderInitWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY, twist);
 		}
 						//d == right
 								else if( k == 100){
 			centerX += 0.12;
-			tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY);
+	tProj.renderInitWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY, twist);
 		}
 														// up == angleincrease
 								else if( k == 2490368){
-			incidentAngle -= 0.35;
-			tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY);
+			incidentAngle -= 0.45;
+	tProj.renderInitWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY, twist);
 		}
 														// left == rot increase
 								else if( k == 2424832){
-			rot += 0.2;
-			tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY);
+			rot += 0.25;
+	tProj.renderInitWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY, twist);
 		}
 														// down == angle decrease
 								else if( k == 2621440){
-			incidentAngle += 0.35;
-			tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY);
+			incidentAngle += 0.45;
+		tProj.renderInitWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY, twist);
 		}
 														// right == rot decrease
 								else if( k == 2555904){
-			rot -= 0.2;
-			tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY);
+			rot -= 0.25;
+		tProj.renderInitWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY, twist);
 		}
 																						//== zoom in
 								else if( k == 122){
 			distanceFromTable += 0.5;
-			tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY);
+tProj.renderInitWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY, twist);
 		}
 														// == right
 								else if( k == 120){
 			distanceFromTable -= 0.5;
-			tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY);
+		tProj.renderInitWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY, twist);
+		}
+
+										else if( k == 44){
+			twist -= 0.25;
+			tProj.renderInitWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY, twist);
+		}
+										else if( k == 46){
+			twist += 0.25;
+			tProj.renderInitWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY, twist);
+		}
+
+										else if( k == 105){
+			incidentAngle = oldIncidentAngle;
+			tProj.renderInitWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY, twist);
+		}
+										else if( k == 114){
+			twist = oldrot;
+			tProj.renderInitWithPerspective(distanceFromTable, incidentAngle, rot, centerX, centerY, twist);
 		}
 	//centerX = (diff.x - 350.0) * 23.75 / 640.0;
 	//centerY = (diff.y - 240.0) * -17.55 / 480.0;
@@ -402,6 +438,16 @@ float distanceFromTable = DEFAULT_DISTANCE;
 
 	k = waitKey();
 	}
+
+		tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, 0.0, 0.0, 8, 6, twist);
+
+
+
+	fixedPts = tCam.extractCircles(cp);
+
+	Point2f diff = tCam.findCircle(cp);
+
+	tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, 0.0, 0.0, diff.x, diff.y, twist);
 
 	imshow("circle",test.background);
 

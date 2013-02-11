@@ -372,13 +372,17 @@ cameraPerspective Camera::getBackground(cameraPerspective cp){
 	warpAffine(m, rot, rot_mat, m.size(), INTER_CUBIC);
 	warpPerspective(rot,warp,myObj.perspectiveWarp,rot.size());
 
-	IplImage* warpI = &IplImage(warp);
-	IplImage* mirrorI = &IplImage(warp);
-	cvConvertImage(warpI,mirrorI,CV_CVTIMG_FLIP);
+	flip(warp, mirror, 1);
+
+	//IplImage* warpI = &IplImage(warp);
+	//IplImage* mirrorI = &IplImage(warp);
+	//cvConvertImage(warpI,mirrorI,CV_CVTIMG_FLIP);
 
 	//imshow("FLIPPED", Mat(mirrorI));
+	//waitKey();
+	//mirror = Mat(mirrorI);
 
-	cp.background = warp.clone();
+	cp.background = mirror.clone();
 	return cp;
 }
 
@@ -477,7 +481,7 @@ Point2f Camera::findCircle(cameraPerspective cp){
 	imshow("capture", roiImg);
 	waitKey();
 
-	threshold(roiImg, thresh, 57.0, 255.0,THRESH_BINARY_INV);
+	threshold(roiImg, thresh, 40.0, 255.0,THRESH_BINARY_INV);
 	imshow("capture", thresh);
 	waitKey();
 
