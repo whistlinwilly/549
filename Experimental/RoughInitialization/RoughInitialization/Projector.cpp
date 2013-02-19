@@ -4,6 +4,8 @@
 Projector::Projector(){
 }
 
+
+
 void Projector::init(void){
 	 SDL_Surface *screen;
     SDL_Event event;
@@ -52,26 +54,135 @@ void Projector::init(void){
     glEnable(GL_TEXTURE_2D);
  
     glLoadIdentity();
-  
-  //  while(!keypress) 
-  //  {
-		////RENDER LOOP
-  //    
-  //       while(SDL_PollEvent(&event)) 
-  //       {      
-  //            switch (event.type) 
-  //            {
-  //                case SDL_QUIT:
-	 //             keypress = 1;
-	 //             break;
-  //                case SDL_KEYDOWN:
-  //                     keypress = 1;
-  //                     break;
-  //            }
-  //       }
-  //  }
 
-   // SDL_Quit();
+
+	
+SDL_Surface *surface;	// This surface will tell us the details of the image
+GLenum texture_format;
+GLint  nOfColors;
+ 
+if ( (surface = SDL_LoadBMP("slody.bmp")) ) { 
+ 
+	// Check that the image's width is a power of 2
+	if ( (surface->w & (surface->w - 1)) != 0 ) {
+		printf("warning: image.bmp's width is not a power of 2\n");
+	}
+ 
+	// Also check if the height is a power of 2
+	if ( (surface->h & (surface->h - 1)) != 0 ) {
+		printf("warning: image.bmp's height is not a power of 2\n");
+	}
+ 
+        // get the number of channels in the SDL surface
+        nOfColors = surface->format->BytesPerPixel;
+        if (nOfColors == 4)     // contains an alpha channel
+        {
+                if (surface->format->Rmask == 0x000000ff)
+                        texture_format = GL_RGBA;
+                else
+                        texture_format = GL_BGRA;
+        } else if (nOfColors == 3)     // no alpha channel
+        {
+                if (surface->format->Rmask == 0x000000ff)
+                        texture_format = GL_RGB;
+                else
+                        texture_format = GL_BGR;
+        } else {
+                printf("warning: the image is not truecolor..  this will probably break\n");
+                // this error should not go unhandled
+        }
+ 
+	// Have OpenGL generate a texture object handle for us
+	glGenTextures( 1, &codyTex );
+ 
+	// Bind the texture object
+	glBindTexture( GL_TEXTURE_2D, codyTex );
+ 
+	// Set the texture's stretching properties
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+ 
+	// Edit the texture object's image data using the information SDL_Surface gives us
+	glTexImage2D( GL_TEXTURE_2D, 0, nOfColors, surface->w, surface->h, 0,
+                      texture_format, GL_UNSIGNED_BYTE, surface->pixels );
+} 
+else {
+	printf("SDL could not load image.bmp: %s\n", SDL_GetError());
+	SDL_Quit();
+	return;
+}    
+ 
+// Free the SDL_Surface only if it was successfully created
+if ( surface ) { 
+	SDL_FreeSurface( surface );
+}
+
+
+/////////////////////////////FOR WALL TEXTURE
+
+
+if ( (surface = SDL_LoadBMP("stonewall.bmp")) ) { 
+ 
+	// Check that the image's width is a power of 2
+	if ( (surface->w & (surface->w - 1)) != 0 ) {
+		printf("warning: image.bmp's width is not a power of 2\n");
+	}
+ 
+	// Also check if the height is a power of 2
+	if ( (surface->h & (surface->h - 1)) != 0 ) {
+		printf("warning: image.bmp's height is not a power of 2\n");
+	}
+ 
+        // get the number of channels in the SDL surface
+        nOfColors = surface->format->BytesPerPixel;
+        if (nOfColors == 4)     // contains an alpha channel
+        {
+                if (surface->format->Rmask == 0x000000ff)
+                        texture_format = GL_RGBA;
+                else
+                        texture_format = GL_BGRA;
+        } else if (nOfColors == 3)     // no alpha channel
+        {
+                if (surface->format->Rmask == 0x000000ff)
+                        texture_format = GL_RGB;
+                else
+                        texture_format = GL_BGR;
+        } else {
+                printf("warning: the image is not truecolor..  this will probably break\n");
+                // this error should not go unhandled
+        }
+ 
+	// Have OpenGL generate a texture object handle for us
+	glGenTextures( 1, &wallTex );
+ 
+	// Bind the texture object
+	glBindTexture( GL_TEXTURE_2D, wallTex );
+ 
+	// Set the texture's stretching properties
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+ 
+	// Edit the texture object's image data using the information SDL_Surface gives us
+	glTexImage2D( GL_TEXTURE_2D, 0, nOfColors, surface->w, surface->h, 0,
+                      texture_format, GL_UNSIGNED_BYTE, surface->pixels );
+} 
+else {
+	printf("SDL could not load image.bmp: %s\n", SDL_GetError());
+	SDL_Quit();
+	return;
+}    
+ 
+// Free the SDL_Surface only if it was successfully created
+if ( surface ) { 
+	SDL_FreeSurface( surface );
+}
+
+
+
+glDisable(GL_TEXTURE_2D);
+
+
+	
 }
 
 void Projector::renderFrame(cv::Point2f point){
@@ -113,7 +224,7 @@ void Projector::renderDisk(){
  
     glMatrixMode(GL_MODELVIEW);
  
-    glEnable(GL_TEXTURE_2D);
+   // glEnable(GL_TEXTURE_2D);
 	glClearDepth(1.0f);                         // Depth Buffer Setup
 glEnable(GL_DEPTH_TEST);                        // Enables Depth Testing
 glDepthFunc(GL_LEQUAL); 
@@ -153,7 +264,7 @@ void Projector::renderInitPattern(){
  
     glMatrixMode(GL_MODELVIEW);
  
-    glEnable(GL_TEXTURE_2D);
+ //   glEnable(GL_TEXTURE_2D);
 	glClearDepth(1.0f);                         // Depth Buffer Setup
 glEnable(GL_DEPTH_TEST);                        // Enables Depth Testing
 glDepthFunc(GL_LEQUAL); 
@@ -294,7 +405,7 @@ void Projector::renderPatternWithPerspective(float distanceFromTable, float inci
  
     glMatrixMode(GL_MODELVIEW);
  
-    glEnable(GL_TEXTURE_2D);
+  //  glEnable(GL_TEXTURE_2D);
 	glClearDepth(1.0f);                         // Depth Buffer Setup
 glEnable(GL_DEPTH_TEST);                        // Enables Depth Testing
 glDepthFunc(GL_LEQUAL); 
@@ -311,7 +422,6 @@ glColor3f(1.0f,1.0f,1.0f);
 
 glRotatef(twist,0,0,1);
 glTranslatef(0.0,0.0,distanceFromTable);
-glTranslatef(deltaX, deltaY, 0.0f);
 glRotatef(projRotation,0,0,1);
 glRotatef(incidentAngle,1,0,0);
 
@@ -330,7 +440,7 @@ glRotatef(incidentAngle,1,0,0);
 		float angle;
 		double radius=1.656;
 		//double radius = 2.12;
-		x1 = 0.0,y1=0.0;
+		x1 = deltaX, y1=deltaY;
 
 		glPushMatrix();
 	//	glTranslatef(10.0,10.0,0.0);
@@ -409,7 +519,7 @@ void Projector::renderInitWithPerspective(float distanceFromTable, float inciden
  
     glMatrixMode(GL_MODELVIEW);
  
-    glEnable(GL_TEXTURE_2D);
+ //   glEnable(GL_TEXTURE_2D);
 	glClearDepth(1.0f);                         // Depth Buffer Setup
 glEnable(GL_DEPTH_TEST);                        // Enables Depth Testing
 glDepthFunc(GL_LEQUAL); 
@@ -427,7 +537,6 @@ glColor3f(1.0f,1.0f,1.0f);
 
 
 glTranslatef(0.0,0.0,distanceFromTable);
-glTranslatef(deltaX, deltaY, 0.0f);
 glRotatef(projRotation,0,0,1);
 glRotatef(incidentAngle,1,0,0);
 glRotatef(twist,0,0,1);
@@ -440,8 +549,8 @@ glPushMatrix();
 		
 	//	glRotatef(100.8,0,0,1);
 	//	glTranslatef(0.0,0.0,90.0);
-		glRectf(-640.0f,0.0f, 0.0f, 400.0f);
-		glRectf(0.0f,-400.0f, 640.0f, 0.0f);
+		glRectf(-640.0f,deltaY, deltaX, 400.0f);
+		glRectf(deltaX,-400.0f, 640.0f, deltaY);
 		glPopMatrix();
 
 		glColor3f(0.0f, 0.75f, 1.0f);
@@ -450,7 +559,7 @@ glPushMatrix();
 		float angle;
 		double radius=4.0;
  
-		x1 = 0.0,y1=0.0;
+		x1 = deltaX,y1=deltaY;
 
 		glPushMatrix();
 	//	glTranslatef(10.0,10.0,0.0);
@@ -511,7 +620,7 @@ void Projector::renderInitPattern2(float distanceFromTable, float incidentAngle,
  
     glMatrixMode(GL_MODELVIEW);
  
-    glEnable(GL_TEXTURE_2D);
+ //   glEnable(GL_TEXTURE_2D);
 	glClearDepth(1.0f);                         // Depth Buffer Setup
 glEnable(GL_DEPTH_TEST);                        // Enables Depth Testing
 glDepthFunc(GL_LEQUAL); 
@@ -547,7 +656,7 @@ glRotatef(twist,0,0,1);
 		float angle;
 		double radius=1.0;
  
-		x1 = -xDist,y1=yDist;
+		x1 = deltaX-xDist,y1= deltaY + yDist;
 
 		glPushMatrix();
 	//	glRotatef(-73.0,1,0,0);
@@ -563,7 +672,7 @@ glRotatef(twist,0,0,1);
 		glEnd();
 		glPopMatrix();
 
-		x1 = -xDist,y1=-yDist;
+		x1 = deltaX - xDist,y1= deltaY - yDist;
 
 		glPushMatrix();
 	//	glRotatef(-73.0,1,0,0);
@@ -580,7 +689,7 @@ glRotatef(twist,0,0,1);
 		glPopMatrix();
 
 
-		x1 = xDist,y1=yDist;
+		x1 = deltaX + xDist,y1=deltaY + yDist;
 
 		glPushMatrix();
 	//	glRotatef(-73.0,1,0,0);
@@ -596,7 +705,7 @@ glRotatef(twist,0,0,1);
 		glEnd();
 		glPopMatrix();
 
-		x1 = xDist,y1=-yDist;
+		x1 = deltaX + xDist,y1= deltaY - yDist;
 
 		glPushMatrix();
 	//	glRotatef(-73.0,1,0,0);
@@ -611,6 +720,63 @@ glRotatef(twist,0,0,1);
  
 		glEnd();
 		glPopMatrix();
+
+		glEnable(GL_TEXTURE_2D);
+
+		glPushMatrix();
+		glRotatef(25.0f,0.0,0.0,1.0);
+		//CODY FACE CODE
+		glBindTexture(GL_TEXTURE_2D, codyTex);
+		glBegin( GL_QUADS );
+	//Top-left vertex (corner)
+	glTexCoord2i( 0, 0 );
+	glVertex3f( -4.70f, 0.0f, 6.5f );
+ 
+	//Top-right vertex (corner)
+	glTexCoord2i( 1, 0 );
+	glVertex3f( 4.70f, 0.0f, 6.5f );
+ 
+	//Bottom-right vertex (corner)
+	glTexCoord2i( 1, 1 );
+	glVertex3f( 4.70f, 0.0f, 0.0f );
+	
+ 
+	//Bottom-left vertex (corner)
+	glTexCoord2i( 0, 1 );
+	glVertex3f( -4.70f, 0.0f, 0.0f );
+	
+glEnd();
+glPopMatrix();
+
+glPushMatrix();
+glTranslatef(3.0,-4.0f, 0.0f);
+		glRotatef(-30.0f,0.0,0.0,1.0);
+		
+		//STONEWALL
+		glBindTexture(GL_TEXTURE_2D, wallTex);
+		glBegin( GL_QUADS );
+	//Top-left vertex (corner)
+	glTexCoord2i( 0, 0 );
+	glVertex3f( -2.60f, 0.0f, 3.0f );
+ 
+	//Top-right vertex (corner)
+	glTexCoord2i( 1, 0 );
+	glVertex3f( 2.60f, 0.0f, 3.0f );
+ 
+	//Bottom-right vertex (corner)
+	glTexCoord2i( 1, 1 );
+	glVertex3f( 2.60f, 0.0f, 0.0f );
+	
+ 
+	//Bottom-left vertex (corner)
+	glTexCoord2i( 0, 1 );
+	glVertex3f( -2.60f, 0.0f, 0.0f );
+	
+glEnd();
+glPopMatrix();
+
+
+		glDisable(GL_TEXTURE_2D);
 
 		
     SDL_GL_SwapBuffers();

@@ -247,7 +247,7 @@ float distanceFromTable = DEFAULT_DISTANCE;
 
 	//cvtColor(test.background, grey, CV_RGB2GRAY);
 
-	threshold(blue, bThresh, 245.0, 255.0,THRESH_BINARY);
+	threshold(blue, bThresh, 247.0, 255.0,THRESH_BINARY);
 
 	imshow("circle", bThresh);
 
@@ -321,11 +321,11 @@ float distanceFromTable = DEFAULT_DISTANCE;
 
 		float oldrot = rot;
 	rot=0.0;
-
-	int k = waitKey();
-	while(k != 121){
 		centerX = 0;
 		centerY = 0;
+	int k = waitKey();
+	while(k != 121){
+
 		
 		if(k == 102){
 	Point2f diff = tCam.findCircle(cp);
@@ -439,7 +439,7 @@ tProj.renderInitWithPerspective(distanceFromTable, incidentAngle, rot, centerX, 
 	k = waitKey();
 	}
 
-		tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, 0.0, 0.0, 8, 6, twist);
+ 		tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, 0, 0, 8, 6, twist);
 
 
 
