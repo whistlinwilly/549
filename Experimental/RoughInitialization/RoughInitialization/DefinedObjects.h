@@ -3,6 +3,8 @@
 
 
 typedef struct{
+	float x;
+	float y;
 	cv::Point2f tCorners[4];
 	cv::Point2f points[8];
 	cv::Point2f center;

@@ -45,8 +45,8 @@ void findCircles(Point2f* points, Mat image, int numCircles, int minContourLengt
 }
 
 void orderCorners(Point2f* corners){
-	int min = 500;
-	int max = -500;
+	int min = 10000;
+	int max = 0;
 	int minI = 0;
 	int maxI = 0;
 
@@ -55,15 +55,18 @@ void orderCorners(Point2f* corners){
 			min = corners[i].x + corners[i].y;
 			minI = i;
 		}
-		if(corners[i].x + corners[i].y > max){
-			max = corners[i].x + corners[i].y;
-			maxI = i;
-		}
 	}
 
 	Point2f temp = corners[0];
 	corners[0] = corners[minI];
 	corners[minI] = temp;
+
+	for(int i = 0; i < 4; i++){
+		if(corners[i].x + corners[i].y > max){
+			max = corners[i].x + corners[i].y;
+			maxI = i;
+		}
+	}
 
 	temp = corners[2];
 	corners[2] = corners[maxI];

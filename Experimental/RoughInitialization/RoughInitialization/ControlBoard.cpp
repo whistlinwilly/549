@@ -247,7 +247,7 @@ float distanceFromTable = DEFAULT_DISTANCE;
 
 	//cvtColor(test.background, grey, CV_RGB2GRAY);
 
-	threshold(blue, bThresh, 247.0, 255.0,THRESH_BINARY);
+	threshold(blue, bThresh, 254.0, 255.0,THRESH_BINARY);
 
 	imshow("circle", bThresh);
 
@@ -442,16 +442,154 @@ tProj.renderInitWithPerspective(distanceFromTable, incidentAngle, rot, centerX, 
  		tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, 0, 0, 8, 6, twist);
 
 
+	k = waitKey();
+	while(k != 121){
+
+		
+		if(k == 102){
+	Point2f diff = tCam.findCircle(cp);
+
+	x1y1 = fixedPts.at<double>(0);
+	x2y1 = fixedPts.at<double>(1);
+	x3y1 = fixedPts.at<double>(2);
+	x1y2 = fixedPts.at<double>(3);
+	x2y2 = fixedPts.at<double>(4);
+	x3y2 = fixedPts.at<double>(5);
+	x1y3 = fixedPts.at<double>(6);
+	x2y3 = fixedPts.at<double>(7);
+	x3y3 = fixedPts.at<double>(8);
+
+	ans1 = x1y1 * diff.x + x2y1 * diff.y + x3y1 * 1.0;
+	ans2 = x1y2 * diff.x + x2y2 * diff.y + x3y2 * 1.0;
+	ans3 = x1y3 * diff.x + x2y3 * diff.y + x3y3 * 1.0;
+
+	ans1 = ans1 / ans3;
+	ans2 = ans2 / ans3;
+
+	diffX = (ans1 - 320.0) * TABLE_WIDTH / 1280.0;
+	diffY = (ans2 - 240.0) * TABLE_WIDTH / 960.0;
+	tProj.renderPatternWithPerspective(-50.0, incidentAngle, rot, curX, curY, 0.0);
+
+	tProj.renderPatternWithPerspective(-50.0, incidentAngle, rot, curX + diffX, curY + diffY, 0.0);
+
+//	tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, diffX + curX, diffY + curY);
+	//centerX = (diff.x - 350.0) * 23.5 / 640.0;
+	//centerY = (diff.y - 240.0) * -17.55 / 480.0;
+		
+	}
+		//w == up
+		else if( k == 119){
+			centerY += 0.12;
+		tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, centerX, centerY, 8, 6, twist);
+		}
+		//a == left
+				else if( k == 97){
+			centerX -= 0.12;
+		tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, centerX, centerY, 8, 6, twist);
+		}
+				//s == down
+						else if( k == 115){
+			centerY -= 0.12;
+		tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, centerX, centerY, 8, 6, twist);
+		}
+						//d == right
+								else if( k == 100){
+			centerX += 0.12;
+	tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, centerX, centerY, 8, 6, twist);
+		}
+														// up == angleincrease
+								else if( k == 2490368){
+			incidentAngle -= 0.45;
+	tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, centerX, centerY, 8, 6, twist);
+		}
+														// left == rot increase
+								else if( k == 2424832){
+			rot += 0.25;
+	tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, centerX, centerY, 8, 6, twist);
+		}
+														// down == angle decrease
+								else if( k == 2621440){
+			incidentAngle += 0.45;
+		tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, centerX, centerY, 8, 6, twist);
+		}
+														// right == rot decrease
+								else if( k == 2555904){
+			rot -= 0.25;
+		tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, centerX, centerY, 8, 6, twist);
+		}
+																						//== zoom in
+								else if( k == 122){
+			distanceFromTable += 0.5;
+tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, centerX, centerY, 8, 6, twist);
+		}
+														// == right
+								else if( k == 120){
+			distanceFromTable -= 0.5;
+		tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, centerX, centerY, 8, 6, twist);
+		}
+
+										else if( k == 44){
+			twist -= 0.25;
+			tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, centerX, centerY, 8, 6, twist);
+		}
+										else if( k == 46){
+			twist += 0.25;
+			tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, centerX, centerY, 8, 6, twist);
+		}
+
+										else if( k == 105){
+			incidentAngle = oldIncidentAngle;
+			tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, centerX, centerY, 8, 6, twist);
+		}
+										else if( k == 114){
+			twist = oldrot;
+			tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, centerX, centerY, 8, 6, twist);
+		}
+	//centerX = (diff.x - 350.0) * 23.75 / 640.0;
+	//centerY = (diff.y - 240.0) * -17.55 / 480.0;
+
+	//tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, centerY, centerX);
+	//centerX = (diff.x - 350.0) * 24.0 / 640.0;
+	//centerY = (diff.y - 240.0) * -17.55 / 480.0;
+
+	//tProj.renderPatternWithPerspective(distanceFromTable, incidentAngle, rot, centerY, centerX);
+	//}
+
+	k = waitKey();
+	}
+
+
+	cp.x = centerX;
+	cp.y = centerY;
+
 
 	fixedPts = tCam.extractCircles(cp);
 
-	Point2f diff = tCam.findCircle(cp);
+	while(1){
+ 	Point2f diff = tCam.findCircle(cp);
 
-	tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, 0.0, 0.0, diff.x, diff.y, twist);
+	//tProj.renderBathtub(distanceFromTable, incidentAngle, rot, twist, centerX, centerY,0,0);
 
-	imshow("circle",test.background);
+	x1y1 = fixedPts.at<double>(0);
+	x2y1 = fixedPts.at<double>(1);
+	x3y1 = fixedPts.at<double>(2);
+	x1y2 = fixedPts.at<double>(3);
+	x2y2 = fixedPts.at<double>(4);
+	x3y2 = fixedPts.at<double>(5);
+	x1y3 = fixedPts.at<double>(6);
+	x2y3 = fixedPts.at<double>(7);
+	x3y3 = fixedPts.at<double>(8);
 
-	waitKey();
+	ans1 = x1y1 * diff.x + x2y1 * diff.y + x3y1 * 1.0;
+	ans2 = x1y2 * diff.x + x2y2 * diff.y + x3y2 * 1.0;
+	ans3 = x1y3 * diff.x + x2y3 * diff.y + x3y3 * 1.0;
+
+	ans1 = ans1 / ans3;
+	ans2 = ans2 / ans3;
+
+	tProj.renderBathtub(distanceFromTable, incidentAngle, rot, twist, centerX, centerY, ans1, ans2);
+	}
+	
 
 	return Mat();
 

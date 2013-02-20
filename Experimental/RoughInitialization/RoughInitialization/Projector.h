@@ -37,6 +37,7 @@ public:
 	void renderPatternWithPerspective(float distanceFromTable, float incidentAngle, float projRotation, float deltaX, float deltaY, float twist);
 	void renderInitWithPerspective(float distanceFromTable, float incidentAngle, float projRotation, float deltaX, float deltaY, float twist);
 	void renderInitPattern2(float distanceFromTable, float incidentAngle, float projRotation, float deltaX, float deltaY, float xDist, float yDist, float twist);
-	GLuint codyTex;			// This is a handle to our texture object
-	GLuint wallTex;
+	void renderBathtub(float distanceFromTable, float incidentAngle,float  rot,float  twist,float  xCenter,float  yCenter, float distX, float distY); 
+	GLuint createTexture(char* filename);
+	GLuint* texture;
 };
