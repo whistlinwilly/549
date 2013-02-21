@@ -2,6 +2,7 @@
 #include "Projector.h"
 #include "Camera.h"
 #include <opencv\cv.h>
+#include <opencv2\opencv.hpp>
 #include <opencv\highgui.h>
 
 
@@ -12,6 +13,8 @@
 
 using namespace std;
 using namespace cv;
+
+
 
 void projInit( int event, int x, int y, int flags, void* param );
 void camRotationTest(void);
@@ -30,18 +33,97 @@ ControlBoard::ControlBoard(){
 }
 
 void ControlBoard::init(void){
-	Mat myMat;
-	RotatedRect myRect;
-	cameraPerspective test;
-	cameraPerspective nTest;
-	curWindow= "projInit";
-	namedWindow(curWindow, CV_WINDOW_AUTOSIZE);
-	setMouseCallback(curWindow, projInit, (void*) NULL);
-	imshow(curWindow, imread("projInit.jpg"));
-	waitKey();
-	myMat = getPerspectiveMapping();
+
+		
+
+
+
+	//Mat myMat;
+	//RotatedRect myRect;
+	//cameraPerspective test;
+	//cameraPerspective nTest;
+	//curWindow= "projInit";
+	//namedWindow(curWindow, CV_WINDOW_AUTOSIZE);
+	//setMouseCallback(curWindow, projInit, (void*) NULL);
+	//imshow(curWindow, imread("projInit.jpg"));
+	//waitKey();
+	//myMat = getPerspectiveMapping();
+	tCam.initFastCam();
+	runObjectTracking();
+
+
+
+
 	//myMat = getPointMapping();
 
+}
+
+void ControlBoard::runObjectTracking(void){
+	Mat actual;
+	Mat foreground;
+	Mat frame;
+	Mat canny;
+	Mat thresh;
+	Mat contours;
+	vector<Vec4i> hierarchy;
+	std::vector<std::vector<cv::Point> > contour;
+
+	
+	
+	
+	frame = tCam.grabFrame();
+
+	BackgroundSubtractorMOG2* bg = new BackgroundSubtractorMOG2(0,100,true);
+	bg->operator()(frame,foreground,0.1);
+
+	while(1){
+		frame = tCam.grabFrame();
+		bg->operator()(frame,foreground,0.01);
+		threshold(foreground, thresh, 250.0, 255.0,THRESH_BINARY);
+		Canny(thresh, canny, 170, 190, 3);
+
+		findContours( canny, contour, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE, Point(0, 0) );
+
+			for(int i=0; i<contour.size(); i++){
+				if(contour[i].size() > 400){
+					Mat myTest = classifyObject(contour[i]);
+					drawContours(myTest,contour,i,Scalar(0.0,255.0,0.0),3.0);
+					
+					imshow("WINDOW", myTest);
+					imshow("WINDOW2",canny);
+					waitKey(15);
+				}
+			}
+	}
+
+}
+
+Mat ControlBoard::classifyObject(std::vector<cv::Point> contour){
+
+	Mat frame;
+	std::vector<int> hull;
+	std::vector<Vec4i> defects; 
+
+		RotatedRect myRect;
+		myRect = fitEllipse(contour);
+		convexHull(contour,hull,false);
+		convexityDefects(contour,hull,defects);
+
+		frame = tCam.grabFrame();
+		IplImage* myImage = new IplImage(frame);
+
+		
+		for(int i = 0; i < defects.size(); i++){
+			Vec4i curDef = defects.at(i);
+			int start = curDef[0];
+			int finish = curDef[1];
+			cvLine(myImage,contour[start],contour[finish],Scalar(255.0,0.0,0.0),1.0);
+		}
+
+			/*imshow("WINDOW",Mat(myImage));
+			waitKey();*/
+
+		return Mat(myImage).clone();
 }
 
 void projInit( int event, int x, int y, int flags, void* param ){
@@ -49,6 +131,7 @@ void projInit( int event, int x, int y, int flags, void* param ){
 		case CV_EVENT_LBUTTONUP:
 			tProj.init();
 			tProj.renderFrame(Point2f(0.0,0.0));
+			tCam.initFastCam();
 			camRotationTest();
 			break;
 	}
@@ -201,6 +284,12 @@ int found = 0;
 }
 
 Mat getPerspectiveMapping(void){
+
+	//OBJECT TRACKING VARIABLES
+	Mat background;
+	Mat foreground;
+	//END VARS
+
 	cameraPerspective test;
 	Mat bThresh, bCan, grey;
 	vector<Vec4i> hierarchy;
@@ -234,6 +323,9 @@ float distanceFromTable = DEFAULT_DISTANCE;
 	//Works for brighter projector with multicolored test pattern
 	IplImage rgb = test.background;
 
+	imshow("TEST", test.background);
+	waitKey();
+
 
 	IplImage* r = cvCreateImage( cvGetSize(&rgb), rgb.depth,1 );
 	IplImage* g = cvCreateImage( cvGetSize(&rgb), rgb.depth,1 );
@@ -247,7 +339,7 @@ float distanceFromTable = DEFAULT_DISTANCE;
 
 	//cvtColor(test.background, grey, CV_RGB2GRAY);
 
-	threshold(blue, bThresh, 254.0, 255.0,THRESH_BINARY);
+	threshold(blue, bThresh, 240.0, 255.0,THRESH_BINARY);
 
 	imshow("circle", bThresh);
 
@@ -328,7 +420,7 @@ float distanceFromTable = DEFAULT_DISTANCE;
 
 		
 		if(k == 102){
-	Point2f diff = tCam.findCircle(cp);
+	Point3f diff = tCam.findCircle(cp);
 
 	x1y1 = fixedPts.at<double>(0);
 	x2y1 = fixedPts.at<double>(1);
@@ -447,7 +539,7 @@ tProj.renderInitWithPerspective(distanceFromTable, incidentAngle, rot, centerX, 
 
 		
 		if(k == 102){
-	Point2f diff = tCam.findCircle(cp);
+	Point3f diff = tCam.findCircle(cp);
 
 	x1y1 = fixedPts.at<double>(0);
 	x2y1 = fixedPts.at<double>(1);
@@ -565,8 +657,20 @@ tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, centerX, centerY
 
 	fixedPts = tCam.extractCircles(cp);
 
+	BackgroundSubtractor* bg = new BackgroundSubtractorMOG2(1,64,true);
+	Mat actual;
+
 	while(1){
- 	Point2f diff = tCam.findCircle(cp);
+
+		//background = tCam.grabFrame();
+		//bg->operator()(background,foreground,0.05);
+		//bg->getBackgroundImage(actual);
+		//imshow("RUNNING FOREGROUND",foreground);
+		//imshow("RUNNING BACKGROUND",actual);
+		//waitKey(10);
+
+		//OLD WORKING OBJECT TRACKING
+ 	Point3f diff = tCam.findCircle(cp);
 
 	//tProj.renderBathtub(distanceFromTable, incidentAngle, rot, twist, centerX, centerY,0,0);
 
@@ -588,6 +692,7 @@ tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, centerX, centerY
 	ans2 = ans2 / ans3;
 
 	tProj.renderBathtub(distanceFromTable, incidentAngle, rot, twist, centerX, centerY, ans1, ans2);
+
 	}
 	
 

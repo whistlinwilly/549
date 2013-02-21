@@ -872,15 +872,16 @@ void Projector::renderBathtub(float distanceFromTable, float incidentAngle, floa
     glLoadIdentity();
 	glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 	glEnable(GL_TEXTURE_2D);
+
 	glTranslatef(0.0,0.0,distanceFromTable);
-	//glTranslatef(deltaX, deltaY, 0.0f);
 	glRotatef(projRotation,0,0,1);
 	glRotatef(incidentAngle,1,0,0);
 	glRotatef(twist,0,0,1);
 	
-	for(int i = 0; i < 20; i++){
+	for(int i = 0; i < 1; i++){
 	
 	glPushMatrix();
+	
 	glBindTexture(GL_TEXTURE_2D, texture[i % 10]);
 
 	//BOTTOM OF BOX

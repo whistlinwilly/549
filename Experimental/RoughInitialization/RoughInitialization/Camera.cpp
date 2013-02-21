@@ -183,7 +183,6 @@ Mat Camera::init(void){
 
 cameraPerspective Camera::tryRotation(void){
 
-	VideoCapture cap;
 	cameraPerspective nullCP;
 	Mat cam, grey, gat, ht, dht, out, gauss, can, newMat, thre;
 	int thresh = 1;
@@ -192,14 +191,9 @@ cameraPerspective Camera::tryRotation(void){
 	Point2f cornerSquare[4] = {Point2f(0,0),Point2f(0,480),Point2f(640,480),Point2f(640,0)};
 	int found = 0;
 
-	try{
-	cap.open(0);
-	}
-	catch(Exception e){
-		return nullCP;
-	}
+	cam = grabFrame();
+	
 
-	cap>>cam;
 	ht = cam;
 
 	cvtColor( cam, grey, CV_RGB2GRAY);
@@ -267,8 +261,6 @@ cameraPerspective Camera::tryRotation(void){
 		line(rotated,pt1,pt2,Scalar(255,0,0),1);
 	}
 	myObj.pic = rotated;
-
-	cap.release();
 
 	return myObj;
 }
@@ -355,18 +347,26 @@ Point2f Camera::findPoint(Mat bg, cameraPerspective cp){
 	return Point2f(0.0,0.0);
 }
 
-cameraPerspective Camera::getBackground(cameraPerspective cp){
-	VideoCapture nCam;
-	Mat m, rot, warp, mirror;
-
+int Camera::initFastCam(){
 	try{
-	nCam.open(0);
+		fastCam.open(0);
 	}
 	catch(Exception e){
-		return cp;
+		exit(0);
 	}
+}
 
-	nCam>>m;
+Mat Camera::grabFrame(){
+	Mat frame;
+	for(int i = 0; i < 5; i++)
+	fastCam >> frame;
+	return frame.clone();
+}
+
+cameraPerspective Camera::getBackground(cameraPerspective cp){
+	Mat m, rot, warp, mirror;
+
+	m = grabFrame();
 
 	Mat rot_mat = getRotationMatrix2D(cp.center,cp.angle,1);
 	warpAffine(m, rot, rot_mat, m.size(), INTER_CUBIC);
@@ -440,7 +440,7 @@ RotatedRect Camera::extractPoint(cameraPerspective cp){
 	
 }
 
-Point2f Camera::findCircle(cameraPerspective cp){
+Point3f Camera::findCircle(cameraPerspective cp){
 
 	float coX = 7.0;
 	float coY = 7.0;
@@ -451,6 +451,7 @@ Point2f Camera::findCircle(cameraPerspective cp){
 	RotatedRect myRect;
 
 	float centerX = 0;
+	float rot = 0;
 	float centerY = 0;
 	float num = 0;
 
@@ -499,6 +500,7 @@ Point2f Camera::findCircle(cameraPerspective cp){
 		if(myRect.size.area() > 2000.0){
 			centerX += myRect.center.x + coX;
 			centerY += myRect.center.y + coY;
+			rot += myRect.angle;
 			num++;
 			//drawContours(test.background,contour,i,Scalar(0.0,255.0,0.0),0.5,NULL,NULL,NULL,Point2f(coX,coY));
 		}
@@ -511,7 +513,7 @@ Point2f Camera::findCircle(cameraPerspective cp){
 	//imshow("capture", test.background);
 	//waitKey();
 
- 	return Point2f(centerX / num , centerY / num);
+ 	return Point3f(centerX / num , centerY / num, rot / num);
 
 }
 

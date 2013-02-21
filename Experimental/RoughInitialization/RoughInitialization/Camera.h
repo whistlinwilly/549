@@ -24,7 +24,10 @@ public:
 	cv::Point2f findPoint(cv::Mat bg, cameraPerspective cp);
 	cameraPerspective getBackground(cameraPerspective cp);
 	cv::RotatedRect extractPoint(cameraPerspective cp);
-	cv::Point2f findCircle(cameraPerspective cp);
+	cv::Point3f findCircle(cameraPerspective cp);
 	void extractPattern2(cameraPerspective cp);
 	cv::Mat extractCircles(cameraPerspective cp);
+	cv::VideoCapture fastCam;
+	int initFastCam();
+	cv::Mat grabFrame();
 };
