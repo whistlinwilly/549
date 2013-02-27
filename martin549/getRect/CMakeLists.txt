@@ -1,0 +1,6 @@
+set (OpenCV_DIR $ENV{OPENCV_PACKAGE_DIR}/Users/martinyiangao/opencv/release)
+cmake_minimum_required(VERSION 2.8)
+project( getCorner )
+find_package( OpenCV REQUIRED )
+add_executable( getCorner getCorner )
+target_link_libraries( getCorner ${OpenCV_LIBS} )

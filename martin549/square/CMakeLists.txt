@@ -1,0 +1,6 @@
+set (OpenCV_DIR $ENV{OPENCV_PACKAGE_DIR}/Users/martinyiangao/opencv/release)
+cmake_minimum_required(VERSION 2.8)
+project( square )
+find_package( OpenCV REQUIRED )
+add_executable( square square )
+target_link_libraries( square ${OpenCV_LIBS} )
