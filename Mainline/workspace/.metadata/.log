@@ -1,0 +1,1037 @@
+!SESSION 2013-02-26 21:53:17.939 -----------------------------------------------
+eclipse.buildId=v21.1.0-569685
+java.version=1.7.0
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product com.android.ide.eclipse.adt.package.product
+Command-line arguments:  -data C:\Users\549\Documents\GitHub\549\Mainline\workspace -os win32 -ws win32 -arch x86_64 -product com.android.ide.eclipse.adt.package.product
+
+!ENTRY com.android.ide.eclipse.ddms 4 0 2013-02-26 21:53:26.450
+!MESSAGE DDMS files not found: C:\Users\549\Documents\Android\eclipse\platform-tools\adb.exe C:\Users\549\Documents\Android\eclipse\tools\hprof-conv.exe C:\Users\549\Documents\Android\eclipse\tools\traceview.bat 
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:13.299
+!MESSAGE Failed to load properties file for project 'Table'
+
+!ENTRY org.eclipse.egit.ui 2 0 2013-02-26 21:55:15.343
+!MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
+Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
+The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
+this system level configuration. The Git installation location can be configured on the
+Team > Git > Configuration preference page's 'System Settings' tab.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.ui 2 0 2013-02-26 21:55:15.343
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\549'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.087
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.087
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.087
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 2 0 2013-02-26 21:55:19.087
+!MESSAGE activity_table.xml: Couldn't resolve resource @string/hello_world
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.087
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.336
+!MESSAGE palette: Failed to find style 'autoCompleteTextViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.336
+!MESSAGE palette: Failed to find style 'autoCompleteTextViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.336
+!MESSAGE palette: Failed to find style 'autoCompleteTextViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.352
+!MESSAGE palette: Failed to find style 'autoCompleteTextViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.367
+!MESSAGE palette: Failed to find style 'autoCompleteTextViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.367
+!MESSAGE palette: Failed to find style 'autoCompleteTextViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.367
+!MESSAGE palette: Failed to find style 'buttonStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.367
+!MESSAGE palette: Failed to find style 'buttonStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.367
+!MESSAGE palette: Failed to find style 'buttonStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.367
+!MESSAGE palette: Failed to find style 'buttonStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.367
+!MESSAGE palette: Failed to find style 'buttonStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.367
+!MESSAGE palette: Failed to find style 'buttonStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.367
+!MESSAGE palette: Failed to find style 'buttonStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.367
+!MESSAGE palette: Failed to find style 'buttonStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.383
+!MESSAGE palette: Failed to find style 'checkboxStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.383
+!MESSAGE palette: Failed to find style 'checkboxStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.383
+!MESSAGE palette: Failed to find style 'checkboxStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.383
+!MESSAGE palette: Failed to find style 'checkboxStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.383
+!MESSAGE palette: Failed to find style 'checkboxStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.383
+!MESSAGE palette: Failed to find style 'checkedTextViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.383
+!MESSAGE palette: Failed to find style 'checkedTextViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.383
+!MESSAGE palette: Failed to find style 'checkedTextViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.383
+!MESSAGE palette: Failed to find style 'checkedTextViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.383
+!MESSAGE palette: Failed to find style 'checkedTextViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.383
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.383
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.383
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.383
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.430
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'editTextStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.445
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 2 0 2013-02-26 21:55:19.461
+!MESSAGE Failed to render set of icons for AnalogClock, AutoCompleteTextView, Button, SmallButton, CheckBox, CheckedTextView, DigitalClock, PlainText, Password, PasswordNumeric, PersonName, Phone, PostalAddress, MultilineText, Date, Time, Email, Number, NumberSigned, NumberDecimal, LargeText, MediumText, SmallText, MultiAutoCompleteTextView, ProgressBarNormal, ProgressBarHorizontal, ProgressBarLarge, ProgressBarSmall, QuickContactBadge, RadioButton, RatingBar, SeekBar, ListView, ExpandableListView, Spinner, TextView, ToggleButton, ZoomButton, ZoomControls, CalendarView, RadioGroup
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.461
+!MESSAGE 
+!STACK 0
+android.content.res.Resources$NotFoundException
+	at com.android.layoutlib.bridge.android.BridgeContext.obtainStyledAttributes(BridgeContext.java:464)
+	at android.content.res.Resources_Theme_Delegate.obtainStyledAttributes(Resources_Theme_Delegate.java:48)
+	at android.content.res.Resources$Theme.obtainStyledAttributes(Resources.java:1170)
+	at android.widget.TextView.<init>(TextView.java:496)
+	at android.widget.TextView.<init>(TextView.java:449)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at android.view.LayoutInflater.createView(LayoutInflater.java:587)
+	at android.view.BridgeInflater.onCreateView(BridgeInflater.java:86)
+	at android.view.LayoutInflater.onCreateView(LayoutInflater.java:660)
+	at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:685)
+	at android.view.BridgeInflater.createViewFromTag(BridgeInflater.java:131)
+	at android.view.LayoutInflater.rInflate_Original(LayoutInflater.java:746)
+	at android.view.LayoutInflater_Delegate.rInflate(LayoutInflater_Delegate.java:64)
+	at android.view.LayoutInflater.rInflate(LayoutInflater.java:718)
+	at android.view.LayoutInflater.inflate(LayoutInflater.java:489)
+	at android.view.LayoutInflater.inflate(LayoutInflater.java:372)
+	at com.android.layoutlib.bridge.impl.RenderSessionImpl.inflate(RenderSessionImpl.java:385)
+	at com.android.layoutlib.bridge.Bridge.createSession(Bridge.java:332)
+	at com.android.ide.common.rendering.LayoutLibrary.createSession(LayoutLibrary.java:325)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.RenderService.createRenderSession(RenderService.java:440)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.PreviewIconFactory.render(PreviewIconFactory.java:273)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.PreviewIconFactory.initColors(PreviewIconFactory.java:595)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.PreviewIconFactory.getBackgroundColor(PreviewIconFactory.java:570)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.PaletteControl.reloadPalette(PaletteControl.java:437)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.GraphicalEditorPart.reloadPalette(GraphicalEditorPart.java:1320)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.GraphicalEditorPart.changed(GraphicalEditorPart.java:764)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.GraphicalEditorPart.onTargetChange(GraphicalEditorPart.java:1189)
+	at com.android.ide.eclipse.adt.internal.editors.layout.LayoutEditorDelegate.onDescriptorsChanged(LayoutEditorDelegate.java:916)
+	at com.android.ide.eclipse.adt.internal.editors.layout.LayoutEditorDelegate.delegateInitUiRootNode(LayoutEditorDelegate.java:835)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.GraphicalEditorPart$TargetListener.updateEditor(GraphicalEditorPart.java:946)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.GraphicalEditorPart$TargetListener.onTargetLoaded(GraphicalEditorPart.java:910)
+	at com.android.ide.eclipse.adt.AdtPlugin$11.run(AdtPlugin.java:1754)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:135)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4144)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3761)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2701)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2665)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2499)
+	at org.eclipse.ui.internal.Workbench$7.run(Workbench.java:679)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:668)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:124)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:353)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:180)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:629)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:584)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1438)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1414)
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.461
+!MESSAGE palette: Failed to find style 'switchStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.461
+!MESSAGE palette: Failed to find style 'switchStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.461
+!MESSAGE palette: Failed to find style 'switchStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.461
+!MESSAGE palette: Failed to find style 'switchStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.461
+!MESSAGE palette: Failed to find style 'switchStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.461
+!MESSAGE palette: Failed to find style 'switchStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 2 0 2013-02-26 21:55:19.461
+!MESSAGE Failed to render set of icons for Switch
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.461
+!MESSAGE 
+!STACK 0
+java.lang.NullPointerException
+	at android.widget.Switch.jumpDrawablesToCurrentState(Switch.java:825)
+	at android.view.ViewGroup.jumpDrawablesToCurrentState(ViewGroup.java:5160)
+	at android.view.ViewGroup.jumpDrawablesToCurrentState(ViewGroup.java:5160)
+	at android.widget.FrameLayout.jumpDrawablesToCurrentState(FrameLayout.java:189)
+	at android.view.View.onAttachedToWindow(View.java:11553)
+	at android.view.View.dispatchAttachedToWindow(View.java:11932)
+	at android.view.ViewGroup.dispatchAttachedToWindow(ViewGroup.java:2415)
+	at android.view.AttachInfo_Accessor.setAttachInfo(AttachInfo_Accessor.java:42)
+	at com.android.layoutlib.bridge.impl.RenderSessionImpl.inflate(RenderSessionImpl.java:393)
+	at com.android.layoutlib.bridge.Bridge.createSession(Bridge.java:332)
+	at com.android.ide.common.rendering.LayoutLibrary.createSession(LayoutLibrary.java:325)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.RenderService.createRenderSession(RenderService.java:440)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.PreviewIconFactory.render(PreviewIconFactory.java:273)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.PreviewIconFactory.initColors(PreviewIconFactory.java:595)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.PreviewIconFactory.getBackgroundColor(PreviewIconFactory.java:570)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.PaletteControl.reloadPalette(PaletteControl.java:437)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.GraphicalEditorPart.reloadPalette(GraphicalEditorPart.java:1320)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.GraphicalEditorPart.changed(GraphicalEditorPart.java:764)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.GraphicalEditorPart.onTargetChange(GraphicalEditorPart.java:1189)
+	at com.android.ide.eclipse.adt.internal.editors.layout.LayoutEditorDelegate.onDescriptorsChanged(LayoutEditorDelegate.java:916)
+	at com.android.ide.eclipse.adt.internal.editors.layout.LayoutEditorDelegate.delegateInitUiRootNode(LayoutEditorDelegate.java:835)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.GraphicalEditorPart$TargetListener.updateEditor(GraphicalEditorPart.java:946)
+	at com.android.ide.eclipse.adt.internal.editors.layout.gle2.GraphicalEditorPart$TargetListener.onTargetLoaded(GraphicalEditorPart.java:910)
+	at com.android.ide.eclipse.adt.AdtPlugin$11.run(AdtPlugin.java:1754)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:135)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4144)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3761)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2701)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2665)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2499)
+	at org.eclipse.ui.internal.Workbench$7.run(Workbench.java:679)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:668)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:124)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:353)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:180)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:629)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:584)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1438)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1414)
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.461
+!MESSAGE palette: Failed to find style 'tabWidgetStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.477
+!MESSAGE palette: Failed to find style 'tabWidgetStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.477
+!MESSAGE palette: Failed to find style 'tabWidgetStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.477
+!MESSAGE palette: Failed to find style 'tabWidgetStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.523
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.523
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.523
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.523
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.539
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.539
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.539
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.539
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.539
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.539
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.539
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.539
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.555
+!MESSAGE palette: Failed to find style 'tabWidgetStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.555
+!MESSAGE palette: Failed to find style 'tabWidgetStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.555
+!MESSAGE palette: Failed to find style 'tabWidgetStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.555
+!MESSAGE palette: Failed to find style 'tabWidgetStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.570
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.570
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.570
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.570
+!MESSAGE palette: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.570
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.570
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.570
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 2 0 2013-02-26 21:55:19.570
+!MESSAGE activity_table.xml: Couldn't resolve resource @string/hello_world
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.570
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.991
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.991
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.991
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 2 0 2013-02-26 21:55:19.991
+!MESSAGE activity_table.xml: Couldn't resolve resource @string/hello_world
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:19.991
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:20.038
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:20.038
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:20.038
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 2 0 2013-02-26 21:55:20.038
+!MESSAGE activity_table.xml: Couldn't resolve resource @string/hello_world
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:20.038
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:20.147
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:20.147
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:20.147
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 2 0 2013-02-26 21:55:20.147
+!MESSAGE activity_table.xml: Couldn't resolve resource @string/hello_world
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 21:55:20.147
+!MESSAGE activity_table.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 22:04:00.274
+!MESSAGE 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/OpenCV Library - 2.4.3/res' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:341)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:215)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:266)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:249)
+	at com.android.ide.eclipse.adt.internal.sdk.Sdk$6.run(Sdk.java:1306)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2013-02-26 22:04:00.275
+!MESSAGE Resource '/OpenCV Library - 2.4.3/res' does not exist.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 22:04:00.276
+!MESSAGE 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/OpenCV Sample - 15 puzzle/res' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:341)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:215)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:266)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:249)
+	at com.android.ide.eclipse.adt.internal.sdk.Sdk$6.run(Sdk.java:1306)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2013-02-26 22:04:00.277
+!MESSAGE Resource '/OpenCV Sample - 15 puzzle/res' does not exist.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 22:04:00.278
+!MESSAGE 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/OpenCV Sample - color-blob-detection/res' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:341)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:215)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:266)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:249)
+	at com.android.ide.eclipse.adt.internal.sdk.Sdk$6.run(Sdk.java:1306)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2013-02-26 22:04:00.278
+!MESSAGE Resource '/OpenCV Sample - color-blob-detection/res' does not exist.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 22:04:00.279
+!MESSAGE 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/OpenCV Sample - face-detection/res' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:341)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:215)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:266)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:249)
+	at com.android.ide.eclipse.adt.internal.sdk.Sdk$6.run(Sdk.java:1306)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2013-02-26 22:04:00.279
+!MESSAGE Resource '/OpenCV Sample - face-detection/res' does not exist.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 22:04:00.280
+!MESSAGE 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/OpenCV Sample - image-manipulations/res' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:341)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:215)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:266)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:249)
+	at com.android.ide.eclipse.adt.internal.sdk.Sdk$6.run(Sdk.java:1306)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2013-02-26 22:04:00.281
+!MESSAGE Resource '/OpenCV Sample - image-manipulations/res' does not exist.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 22:04:00.282
+!MESSAGE 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/OpenCV Tutorial 1 - Add OpenCV/res' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:341)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:215)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:266)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:249)
+	at com.android.ide.eclipse.adt.internal.sdk.Sdk$6.run(Sdk.java:1306)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2013-02-26 22:04:00.282
+!MESSAGE Resource '/OpenCV Tutorial 1 - Add OpenCV/res' does not exist.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 22:04:00.283
+!MESSAGE 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/OpenCV Tutorial 2 - Use OpenCV Camera/res' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:341)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:215)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:266)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:249)
+	at com.android.ide.eclipse.adt.internal.sdk.Sdk$6.run(Sdk.java:1306)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2013-02-26 22:04:00.283
+!MESSAGE Resource '/OpenCV Tutorial 2 - Use OpenCV Camera/res' does not exist.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 22:04:00.284
+!MESSAGE 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/OpenCV Tutorial 3 - Add Native OpenCV/res' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:341)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:215)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:266)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:249)
+	at com.android.ide.eclipse.adt.internal.sdk.Sdk$6.run(Sdk.java:1306)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2013-02-26 22:04:00.284
+!MESSAGE Resource '/OpenCV Tutorial 3 - Add Native OpenCV/res' does not exist.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 22:04:00.286
+!MESSAGE 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/OpenCV Tutorial 4 - Mix Java+Native OpenCV/res' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:341)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:215)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:266)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:249)
+	at com.android.ide.eclipse.adt.internal.sdk.Sdk$6.run(Sdk.java:1306)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2013-02-26 22:04:00.286
+!MESSAGE Resource '/OpenCV Tutorial 4 - Mix Java+Native OpenCV/res' does not exist.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-02-26 22:04:00.287
+!MESSAGE 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/OpenCV Tutorial 5 - Camera Control/res' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:341)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:215)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:266)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:249)
+	at com.android.ide.eclipse.adt.internal.sdk.Sdk$6.run(Sdk.java:1306)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2013-02-26 22:04:00.287
+!MESSAGE Resource '/OpenCV Tutorial 5 - Camera Control/res' does not exist.
+
+!ENTRY org.eclipse.cdt.core 1 0 2013-02-26 22:04:09.192
+!MESSAGE Indexed 'OpenCV Sample - face-detection' (1 sources, 21 headers) in 4.21 sec: 9,687 declarations; 13,757 references; 41 unresolved inclusions; 12 syntax errors; 1,512 unresolved names (6.06%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2013-02-26 22:04:10.914
+!MESSAGE Indexed 'OpenCV Tutorial 4 - Mix Java+Native OpenCV' (1 sources, 25 headers) in 1.72 sec: 13,332 declarations; 17,502 references; 37 unresolved inclusions; 2 syntax errors; 1,808 unresolved names (5.54%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2013-02-26 22:04:12.097
+!MESSAGE Indexed 'OpenCV Tutorial 3 - Add Native OpenCV' (1 sources, 25 headers) in 1.18 sec: 13,332 declarations; 17,502 references; 37 unresolved inclusions; 2 syntax errors; 1,808 unresolved names (5.54%)
+
+!ENTRY org.eclipse.core.resources 4 2 2013-02-26 22:04:56.386
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/OpenCV Library - 2.4.3/bin' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:341)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:215)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:266)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:249)
+	at com.android.ide.eclipse.adt.internal.build.builders.PostCompilerBuilder.clean(PostCompilerBuilder.java:153)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:730)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:256)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:394)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:618)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2344)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:597)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:114)
+	at com.android.ide.eclipse.adt.internal.project.ProjectHelper.checkAndFixCompilerCompliance(ProjectHelper.java:450)
+	at com.android.ide.eclipse.adt.internal.project.ProjectHelper.fixProjectClasspathEntries(ProjectHelper.java:350)
+	at com.android.ide.eclipse.adt.internal.project.ProjectHelper.fixProject(ProjectHelper.java:268)
+	at com.android.ide.eclipse.adt.internal.actions.FixProjectAction$1.run(FixProjectAction.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2013-02-26 22:04:56.387
+!MESSAGE Resource '/OpenCV Library - 2.4.3/bin' does not exist.
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2013-02-26 22:04:56.387
+!MESSAGE Resource '/OpenCV Library - 2.4.3/bin' does not exist.
+
+!ENTRY org.eclipse.core.resources 4 2 2013-02-26 22:05:13.761
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/OpenCV Library - 2.4.3/bin' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:341)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:215)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:266)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:249)
+	at com.android.ide.eclipse.adt.internal.build.builders.PostCompilerBuilder.clean(PostCompilerBuilder.java:153)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:730)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:256)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:394)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:618)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2344)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:597)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:114)
+	at org.eclipse.ui.internal.ide.dialogs.CleanDialog.doClean(CleanDialog.java:319)
+	at org.eclipse.ui.internal.ide.dialogs.CleanDialog$1.runInWorkspace(CleanDialog.java:151)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:38)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2013-02-26 22:05:13.761
+!MESSAGE Resource '/OpenCV Library - 2.4.3/bin' does not exist.
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2013-02-26 22:05:13.761
+!MESSAGE Resource '/OpenCV Library - 2.4.3/bin' does not exist.
+
+!ENTRY org.eclipse.core.resources 4 566 2013-02-26 22:05:13.774
+!MESSAGE Errors occurred during the build.
+!SUBENTRY 1 com.android.ide.eclipse.adt 4 75 2013-02-26 22:05:13.774
+!MESSAGE Errors running builder 'Android Package Builder' on project 'OpenCV Library - 2.4.3'.
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/OpenCV Library - 2.4.3/bin' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:341)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:215)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:266)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:249)
+	at com.android.ide.eclipse.adt.internal.build.builders.PostCompilerBuilder.clean(PostCompilerBuilder.java:153)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:730)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:256)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:394)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:618)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2344)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:597)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:114)
+	at org.eclipse.ui.internal.ide.dialogs.CleanDialog.doClean(CleanDialog.java:319)
+	at org.eclipse.ui.internal.ide.dialogs.CleanDialog$1.runInWorkspace(CleanDialog.java:151)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:38)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 2 org.eclipse.core.resources 4 368 2013-02-26 22:05:13.774
+!MESSAGE Resource '/OpenCV Library - 2.4.3/bin' does not exist.
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2013-02-26 22:05:13.774
+!MESSAGE Resource '/OpenCV Library - 2.4.3/bin' does not exist.
+!SESSION 2013-02-26 22:15:50.659 -----------------------------------------------
+eclipse.buildId=v21.1.0-569685
+java.version=1.7.0
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product com.android.ide.eclipse.adt.package.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.android.ide.eclipse.adt.package.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2013-02-26 22:16:00.768
+!MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
+Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
+The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
+this system level configuration. The Git installation location can be configured on the
+Team > Git > Configuration preference page's 'System Settings' tab.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.ui 2 0 2013-02-26 22:16:00.769
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\549'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.ui.workbench 2 0 2013-02-26 22:18:23.718
+!MESSAGE A handler conflict occurred.  This may disable some commands.
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2013-02-26 22:18:23.718
+!MESSAGE Conflict for 'org.eclipse.ltk.ui.refactor.create.refactoring.script':
+HandlerActivation(commandId=org.eclipse.ltk.ui.refactor.create.refactoring.script,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.ltk.ui.refactoring.actions.CreateRefactoringScriptAction),
+	expression=AndExpression(ActionSetExpression(org.eclipse.cdt.ui.CodingActionSet,org.eclipse.ui.internal.WorkbenchWindow@7cc3bf6f),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@7cc3bf6f)),sourcePriority=16640)
+HandlerActivation(commandId=org.eclipse.ltk.ui.refactor.create.refactoring.script,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.jdt.internal.ui.refactoring.actions.CreateRefactoringScriptAction),
+	expression=AndExpression(ActionSetExpression(org.eclipse.jdt.ui.CodingActionSet,org.eclipse.ui.internal.WorkbenchWindow@7cc3bf6f),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@7cc3bf6f)),sourcePriority=16640)
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2013-02-26 22:18:23.718
+!MESSAGE Conflict for 'org.eclipse.ltk.ui.refactor.show.refactoring.history':
+HandlerActivation(commandId=org.eclipse.ltk.ui.refactor.show.refactoring.history,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.jdt.internal.ui.refactoring.actions.ShowRefactoringHistoryAction),
+	expression=AndExpression(ActionSetExpression(org.eclipse.jdt.ui.CodingActionSet,org.eclipse.ui.internal.WorkbenchWindow@7cc3bf6f),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@7cc3bf6f)),sourcePriority=16640)
+HandlerActivation(commandId=org.eclipse.ltk.ui.refactor.show.refactoring.history,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.ltk.ui.refactoring.actions.ShowRefactoringHistoryAction),
+	expression=AndExpression(ActionSetExpression(org.eclipse.cdt.ui.CodingActionSet,org.eclipse.ui.internal.WorkbenchWindow@7cc3bf6f),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@7cc3bf6f)),sourcePriority=16640)
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2013-02-26 22:18:23.718
+!MESSAGE Conflict for 'org.eclipse.ltk.ui.refactor.apply.refactoring.script':
+HandlerActivation(commandId=org.eclipse.ltk.ui.refactor.apply.refactoring.script,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.ltk.ui.refactoring.actions.ApplyRefactoringScriptAction),
+	expression=AndExpression(ActionSetExpression(org.eclipse.cdt.ui.CodingActionSet,org.eclipse.ui.internal.WorkbenchWindow@7cc3bf6f),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@7cc3bf6f)),sourcePriority=16640)
+HandlerActivation(commandId=org.eclipse.ltk.ui.refactor.apply.refactoring.script,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.jdt.internal.ui.refactoring.actions.ApplyRefactoringScriptAction),
+	expression=AndExpression(ActionSetExpression(org.eclipse.jdt.ui.CodingActionSet,org.eclipse.ui.internal.WorkbenchWindow@7cc3bf6f),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@7cc3bf6f)),sourcePriority=16640)
+!SESSION 2013-02-28 06:55:26.709 -----------------------------------------------
+eclipse.buildId=v21.1.0-569685
+java.version=1.7.0
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product com.android.ide.eclipse.adt.package.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.android.ide.eclipse.adt.package.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2013-02-28 06:55:39.782
+!MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
+Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
+The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
+this system level configuration. The Git installation location can be configured on the
+Team > Git > Configuration preference page's 'System Settings' tab.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.ui 2 0 2013-02-28 06:55:39.784
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\549'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2013-03-04 23:27:57.130 -----------------------------------------------
+eclipse.buildId=v21.1.0-569685
+java.version=1.7.0
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product com.android.ide.eclipse.adt.package.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.android.ide.eclipse.adt.package.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2013-03-04 23:28:01.298
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.egit.ui 2 0 2013-03-04 23:28:14.159
+!MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
+Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
+The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
+this system level configuration. The Git installation location can be configured on the
+Team > Git > Configuration preference page's 'System Settings' tab.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.ui 2 0 2013-03-04 23:28:14.160
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\549'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-03-04 23:29:38.585
+!MESSAGE Failed to load properties file for project 'Client'
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-03-04 23:57:37.553
+!MESSAGE Failed converting ECJ parse tree to Lombok for file C:\Users\549\Documents\GitHub\549\Mainline\workspace\Client\src\com\example\client\ClientActivity.java
+!STACK 0
+java.lang.NullPointerException: returnTypeReference is mandatory
+	at lombok.ast.MethodDeclaration.astReturnTypeReference(MethodDeclaration.java:75)
+	at lombok.ast.ecj.EcjTreeConverter$2.visitMethodDeclaration(EcjTreeConverter.java:1231)
+	at lombok.ast.ecj.EcjTreeVisitor.visitEcjNode(EcjTreeVisitor.java:152)
+	at lombok.ast.ecj.EcjTreeConverter.visit(EcjTreeConverter.java:290)
+	at lombok.ast.ecj.EcjTreeConverter.toTree(EcjTreeConverter.java:231)
+	at lombok.ast.ecj.EcjTreeConverter.fillList(EcjTreeConverter.java:277)
+	at lombok.ast.ecj.EcjTreeConverter.fillList(EcjTreeConverter.java:247)
+	at lombok.ast.ecj.EcjTreeConverter.access$100(EcjTreeConverter.java:140)
+	at lombok.ast.ecj.EcjTreeConverter$2.createNormalTypeBody(EcjTreeConverter.java:557)
+	at lombok.ast.ecj.EcjTreeConverter$2.visitTypeDeclaration(EcjTreeConverter.java:480)
+	at lombok.ast.ecj.EcjTreeVisitor.visitEcjNode(EcjTreeVisitor.java:48)
+	at lombok.ast.ecj.EcjTreeConverter.visit(EcjTreeConverter.java:290)
+	at lombok.ast.ecj.EcjTreeConverter.toTree(EcjTreeConverter.java:231)
+	at lombok.ast.ecj.EcjTreeConverter.fillList(EcjTreeConverter.java:277)
+	at lombok.ast.ecj.EcjTreeConverter.fillList(EcjTreeConverter.java:247)
+	at lombok.ast.ecj.EcjTreeConverter.access$100(EcjTreeConverter.java:140)
+	at lombok.ast.ecj.EcjTreeConverter$2.visitCompilationUnitDeclaration(EcjTreeConverter.java:435)
+	at lombok.ast.ecj.EcjTreeVisitor.visitEcjNode(EcjTreeVisitor.java:264)
+	at lombok.ast.ecj.EcjTreeConverter.visit(EcjTreeConverter.java:290)
+	at com.android.ide.eclipse.adt.internal.lint.EclipseLintClient$EclipseJavaParser.parseJava(EclipseLintClient.java:1141)
+	at com.android.tools.lint.client.api.JavaVisitor.visitFile(JavaVisitor.java:196)
+	at com.android.tools.lint.client.api.LintDriver.checkIndividualJavaFiles(LintDriver.java:1475)
+	at com.android.tools.lint.client.api.LintDriver.runFileDetectors(LintDriver.java:911)
+	at com.android.tools.lint.client.api.LintDriver.checkProject(LintDriver.java:785)
+	at com.android.tools.lint.client.api.LintDriver.analyze(LintDriver.java:386)
+	at com.android.ide.eclipse.adt.internal.lint.LintJob.run(LintJob.java:153)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SESSION 2013-03-05 00:43:58.091 -----------------------------------------------
+eclipse.buildId=v21.1.0-569685
+java.version=1.7.0
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product com.android.ide.eclipse.adt.package.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.android.ide.eclipse.adt.package.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2013-03-05 00:44:00.572
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.egit.ui 2 0 2013-03-05 00:44:07.186
+!MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
+Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
+The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
+this system level configuration. The Git installation location can be configured on the
+Team > Git > Configuration preference page's 'System Settings' tab.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.ui 2 0 2013-03-05 00:44:07.186
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\549'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2013-03-05 03:11:47.781 -----------------------------------------------
+eclipse.buildId=v21.1.0-569685
+java.version=1.7.0
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product com.android.ide.eclipse.adt.package.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.android.ide.eclipse.adt.package.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2013-03-05 03:11:57.065
+!MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
+Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
+The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
+this system level configuration. The Git installation location can be configured on the
+Team > Git > Configuration preference page's 'System Settings' tab.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.ui 2 0 2013-03-05 03:11:57.066
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\549'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2013-03-05 13:33:28.234 -----------------------------------------------
+eclipse.buildId=v21.1.0-569685
+java.version=1.7.0
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product com.android.ide.eclipse.adt.package.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.android.ide.eclipse.adt.package.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2013-03-05 13:33:30.746
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.egit.ui 2 0 2013-03-05 13:33:36.722
+!MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
+Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
+The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
+this system level configuration. The Git installation location can be configured on the
+Team > Git > Configuration preference page's 'System Settings' tab.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.ui 2 0 2013-03-05 13:33:36.723
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\549'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-03-05 13:35:08.532
+!MESSAGE 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/OpenGL/res' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:341)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:215)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:266)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:249)
+	at com.android.ide.eclipse.adt.internal.sdk.Sdk$6.run(Sdk.java:1306)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2013-03-05 13:35:08.534
+!MESSAGE Resource '/OpenGL/res' does not exist.
+!SESSION 2013-03-05 13:44:36.858 -----------------------------------------------
+eclipse.buildId=v21.1.0-569685
+java.version=1.7.0
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product com.android.ide.eclipse.adt.package.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.android.ide.eclipse.adt.package.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2013-03-05 13:44:47.005
+!MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
+Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
+The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
+this system level configuration. The Git installation location can be configured on the
+Team > Git > Configuration preference page's 'System Settings' tab.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.ui 2 0 2013-03-05 13:44:47.006
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\549'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.

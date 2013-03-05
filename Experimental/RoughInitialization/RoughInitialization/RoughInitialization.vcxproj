@@ -85,6 +85,7 @@
     <ClCompile Include="ImageManip.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Projector.cpp" />
+    <ClCompile Include="Server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
@@ -92,6 +93,7 @@
     <ClInclude Include="DefinedObjects.h" />
     <ClInclude Include="ImageManip.h" />
     <ClInclude Include="Projector.h" />
+    <ClInclude Include="Server.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

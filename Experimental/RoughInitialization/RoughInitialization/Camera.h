@@ -30,4 +30,5 @@ public:
 	cv::VideoCapture fastCam;
 	int initFastCam();
 	cv::Mat grabFrame();
+	cv::Mat grabFrameWithPerspective(cameraPerspective cp);
 };

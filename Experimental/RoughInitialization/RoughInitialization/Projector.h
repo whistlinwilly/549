@@ -37,7 +37,7 @@ public:
 	void renderPatternWithPerspective(float distanceFromTable, float incidentAngle, float projRotation, float deltaX, float deltaY, float twist);
 	void renderInitWithPerspective(float distanceFromTable, float incidentAngle, float projRotation, float deltaX, float deltaY, float twist);
 	void renderInitPattern2(float distanceFromTable, float incidentAngle, float projRotation, float deltaX, float deltaY, float xDist, float yDist, float twist);
-	void renderBathtub(float distanceFromTable, float incidentAngle,float  rot,float  twist,float  xCenter,float  yCenter, float distX, float distY); 
+	void renderBathtub(float distanceFromTable, float incidentAngle,float  rot,float  twist,float  xCenter,float  yCenter, float distX, float distY, float shapeAngle); 
 	GLuint createTexture(char* filename);
 	GLuint* texture;
 };

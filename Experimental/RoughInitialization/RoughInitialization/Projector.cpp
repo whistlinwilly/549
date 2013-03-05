@@ -59,7 +59,7 @@ void Projector::init(void){
 
 	
 	texture[0] = createTexture("Tub1.bmp");
-	texture[1] = createTexture("Tub2.bmp");
+	texture[1] = createTexture("stonewall.bmp");
 	texture[2] = createTexture("Tub3.bmp");
 	texture[3] = createTexture("Tub4.bmp");
 	texture[4] = createTexture("Tub5.bmp");
@@ -859,7 +859,7 @@ glRotatef(twist,0,0,1);
 }
 
 
-void Projector::renderBathtub(float distanceFromTable, float incidentAngle, float projRotation,  float twist, float deltaX, float deltaY, float distX, float distY){
+void Projector::renderBathtub(float distanceFromTable, float incidentAngle, float projRotation,  float twist, float deltaX, float deltaY, float distX, float distY, float shapeAngle){
 
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -878,6 +878,80 @@ void Projector::renderBathtub(float distanceFromTable, float incidentAngle, floa
 	glRotatef(incidentAngle,1,0,0);
 	glRotatef(twist,0,0,1);
 	
+	float v1x, v1y, v2x, v2y, v3x, v3y, v4x, v4y, v5x, v5y, v6x, v6y, tx, ty;
+
+	v1x = -2.62;
+	v1y = -1.5;
+
+	v2x = 2.62;
+	v2y = -1.5;
+
+	v3x = 2.62;
+	v3y = 1.5;
+
+	v4x = -2.62;
+	v4y = 1.5;
+
+	v5x = -2.62;
+	v5y = -3.5;
+
+	v6x = 2.62;
+	v6y = -3.5;
+
+	tx = v1x * cos(shapeAngle) - v1y * sin(shapeAngle);
+	ty = v1x * sin(shapeAngle) + v1y * cos(shapeAngle);
+
+	v1x = tx;
+	v1y = ty;
+
+	tx = v2x * cos(shapeAngle) - v2y * sin(shapeAngle);
+	ty = v2x * sin(shapeAngle) + v2y * cos(shapeAngle);
+
+	v2x = tx;
+	v2y = ty;
+
+	tx = v3x * cos(shapeAngle) - v3y * sin(shapeAngle);
+	ty = v3x * sin(shapeAngle) + v3y * cos(shapeAngle);
+
+	v3x = tx;
+	v3y = ty;
+
+	tx = v4x * cos(shapeAngle) - v4y * sin(shapeAngle);
+	ty = v4x * sin(shapeAngle) + v4y * cos(shapeAngle);
+
+	v4x = tx;
+	v4y = ty;
+
+	tx = v5x * cos(shapeAngle) - v5y * sin(shapeAngle);
+	ty = v5x * sin(shapeAngle) + v5y * cos(shapeAngle);
+
+	v5x = tx;
+	v5y = ty;
+
+	tx = v6x * cos(shapeAngle) - v6y * sin(shapeAngle);
+	ty = v6x * sin(shapeAngle) + v6y * cos(shapeAngle);
+
+	v6x = tx;
+	v6y = ty;
+
+	v1x += distX;
+	v1y += distY;
+
+	v2x += distX;
+	v2y += distY;
+
+	v3x += distX;
+	v3y += distY;
+
+	v4x += distX;
+	v4y += distY;
+
+	v5x += distX;
+	v5y += distY;
+
+	v6x += distX;
+	v6y += distY;
+
 	for(int i = 0; i < 1; i++){
 	
 	glPushMatrix();
@@ -888,14 +962,29 @@ void Projector::renderBathtub(float distanceFromTable, float incidentAngle, floa
 	glBegin( GL_QUADS );
 	
 	glTexCoord2i( 0, 1 );
-	glVertex3f( -2.62 + distX, -1.5 + distY, 2.0f );
+	glVertex3f( v1x, v1y, 2.0f );
 	glTexCoord2i( 1, 1 );
-	glVertex3f( 2.62 + distX, -1.5 + distY, 2.0f );
+	glVertex3f( v2x, v2y, 2.0f );
 	glTexCoord2i( 1, 0 );
-	glVertex3f( 2.62 + distX, 1.5 + distY, 2.0f );
+	glVertex3f( v3x, v3y, 2.0f );
 	glTexCoord2i( 0, 0 );
-	glVertex3f( -2.62 + distX, 1.5 + distY, 2.0f );
-	glEnd();	
+	glVertex3f( v4x, v4y, 2.0f );
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, texture[1]);
+
+	glBegin( GL_QUADS );
+	
+	glTexCoord2i( 0, 1 );
+	glVertex3f( v5x, v5y, 0.0f );
+	glTexCoord2i( 1, 1 );
+	glVertex3f( v6x, v6y, 0.0f );
+	glTexCoord2i( 1, 0 );
+	glVertex3f( v2x, v2y, 0.0f );
+	glTexCoord2i( 0, 0 );
+	glVertex3f( v1x, v1y, 0.0f );
+	glEnd();
+
 	glPopMatrix();
 
 	

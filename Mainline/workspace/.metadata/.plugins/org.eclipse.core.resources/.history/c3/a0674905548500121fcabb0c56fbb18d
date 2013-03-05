@@ -1,0 +1,73 @@
+package com.example.client;
+
+
+import java.net.InetAddress;
+import java.net.Socket;
+
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.app.Activity;
+import android.util.Log;
+import android.view.Menu;
+import android.widget.Toast;
+
+public class ClientActivity extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_client);
+		
+		Toast.makeText(getApplicationContext(), "APP STARTED", Toast.LENGTH_SHORT).show();
+		
+		Thread myThread = new Thread()
+		{
+		    @Override
+		    public void run() {
+		    	Log.w("NETWORK", "MADE IT TO THREAD");
+		    	try {
+					Socket test = new Socket(InetAddress.getByName("10.0.1.3"),6881);
+					Log.w("NETWORK", "CONNECTED");
+				
+				} catch (Exception e) {
+					Log.w("NETWORK", "NOT CONNECTED");
+					e.printStackTrace();
+				}
+		    }
+		};
+
+		myNetworker mine = new myNetworker();
+		String mycrap = "nsdf";
+		mine.execute(mycrap);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.client, menu);
+		return true;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	private class myNetworker extends AsyncTask {
+
+		@Override
+		protected Object doInBackground(Object... arg0) {
+			try{
+			Socket test = new Socket(InetAddress.getByName("10.0.1.3"),6881);
+			Log.w("NETWORK", "CONNECTED");
+			return "WORKED";
+			}
+			catch(Exception e){
+				return "DIDN'T WORK";
+			}
+		}
+		
+		protected void onPostExecute(String result) {
+			Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+		}
+		
+	}
+	}
+
+}

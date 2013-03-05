@@ -226,7 +226,12 @@ cameraPerspective Camera::tryRotation(void){
 
 	GaussianBlur( grey, gauss, Size( 3, 3 ), 0, 0 );
 
-		 threshold( gauss, thre, i, 255.0, THRESH_BINARY);
+	float thresholdNum = threshold( gauss, thre, i, 255.0, THRESH_OTSU);
+
+	thresholdNum -= 65.0;
+	threshold( gauss, thre, thresholdNum, 255.0, THRESH_BINARY);
+	//imshow("new", thre);
+	//waitKey();
 		imshow("new",thre);
 	while(waitKey() != 121){
 		i+=5.0;
@@ -234,8 +239,8 @@ cameraPerspective Camera::tryRotation(void){
 		imshow("new",thre);
 	};
 	Canny(thre, can, 10, 250, 3);
-		imshow("new", can);
-	waitKey();
+		//imshow("new", can);
+	//waitKey();
 	vector<Vec2f> lines;
 	HoughLines(can, lines, 1, CV_PI/180, 25, 0, 0 );
 
@@ -361,6 +366,20 @@ Mat Camera::grabFrame(){
 	for(int i = 0; i < 5; i++)
 	fastCam >> frame;
 	return frame.clone();
+}
+
+Mat Camera::grabFrameWithPerspective(cameraPerspective cp){
+	Mat m, rot, warp, mirror;
+
+	m = grabFrame();
+
+	Mat rot_mat = getRotationMatrix2D(cp.center,cp.angle,1);
+	warpAffine(m, rot, rot_mat, m.size(), INTER_CUBIC);
+	warpPerspective(rot,warp,myObj.perspectiveWarp,rot.size());
+
+	flip(warp, mirror, 1);
+
+	return mirror.clone();
 }
 
 cameraPerspective Camera::getBackground(cameraPerspective cp){
@@ -496,13 +515,13 @@ Point3f Camera::findCircle(cameraPerspective cp){
 
 	for(int i=0; i<contour.size(); i++){
 		if(contour[i].size() > 150){
-			myRect = fitEllipse(contour[i]);
+			myRect = minAreaRect(contour[i]);
 		if(myRect.size.area() > 2000.0){
 			centerX += myRect.center.x + coX;
 			centerY += myRect.center.y + coY;
 			rot += myRect.angle;
 			num++;
-			//drawContours(test.background,contour,i,Scalar(0.0,255.0,0.0),0.5,NULL,NULL,NULL,Point2f(coX,coY));
+			drawContours(test.background,contour,i,Scalar(0.0,255.0,0.0),0.5,NULL,NULL,NULL,Point2f(coX,coY));
 		}
 		//	drawContours(test.background,contour,i,Scalar(0.0,255.0,0.0),0.5);
 		}
@@ -510,8 +529,8 @@ Point3f Camera::findCircle(cameraPerspective cp){
 
 
 
-	//imshow("capture", test.background);
-	//waitKey();
+	imshow("capture", test.background);
+	waitKey();
 
  	return Point3f(centerX / num , centerY / num, rot / num);
 
