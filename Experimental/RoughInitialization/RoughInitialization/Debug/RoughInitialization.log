@@ -1,181 +1,15 @@
-﻿Build started 3/6/2013 1:13:17 AM.
+﻿Build started 3/6/2013 2:02:00 AM.
      1>Project "C:\Users\549\Documents\GitHub\549\Experimental\RoughInitialization\RoughInitialization\RoughInitialization.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\RoughInitialization.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\Users\549\Documents\opencv\build\include /I"C:\Users\549\Documents\GitHub\549\glew-1.9.0\include\GL\\" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ControlBoard.cpp Projector.cpp main.cpp
-         ControlBoard.cpp
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(149): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(168): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(176): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(178): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(178): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(178): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(178): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(180): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(182): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(182): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(243): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(260): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(272): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(333): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(365): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(385): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(386): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(387): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(388): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(389): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(390): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(391): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(392): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(393): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(395): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(396): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(397): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(405): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(501): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(502): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(503): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(504): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(505): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(506): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(507): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(508): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(509): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(516): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(517): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(518): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(523): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(524): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(525): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(530): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(531): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(532): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(537): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(538): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(539): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(544): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(545): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(546): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(551): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(552): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(553): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(558): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(559): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(560): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(565): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(566): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(567): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(572): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(573): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(574): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(709): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(720): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(720): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(720): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(740): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(741): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(747): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(755): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(778): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(779): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(780): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(781): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(782): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(783): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(784): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(785): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(786): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(788): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(789): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(790): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(795): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(796): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(808): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(813): warning C4305: '-=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(818): warning C4305: '-=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(823): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(828): warning C4305: '-=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(838): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(897): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(898): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(899): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(900): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(901): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(902): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(903): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(904): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(905): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(907): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(908): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(909): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(914): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(915): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(927): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(932): warning C4305: '-=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(937): warning C4305: '-=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(942): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(947): warning C4305: '-=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(957): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\controlboard.cpp(623): warning C4101: 'temp' : unreferenced local variable
-         Generating Code...
-         Compiling...
-         main.cpp
-     1>c:\users\549\documents\opencv\build\include\opencv2\flann\logger.h(66): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : see declaration of 'fopen'
-         Projector.cpp
-     1>c:\users\549\documents\opencv\build\include\opencv2\flann\logger.h(66): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : see declaration of 'fopen'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(11): warning C4101: 'event' : unreferenced local variable
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(324): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(382): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(384): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(385): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(526): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(528): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(529): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(546): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(548): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(549): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(550): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(645): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(647): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(648): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(741): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(743): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(744): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(757): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(759): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(760): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(774): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(776): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(777): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(790): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(792): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(793): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(883): warning C4305: '=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(886): warning C4305: '=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(889): warning C4305: '=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(892): warning C4305: '=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(895): warning C4305: '=' : truncation from 'double' to 'float'
-     1>c:\users\549\documents\github\549\experimental\roughinitialization\roughinitialization\projector.cpp(898): warning C4305: '=' : truncation from 'double' to 'float'
-         Generating Code...
+         All outputs are up-to-date.
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\549\Documents\GitHub\549\Experimental\RoughInitialization\Debug\RoughInitialization.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\Users\549\Documents\opencv\build\x86\vc10\lib opencv_core243d.lib opencv_imgproc243d.lib opencv_highgui243d.lib opencv_ml243d.lib opencv_video243d.lib opencv_features2d243d.lib opencv_calib3d243d.lib opencv_nonfree243d.lib SDL.lib SDLmain.lib opengl32.lib glu32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\RoughInitialization.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\549\Documents\GitHub\549\Experimental\RoughInitialization\Debug\RoughInitialization.pdb" /SUBSYSTEM:WINDOWS /STACK:"10000","10000" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\549\Documents\GitHub\549\Experimental\RoughInitialization\Debug\RoughInitialization.lib" /MACHINE:X86 Debug\RoughInitialization.exe.embed.manifest.res
-         Debug\Camera.obj
-         Debug\ControlBoard.obj
-         Debug\ImageManip.obj
-         Debug\main.obj
-         Debug\Projector.obj
-         Debug\Server.obj
+         All outputs are up-to-date.
        Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\RoughInitialization.exe.embed.manifest" /manifest Debug\RoughInitialization.exe.intermediate.manifest
          All outputs are up-to-date.
-       LinkEmbedManifest:
-         All outputs are up-to-date.
-         RoughInitialization.vcxproj -> C:\Users\549\Documents\GitHub\549\Experimental\RoughInitialization\Debug\RoughInitialization.exe
        FinalizeBuildStatus:
          Deleting file "Debug\RoughInitialization.unsuccessfulbuild".
          Touching "Debug\RoughInitialization.lastbuildstate".
@@ -183,4 +17,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:12.83
+Time Elapsed 00:00:00.36

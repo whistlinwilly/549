@@ -743,7 +743,7 @@ Mat bgFrame, bgThresh, bgForeground;
 	curX += centerX;
 	curY += centerY;
 
-	incidentAngle = (atan(height/width));
+	incidentAngle = (acos(width/height));
 	incidentAngle = incidentAngle / (2*M_PI) * -360.0;
 
 	//distanceFromTable = -1.0 * DEFAULT_DISTANCE / 2.0 * width / 640.0 - (DEFAULT_DISTANCE);

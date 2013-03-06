@@ -27,7 +27,9 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 	   
 	   
 	   private final GLCube cube = new GLCube();
-	   private final GLCircle circle = new GLCircle(0,0,0,100);
+	   private final GLCircle circle = new GLCircle(0,0,1.0f,100);
+	   private final GLCircle circle2 = new GLCircle(0,2,0.4f,100);
+	   private final GLCircle circle3 = new GLCircle(0,-2,0.4f,100);
 	   
 	   
 	   private long startTime;
@@ -148,7 +150,9 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 	    	  gl.glMatrixMode(GL10.GL_MODELVIEW);
 	    	  gl.glLoadIdentity();
 	    	  gl.glTranslatef(0, 0, -38.2f);
-	    	  gl.glRotatef(-68.0f, 1,0,0);
+	    	  gl.glRotatef(78.0f, 0, 0, 1);
+	    	  gl.glRotatef(27.0f, 1,0,0);
+	    	  
 	    //	  if (initialize){
 	    	  // Other drawing commands go here...
 	      
@@ -162,6 +166,8 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 	    	  // Draw the model
 	    	  if(initialize){
 	    	  circle.draw(gl);
+	    	  circle2.draw(gl);
+	    	  circle3.draw(gl);
 	    	  }
 	    
 	      
