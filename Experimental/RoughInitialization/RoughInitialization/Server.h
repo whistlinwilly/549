@@ -27,7 +27,7 @@ public:
     // for error checking return values
     int iResult;
 
-	void sendString(const char* i);
+	void sendString(const char* i, int n);
 
 	void confirm(void);
 };

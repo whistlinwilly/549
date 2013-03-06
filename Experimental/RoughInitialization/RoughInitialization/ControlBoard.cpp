@@ -638,7 +638,7 @@ Mat bgFrame, bgThresh, bgForeground;
 	bgFrame = tCam.grabFrameWithPerspective(cp);
 	tableBGsub->operator()(bgFrame,bgForeground,0.001);
 
-	myServer->sendString("0");
+	myServer->sendString("0",1);
 
 	myServer->confirm();
 
@@ -646,8 +646,8 @@ Mat bgFrame, bgThresh, bgForeground;
 
 	bgFrame = tCam.grabFrameWithPerspective(cp);
 
-	imshow("FRAME GRABBED", bgFrame);
-	waitKey();
+	//imshow("FRAME GRABBED", bgFrame);
+	//waitKey();
 
 	tableBGsub->operator()(bgFrame,bgForeground,0.001);
 
@@ -655,18 +655,18 @@ Mat bgFrame, bgThresh, bgForeground;
 
 	//tableBGsub->getBackgroundImage(back);
 
-	imshow("BACKGROUND MODEL", bgForeground);
-	waitKey();
+	//imshow("BACKGROUND MODEL", bgForeground);
+	//waitKey();
 
 	threshold(bgForeground, bThresh, 240.0, 255.0,THRESH_BINARY);
 
-	imshow("BACKGROUND THRESHOLD", bThresh);
-	waitKey();
+	//imshow("BACKGROUND THRESHOLD", bThresh);
+	//waitKey();
 
 	Canny(bThresh, bCan, 100, 250, 3);
 
-	imshow("BACKGROUND CANNY", bCan);
-	waitKey();
+	//imshow("BACKGROUND CANNY", bCan);
+	//waitKey();
 
 	//OLD CODE WITH THRESHOLDING
 	//test = tCam.getBackground(cp);
@@ -701,7 +701,6 @@ Mat bgFrame, bgThresh, bgForeground;
 	imshow("circle", bCan);
 
 	waitKey();*/
-
 
 
 	findContours( bCan, contour, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE, Point(0, 0) );
@@ -758,8 +757,6 @@ Mat bgFrame, bgThresh, bgForeground;
 
 	//distanceFromTable *= -1.0 * DEFAULT_DISTANCE;
 
-	imshow("CONTOUR", bgFrame);
-	waitKey();
 
 	float oldIncidentAngle = incidentAngle;
 	incidentAngle=0.0;
@@ -768,6 +765,70 @@ Mat bgFrame, bgThresh, bgForeground;
 	rot=0.0;
 		centerX = 0;
 		centerY = 0;
+
+		stringstream ss (stringstream::in | stringstream::out);
+		ss << distanceFromTable;
+
+		std::string s = ss.str();
+
+		s.append(",");
+
+		ss.str("");
+		ss.clear();
+
+		ss << oldIncidentAngle;
+
+		s.append(ss.str());
+
+		s.append(",");
+
+		ss.str("");
+		ss.clear();
+
+		oldrot = 0;
+		ss << oldrot;
+
+		s.append(ss.str());
+
+		s.append(",");
+
+		ss.str("");
+		ss.clear();
+
+		curX = 0;
+		ss << curX;
+
+		s.append(ss.str());
+
+		s.append(",");
+
+		ss.str("");
+		ss.clear();
+
+		curY = 0;
+		ss << curY;
+
+		s.append(ss.str());
+
+		s.append(",");
+
+		ss.str("");
+		ss.clear();
+
+		twist = 0;
+		ss << twist;
+
+		s.append(ss.str());
+
+		s.append(",");
+
+		myServer->sendString(s.c_str(), 100);
+	myServer->confirm();
+
+	imshow("CONTOUR", bgFrame);
+	waitKey();
+
+
 	int k = waitKey();
 	while(k != 121){
 

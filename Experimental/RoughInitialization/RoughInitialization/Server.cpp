@@ -104,8 +104,8 @@ Server::Server(){
 
 	//closesocket(ClientSocket);
 
-void Server::sendString(const char* i){
-	send(ClientSocket, i, 2, 0);
+void Server::sendString(const char* i, int n){
+	send(ClientSocket, i, n, 0);
 }
 
 void Server::confirm(){
