@@ -36,6 +36,7 @@ float h0, h1, h2, h3, h4, h5, h6, h0Er, h1Er, h2Er, h3Er, h4Er, h5Er, h6Er = 0.0
 int numH = 0;
 
 Projector tProj;
+BackgroundSubtractorMOG2* tableBGsub;
 Camera tCam;
 String curWindow;
 cameraPerspective cp;
@@ -73,7 +74,10 @@ void ControlBoard::init(void){
 
 	myServer = new Server();
 
-
+	Mat newFrame = tCam.grabFrameWithPerspective(cp);
+	Mat trans, foreground;
+	tableBGsub = new BackgroundSubtractorMOG2(0,100,true);
+	tableBGsub->operator()(newFrame,foreground,0.001);
 	myMat = getPerspectiveMapping();
 	tProj.renderFrame(Point2f(0,0));
 	//tCam.initFastCam();
@@ -629,32 +633,64 @@ float distanceFromTable = DEFAULT_DISTANCE;
 
 	//tProj.renderInitPattern();
 
-	myServer->sendString("10");
+Mat bgFrame, bgThresh, bgForeground;
+
+	bgFrame = tCam.grabFrameWithPerspective(cp);
+	tableBGsub->operator()(bgFrame,bgForeground,0.001);
+
+	myServer->sendString("0");
 
 	myServer->confirm();
 
-	test = tCam.getBackground(cp);
+	waitKey(100);
 
-	//Works for brighter projector with multicolored test pattern
-	IplImage rgb = test.background;
+	bgFrame = tCam.grabFrameWithPerspective(cp);
 
-	imshow("TEST", test.background);
+	imshow("FRAME GRABBED", bgFrame);
 	waitKey();
 
+	tableBGsub->operator()(bgFrame,bgForeground,0.001);
 
-	IplImage* r = cvCreateImage( cvGetSize(&rgb), rgb.depth,1 );
-	IplImage* g = cvCreateImage( cvGetSize(&rgb), rgb.depth,1 );
-	IplImage* b = cvCreateImage( cvGetSize(&rgb), rgb.depth,1 );
+	//Mat back;
 
-	cvSplit(&rgb,b,g,r,NULL);
+	//tableBGsub->getBackgroundImage(back);
 
-	Mat red = r;
-	Mat blue = b;
-	Mat green = g;
+	imshow("BACKGROUND MODEL", bgForeground);
+	waitKey();
+
+	threshold(bgForeground, bThresh, 240.0, 255.0,THRESH_BINARY);
+
+	imshow("BACKGROUND THRESHOLD", bThresh);
+	waitKey();
+
+	Canny(bThresh, bCan, 100, 250, 3);
+
+	imshow("BACKGROUND CANNY", bCan);
+	waitKey();
+
+	//OLD CODE WITH THRESHOLDING
+	//test = tCam.getBackground(cp);
+
+	////Works for brighter projector with multicolored test pattern
+	//IplImage rgb = test.background;
+
+	//imshow("TEST", test.background);
+	//waitKey();
+
+
+	//IplImage* r = cvCreateImage( cvGetSize(&rgb), rgb.depth,1 );
+	//IplImage* g = cvCreateImage( cvGetSize(&rgb), rgb.depth,1 );
+	//IplImage* b = cvCreateImage( cvGetSize(&rgb), rgb.depth,1 );
+
+	//cvSplit(&rgb,b,g,r,NULL);
+
+	//Mat red = r;
+	//Mat blue = b;
+	//Mat green = g;
 
 	//cvtColor(test.background, grey, CV_RGB2GRAY);
 
-	threshold(blue, bThresh, 240.0, 255.0,THRESH_BINARY);
+	/*threshold(blue, bThresh, 240.0, 255.0,THRESH_BINARY);
 
 	imshow("circle", bThresh);
 
@@ -664,7 +700,9 @@ float distanceFromTable = DEFAULT_DISTANCE;
 
 	imshow("circle", bCan);
 
-	waitKey();
+	waitKey();*/
+
+
 
 	findContours( bCan, contour, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE, Point(0, 0) );
 
@@ -679,7 +717,7 @@ float distanceFromTable = DEFAULT_DISTANCE;
 			centerX += myRect.center.x;
 			centerY += myRect.center.y;
 			//drawContours(test.background,contour,i,Scalar(0.0,255.0,0.0),1.0);
-			ellipse(test.background, myRect.center, cv::Size(myRect.size.width/2, myRect.size.height/2), myRect.angle, 0.0, 360.0, Scalar(0.0,0.0,255.0),2.0);
+			ellipse(bgFrame, myRect.center, cv::Size(myRect.size.width/2, myRect.size.height/2), myRect.angle, 0.0, 360.0, Scalar(0.0,0.0,255.0),2.0);
 		}
 		//	drawContours(test.background,contour,i,Scalar(0.0,255.0,0.0),0.5);
 		}
@@ -711,16 +749,16 @@ float distanceFromTable = DEFAULT_DISTANCE;
 	//distanceFromTable = -1.0 * DEFAULT_DISTANCE / 2.0 * width / 640.0 - (DEFAULT_DISTANCE);
 
 	//FIXING FACTOR
-	width -=5.0;
+	//width -=5.0;
 
 
-	distanceFromTable = (width / 2 / -640.0 * TABLE_WIDTH) * DEFAULT_DISTANCE;
+	distanceFromTable = (width / 2 / -TABLE_X * TABLE_WIDTH) * DEFAULT_DISTANCE;
 
 	//distanceFromTable = width / 2.0 / 640.0 * TABLE_WIDTH;
 
 	//distanceFromTable *= -1.0 * DEFAULT_DISTANCE;
 
-	imshow("CONTOUR", test.background);
+	imshow("CONTOUR", bgFrame);
 	waitKey();
 
 	float oldIncidentAngle = incidentAngle;

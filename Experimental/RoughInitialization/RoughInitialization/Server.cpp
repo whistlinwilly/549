@@ -105,7 +105,7 @@ Server::Server(){
 	//closesocket(ClientSocket);
 
 void Server::sendString(const char* i){
-	send(ClientSocket, i, strlen(i), 0);
+	send(ClientSocket, i, 2, 0);
 }
 
 void Server::confirm(){

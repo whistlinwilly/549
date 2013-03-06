@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="//switch on the received data" key="selection"/>
+		<list key="findhistory">
+			<item value="//switch on the received data"/>
+			<item value="  gl.glEnable(GL10.GL_LIGHTING);"/>
+		</list>
+	</section>
+</section>

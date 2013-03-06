@@ -2,26 +2,25 @@
 #include <SDL_opengl.h>
 #include <opencv\cv.h>
 
-#ifndef DEFAULT_DISTANCE
-#define DEFAULT_DISTANCE (36.0)
-#endif 
-
-#ifndef TABLE_WIDTH
-#define TABLE_WIDTH (23.5)
-#endif 
-
-#ifndef TABLE_HEIGHT
-#define TABLE_HEIGHT (17.5)
-#endif 
-
+//FOV of projector
 #ifndef PROJ_FOV
 #define PROJ_FOV (20.5)
 #endif 
 
+//SDL constants for opengl image plane on second display
 #define WIDTH 1280
 #define HEIGHT 800
 #define BPP 4
 #define DEPTH 32
+
+//Distance for second test patter (from center)
+#define X_DIST (7)
+#define Y_DIST (5)
+
+//Distance from image plane for first orthographic projection
+#ifndef DEFAULT_DISTANCE
+#define DEFAULT_DISTANCE (24.0)
+#endif 
 
 class Projector
 {

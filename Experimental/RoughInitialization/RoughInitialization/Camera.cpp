@@ -188,7 +188,7 @@ cameraPerspective Camera::tryRotation(void){
 	int thresh = 1;
 	float i = 20.0;
 	Point2f corners[4];
-	Point2f cornerSquare[4] = {Point2f(0,0),Point2f(0,480),Point2f(640,480),Point2f(640,0)};
+	Point2f cornerSquare[4] = {Point2f(0,0),Point2f(0,TABLE_Y),Point2f(TABLE_X,TABLE_Y),Point2f(TABLE_X,0)};
 	int found = 0;
 
 	cam = grabFrame();
@@ -206,6 +206,9 @@ cameraPerspective Camera::tryRotation(void){
 
 	vector<vector<Point> > contours;
 	findContours(can, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
+
+	if(contours.size() <1)
+		exit(0);
 
 	RotatedRect box = minAreaRect(contours[0]);
 
@@ -274,13 +277,13 @@ cameraPerspective Camera::findCorners(void){
 
 	Point2f corners[4];
 	int found = 0;
-	Point2f cornerSquare[4] = {Point2f(0,0),Point2f(0,480),Point2f(640,480),Point2f(640,0)};
+	Point2f cornerSquare[4] = {Point2f(0,0),Point2f(0,TABLE_Y),Point2f(TABLE_X,TABLE_Y),Point2f(TABLE_X,0)};
 
 	for(int i = 0; i < 8; i +=2){
 		for(int j = i + 2; j < 8; j+=2){
 			if(intersection(myObj.points[i], myObj.points[i+1], myObj.points[j], myObj.points[j + 1], &(corners[found])) == true){
-				if((corners[found].x > 900) || (corners[found].x < 0) || (corners[found].y > 900) || (corners[found].y < 0))
-					continue;
+				if((corners[found].x > TABLE_X + X_INTERSECT_ERROR_MARGIN) || (corners[found].x < -X_INTERSECT_ERROR_MARGIN) || (corners[found].y > TABLE_Y + Y_INTERSECT_ERROR_MARGIN) || (corners[found].y < -Y_INTERSECT_ERROR_MARGIN))
+					continue; 
 				found++;
 				if(found >= 4)
 					break;
