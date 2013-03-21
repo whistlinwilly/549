@@ -1,0 +1,12 @@
+package org.example.opengl;
+
+public class Surface {
+	
+	byte[] indices = new byte[3];
+	
+	public void setIndices(int index1, int index2, int index3){
+		indices[0] = (byte) index1;
+		indices[1] = (byte) index2;
+	}
+
+}

@@ -1,0 +1,44 @@
+package org.example.opengl;
+
+import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.microedition.khronos.opengles.GL10;
+
+public class Object {
+	
+	int uid;
+	int classifiedType;
+	float x, y, theta;
+	FloatBuffer vertices;
+	ByteBuffer textures, indexBuffer;
+
+	public Object(int uid) {
+		this.uid = uid;
+	      // Setup index-array buffer. Indices in byte.
+
+	}
+	
+	public void draw(GL10 gl) { 
+	      gl.glVertexPointer(3, GL10.GL_FLOAT, 0, vertices);
+	      
+	      
+	      
+	      byte[] indices = { 0, 1, 2 };
+	      
+	      indexBuffer = ByteBuffer.allocateDirect(indices.length);
+	      indexBuffer.put(indices);
+	      indexBuffer.position(0);
+	      
+	      gl.glDrawElements(GL10.GL_TRIANGLES, indices.length, GL10.GL_UNSIGNED_BYTE, indices);
+
+//	      gl.glColor4f(0, 0, 1, 1);
+//	      gl.glNormal3f(0, 0, 1);
+//	      gl.glDrawArrays(GL10.GL_LINE_STRIP, 0, vertices.capacity());
+	     
+	   }
+
+}

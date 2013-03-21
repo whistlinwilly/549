@@ -1,0 +1,20 @@
+package com.example.imagestitcher;
+
+import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Object {
+	
+	int uid;
+	int classifiedType;
+	float x, y, theta;
+	FloatBuffer vertices;
+	ByteBuffer textures;
+
+	public Object(int uid) {
+		this.uid = uid;
+	}
+
+}
