@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="17" version="2.0">
+<workbench progressCount="11" version="2.0">
 <workbenchAdvisor/>
 <window height="728" maximized="true" width="683" x="0" y="0">
 <fastViewData fastViewLocation="1024"/>
@@ -18,13 +18,13 @@
 <coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="76" y="22"/>
 <coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="107" y="22"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="61" y="22"/>
 <coolItem id="org.eclipse.debug.ui.launch.toolbar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.debug.ui.main.toolbar" itemType="typeToolBarContribution" x="261" y="22"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="190" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.cdt.ui.editor.CEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="com.android.ide.eclipse.editors.CommonXmlEditor" itemType="typePlaceholder" x="-1" y="-1"/>
@@ -39,42 +39,16 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
-<part id="2"/>
-<part id="3"/>
-<part id="4"/>
-<part id="5"/>
-<part id="6"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ObjectFactory.java" partName="ObjectFactory.java" path="C:/Users/549/Downloads/eband-code/code/OpenGL/src/org/example/opengl/ObjectFactory.java" title="ObjectFactory.java" tooltip="OpenGL/src/org/example/opengl/ObjectFactory.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/OpenGL/src/org/example/opengl/ObjectFactory.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5448" selectionTopPixel="3227"/>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainActivity.java" partName="MainActivity.java" path="C:/Users/549/Documents/GitHub/549/Mainline/workspace/Projector/src/projector/main/MainActivity.java" title="MainActivity.java" tooltip="Projector/src/projector/main/MainActivity.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Projector/src/projector/main/MainActivity.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="750" selectionTopPixel="0"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="OpenGL.java" partName="OpenGL.java" path="C:/Users/549/Downloads/eband-code/code/OpenGL/src/org/example/opengl/OpenGL.java" title="OpenGL.java" tooltip="OpenGL/src/org/example/opengl/OpenGL.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/OpenGL/src/org/example/opengl/OpenGL.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2561" selectionTopPixel="664"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Object.java" partName="Object.java" path="C:/Users/549/Downloads/eband-code/code/OpenGL/src/org/example/opengl/Object.java" title="Object.java" tooltip="OpenGL/src/org/example/opengl/Object.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/OpenGL/src/org/example/opengl/Object.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1208" selectionTopPixel="77"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GLRenderer.java" partName="GLRenderer.java" path="C:/Users/549/Downloads/eband-code/code/OpenGL/src/org/example/opengl/GLRenderer.java" title="GLRenderer.java" tooltip="OpenGL/src/org/example/opengl/GLRenderer.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/OpenGL/src/org/example/opengl/GLRenderer.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1250" selectionTopPixel="359"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Surface.java" partName="Surface.java" path="C:/Users/549/Downloads/eband-code/code/OpenGL/src/org/example/opengl/Surface.java" title="Surface.java" tooltip="OpenGL/src/org/example/opengl/Surface.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/OpenGL/src/org/example/opengl/Surface.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="167" selectionOffset="607" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.ClassFileEditor" name="GLSurfaceView.class" partName="GLSurfaceView.class" title="GLSurfaceView.class" tooltip="android.opengl.GLSurfaceView" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" org.eclipse.jdt.ui.ClassFileIdentifier="=OpenGL/C:\/Users\/549\/Documents\/Android\/sdk\/platforms\/android-3\/android.jar&lt;android.opengl(GLSurfaceView.class"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GLView.java" partName="GLView.java" path="C:/Users/549/Downloads/eband-code/code/OpenGL/src/org/example/opengl/GLView.java" title="GLView.java" tooltip="OpenGL/src/org/example/opengl/GLView.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/OpenGL/src/org/example/opengl/GLView.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1210" selectionTopPixel="302"/>
+<editor id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" partName="Projector Manifest" path="C:/Users/549/Documents/GitHub/549/Mainline/workspace/Projector/AndroidManifest.xml" title="Projector Manifest" tooltip="Projector/AndroidManifest.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Projector/AndroidManifest.xml"/>
 </editor>
 </editors>
 <views>
@@ -482,80 +456,16 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/org/example/opengl/GLRenderer.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/org/example/opengl/ObjectFactory.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/org/example/opengl/Object.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/org/example/opengl/Object.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/org/example/opengl/GLRenderer.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/org/example/opengl/Surface.java"/>
+<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=OpenGL/C:\/Users\/549\/Documents\/Android\/sdk\/platforms\/android-3\/android.jar&lt;android.opengl(GLSurfaceView.class"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/org/example/opengl/GLView.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Projector/src/projector/client/NetClient.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Projector/src/projector/main/BootUpReceiver.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Projector/src/projector/main/MainActivity.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" path="/Projector/AndroidManifest.xml"/>
 </editors>
-<item historyLabel="ObjectFactory.java" index="3">
-<position info="not_deleted" x="6797" y="0"/>
-</item>
-<item historyLabel="OpenGL.java" index="1">
-<position info="not_deleted" x="956" y="0"/>
-</item>
-<item historyLabel="OpenGL.java" index="1">
-<position info="not_deleted" x="1145" y="0"/>
-</item>
-<item historyLabel="OpenGL.java" index="1">
-<position info="not_deleted" x="1147" y="0"/>
-</item>
-<item historyLabel="Object.java" index="4">
-<position info="not_deleted" x="1208" y="0"/>
-</item>
-<item historyLabel="GLRenderer.java" index="2">
-<position info="not_deleted" x="4777" y="193"/>
-</item>
-<item historyLabel="ObjectFactory.java" index="3">
-<position info="not_deleted" x="5121" y="0"/>
-</item>
-<item historyLabel="OpenGL.java" index="1">
-<position info="not_deleted" x="1433" y="0"/>
-</item>
-<item historyLabel="Object.java" index="4">
-<position info="not_deleted" x="1208" y="0"/>
-</item>
-<item historyLabel="GLRenderer.java" index="2">
-<position/>
-</item>
-<item historyLabel="ObjectFactory.java" index="3">
-<position info="not_deleted" x="4083" y="0"/>
-</item>
-<item historyLabel="Object.java" index="4">
-<position info="not_deleted" x="1208" y="0"/>
-</item>
-<item historyLabel="GLRenderer.java" index="2">
-<position/>
-</item>
-<item historyLabel="OpenGL.java" index="1">
-<position info="not_deleted" x="1433" y="0"/>
-</item>
-<item historyLabel="Object.java" index="4">
-<position info="not_deleted" x="1208" y="0"/>
-</item>
-<item historyLabel="GLRenderer.java" index="2">
-<position/>
-</item>
-<item historyLabel="ObjectFactory.java" index="3">
-<position info="not_deleted" x="5448" y="0"/>
-</item>
-<item historyLabel="OpenGL.java" index="1">
-<position info="not_deleted" x="1433" y="0"/>
-</item>
-<item historyLabel="GLRenderer.java" index="2">
-<position info="not_deleted" x="4942" y="0"/>
-</item>
-<item historyLabel="Object.java" index="4">
-<position info="not_deleted" x="1208" y="0"/>
-</item>
-<item historyLabel="Surface.java" index="5">
-<position info="not_deleted" x="607" y="167"/>
-</item>
-<item historyLabel="Object.java" index="4">
-<position info="not_deleted" x="1208" y="0"/>
-</item>
-<item historyLabel="OpenGL.java" index="1">
-<position info="not_deleted" x="1481" y="0"/>
-</item>
-<item historyLabel="GLRenderer.java" index="2">
-<position info="not_deleted" x="5330" y="0"/>
-</item>
 <item historyLabel="ObjectFactory.java" index="3">
 <position info="not_deleted" x="5448" y="0"/>
 </item>
@@ -631,8 +541,72 @@
 <item historyLabel="GLView.java" index="0">
 <position info="not_deleted" x="1210" y="0"/>
 </item>
-<item active="true" historyLabel="OpenGL.java" index="1">
-<position info="not_deleted" x="2527" y="0"/>
+<item historyLabel="OpenGL.java" index="1">
+<position info="not_deleted" x="2561" y="0"/>
+</item>
+<item historyLabel="Object.java" index="5">
+<position info="not_deleted" x="1208" y="0"/>
+</item>
+<item historyLabel="GLRenderer.java" index="6">
+<position info="not_deleted" x="5" y="0"/>
+</item>
+<item historyLabel="GLRenderer.java" index="6">
+<position info="not_deleted" x="1250" y="0"/>
+</item>
+<item historyLabel="Surface.java" index="7">
+<position info="not_deleted" x="607" y="167"/>
+</item>
+<item historyLabel="GLSurfaceView.class" index="8">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="GLView.java" index="9">
+<position info="not_deleted" x="5" y="0"/>
+</item>
+<item historyLabel="GLView.java" index="9">
+<position info="not_deleted" x="1210" y="0"/>
+</item>
+<item historyLabel="NetClient.java" index="10">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="BootUpReceiver.java" index="11">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="MainActivity.java" index="12">
+<position info="not_deleted" x="683" y="0"/>
+</item>
+<item historyLabel="BootUpReceiver.java" index="11">
+<position info="not_deleted" x="433" y="0"/>
+</item>
+<item historyLabel="MainActivity.java" index="12">
+<position info="not_deleted" x="683" y="0"/>
+</item>
+<item historyLabel="BootUpReceiver.java" index="11">
+<position info="not_deleted" x="433" y="0"/>
+</item>
+<item historyLabel="BootUpReceiver.java" index="11">
+<position info="not_deleted" x="471" y="0"/>
+</item>
+<item historyLabel="Projector Manifest" index="13"/>
+<item historyLabel="BootUpReceiver.java" index="11">
+<position info="not_deleted" x="433" y="0"/>
+</item>
+<item historyLabel="MainActivity.java" index="12">
+<position info="not_deleted" x="683" y="0"/>
+</item>
+<item historyLabel="BootUpReceiver.java" index="11">
+<position info="not_deleted" x="433" y="0"/>
+</item>
+<item historyLabel="Projector Manifest" index="13"/>
+<item historyLabel="MainActivity.java" index="12">
+<position info="not_deleted" x="523" y="0"/>
+</item>
+<item historyLabel="Projector Manifest" index="13"/>
+<item historyLabel="BootUpReceiver.java" index="11">
+<position info="not_deleted" x="433" y="0"/>
+</item>
+<item historyLabel="Projector Manifest" index="13"/>
+<item active="true" historyLabel="MainActivity.java" index="12">
+<position info="not_deleted" x="523" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -652,6 +626,15 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="Projector/AndroidManifest.xml">
+<persistable path="/Projector/AndroidManifest.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainActivity.java" tooltip="Projector/src/projector/main/MainActivity.java">
+<persistable path="/Projector/src/projector/main/MainActivity.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BootUpReceiver.java" tooltip="Projector/src/projector/main/BootUpReceiver.java">
+<persistable path="/Projector/src/projector/main/BootUpReceiver.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GLView.java" tooltip="OpenGL/src/org/example/opengl/GLView.java">
 <persistable path="/OpenGL/src/org/example/opengl/GLView.java"/>
 </file>
@@ -687,15 +670,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Object.java" tooltip="ImageStitcher/src/com/example/imagestitcher/Object.java">
 <persistable path="/ImageStitcher/src/com/example/imagestitcher/Object.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GLCircle.java" tooltip="Projector/src/projector/rendering/GLCircle.java">
-<persistable path="/Projector/src/projector/rendering/GLCircle.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ObjectFactory.java" tooltip="ImageStitcher/src/com/example/imagestitcher/ObjectFactory.java">
-<persistable path="/ImageStitcher/src/com/example/imagestitcher/ObjectFactory.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_main.xml" tooltip="ImageStitcher/res/layout/activity_main.xml">
-<persistable path="/ImageStitcher/res/layout/activity_main.xml"/>
 </file>
 </mruList>
 </workbench>
