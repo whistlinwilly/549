@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 
-import projector.main.MainActivity;
+import com.projector.MainActivity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -26,6 +26,8 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
     public static final int BUFFER_SIZE = 16;
     
     private static final String TAG = "NetClient";
+	private static final int PATTERN1 = 1;
+	private static final int LOAD_MODELS = 0;
     
     public volatile Socket socket = null;
     public String host = null;
@@ -39,9 +41,12 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
     
     public volatile boolean isListening;
     private boolean isCommand;
+    private boolean waitingToReceive = false;
     
     private float[] receiveVals = new float[10];
     private String[] receiveValsString;
+	private int stage = -1;
+	
     /**
      * Constructor with Host, Port and MAC Address
      * @param host
@@ -99,12 +104,13 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
     	
     	//initialization command
     	case MainActivity.INIT:
-    		activity.mGLView.renderer.setStage(1);
+    		activity.mGLView.renderer.setStage(0);
+    		waitingToReceive = false;
     		break;
     		
     	//initialization coordinates
     	case MainActivity.INITCOORDS:
-    		activity.mGLView.renderer.setStage(2);
+    		activity.mGLView.renderer.setStage(1);
     		break;
     		
     	//object description of what is in SDCard
@@ -210,11 +216,20 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
 				
 		    	//while connected to server
 				isListening = true;
+				stage = LOAD_MODELS;
 		        while (isListening) {
-		        	if (socket.isConnected()) Log.i("CONNECTION TEST", "CONNECTION TEST Still Connected");
-		        	else Log.i("CONNECTION TEST", "CONNECTION TEST Not Connected");
-		        	receiveMessageFromServer(params[0]);
-		        	sendMessageToServer("GAY");
+		        	if (socket.isConnected()){
+		        		if(!waitingToReceive){
+		        			if(stage == LOAD_MODELS){
+		        				params[0].mGLView.renderer.loadAllModels();
+		        				stage = PATTERN1;
+		        			}
+		        			sendMessageToServer("CONFIRM");
+		        			waitingToReceive = true;
+		        		}
+		        		else
+		        		receiveMessageFromServer(params[0]);
+		        	}
 		        }
 		        
 			} catch (InterruptedException e) {
@@ -224,6 +239,7 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
 			}
 		return params[0];
 	}
+
 
 }
 

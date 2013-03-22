@@ -1,12 +1,15 @@
 package projector.rendering;
 
 
+import java.io.FileNotFoundException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
+
+import projector.rendering.ObjectFactory;
 
 
 import android.content.Context;
@@ -25,19 +28,28 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 	   private static final String TAG = "GLRenderer";
 	   private final Context context;
 	   
+	   private static final int LOAD_MODELS = 0;
+	   private static final int PATTERN1 = 1;
 	   
-	   private final GLCube cube = new GLCube();
 	   private final GLCircle circle = new GLCircle(0,0,1,100);
-	   private final GLCircle circle1 = new GLCircle(-6,0,1,100);
-	   private final GLCircle circle2 = new GLCircle(6,0,1,100);
-	   private final GLCircle circle3 = new GLCircle(0,-4,1,100);
-	   private final GLCircle circle4 = new GLCircle(0,4,1,100);
 	   private float distanceFromTable, incidentAngle, rotation, deltaX, deltaY, twist;
 	   
 	   private long startTime;
 	   private long fpsStartTime;
 	   private long numFrames;
 	   private volatile int stage;
+	private Object myObj;
+	private int width;
+	private int height;
+	private float eyeX = 0.0f;
+	private float eyeY = 0.0f;
+	private float eyeZ = 24.0f;
+	private float centerX = 0.0f;
+	private float centerY = 0.0f;
+	private float centerZ = 0.0f;
+	private float upX = 0.0f;
+	private float upY = 1.0f;
+	private float upZ = 0.0f;
 
 	   public GLRenderer(Context context) {
 	      this.context = context;
@@ -54,65 +66,66 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 	   
 	   public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 	      
-	      // ...
-	      
-	      
-	      
-	      boolean SEE_THRU = true;
-	      gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	      
-	      startTime = System.currentTimeMillis();
-	      fpsStartTime = startTime;
-	      numFrames = 0;
-	      
+		   boolean SEE_THRU = true;
+		      
+		      
+		      startTime = System.currentTimeMillis();
+		      fpsStartTime = startTime;
+		      numFrames = 0;
+		      
 
-	      
-	      // Define the lighting
-	      float lightAmbient[] = new float[] { 0.2f, 0.2f, 0.2f, 1 };
-	      float lightDiffuse[] = new float[] { 1, 1, 1, 1 };
-	      float[] lightPos = new float[] { 1, 1, 1, 1 };
-	      gl.glEnable(GL10.GL_LIGHTING);
-	      gl.glEnable(GL10.GL_LIGHT0);
-	      gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_AMBIENT, lightAmbient, 0);
-	      gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_DIFFUSE, lightDiffuse, 0);
-	      gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_POSITION, lightPos, 0);
-	      
+		      
+		      // Define the lighting
+		      float lightAmbient[] = new float[] { 0.2f, 0.2f, 0.2f, 1 };
+		      float lightDiffuse[] = new float[] { 1, 1, 1, 1 };
+		      float[] lightPos = new float[] { 1, 1, 1, 1 };
+		      gl.glEnable(GL10.GL_LIGHTING);
+		      gl.glEnable(GL10.GL_LIGHT0);
+		      gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_AMBIENT, lightAmbient, 0);
+		      gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_DIFFUSE, lightDiffuse, 0);
+		      gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_POSITION, lightPos, 0);
+		      
 
-	      
-	      // What is the cube made of?
-	      float matAmbient[] = new float[] { 1, 1, 1, 1 };
-	      float matDiffuse[] = new float[] { 1, 1, 1, 1 };
-	      gl.glMaterialfv(GL10.GL_FRONT_AND_BACK, GL10.GL_AMBIENT,
-	            matAmbient, 0);
-	      gl.glMaterialfv(GL10.GL_FRONT_AND_BACK, GL10.GL_DIFFUSE,
-	            matDiffuse, 0);
-	      
+		      
+		      // What is the cube made of?
+		      float matAmbient[] = new float[] { 1, 1, 1, 1 };
+		      float matDiffuse[] = new float[] { 1, 1, 1, 1 };
+		      gl.glMaterialfv(GL10.GL_FRONT_AND_BACK, GL10.GL_AMBIENT,
+		            matAmbient, 0);
+		      gl.glMaterialfv(GL10.GL_FRONT_AND_BACK, GL10.GL_DIFFUSE,
+		            matDiffuse, 0);
+		      
 
-	      
-	      // Set up any OpenGL options we need
-	      gl.glEnable(GL10.GL_DEPTH_TEST); 
-	      gl.glDepthFunc(GL10.GL_LEQUAL);
-	      gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
+		      
+		      // Set up any OpenGL options we need
+		      gl.glEnable(GL10.GL_DEPTH_TEST); 
+		      gl.glDepthFunc(GL10.GL_LEQUAL);
+		      gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 
-	      // Optional: disable dither to boost performance
-	      // gl.glDisable(GL10.GL_DITHER);
-	      
+		      // Optional: disable dither to boost performance
+		      // gl.glEnable(GL10.GL_DITHER);
+		      
 
-	      
-	      // ...
-	      if (SEE_THRU) {
-	         gl.glDisable(GL10.GL_DEPTH_TEST);
-	         gl.glEnable(GL10.GL_BLEND);
-	         gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE);
-	      }
-	      
-	      
-	      // Enable textures
-	   //   gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
-	   //   gl.glEnable(GL10.GL_TEXTURE_2D);
+		      
+		      // ...
+		      if (SEE_THRU) {
+		         gl.glDisable(GL10.GL_DEPTH_TEST);
+		         gl.glEnable(GL10.GL_BLEND);
+		         gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE);
+		      }
+		      
+		      gl.glEnable (GL10.GL_BLEND);
+		      gl.glBlendFunc (GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+		      
+		     
+		      
+		      
+		      // Enable textures
+		   //   gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+		   //   gl.glEnable(GL10.GL_TEXTURE_2D);
 
-	      // Load the cube's texture from a bitmap
-	   //   GLCube.loadTexture(gl, context, R.drawable.android);
+		      // Load the cube's texture from a bitmap
+		   //   GLCube.loadTexture(gl, context, R.drawable.android);
 	      
 	      
 	      
@@ -137,17 +150,10 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 	   }
 	   
 	   public void onSurfaceChanged(GL10 gl, int width, int height) {
-	      
-	      // ...
-	      
-	      
-	      // Define the view frustum
-	      gl.glViewport(0, 0, width, height);
-	      gl.glMatrixMode(GL10.GL_PROJECTION);
-	      gl.glLoadIdentity();
-	      float ratio = (float) width / height;
-	      GLU.gluPerspective(gl, 17.5f, ratio, 0.1f, 1000f); 
-	     // GLU.gluOrtho2D(gl, 0, width, 0, height);
+		// Define the view frustum
+		      gl.glViewport(0, 0, width, height);
+		      this.width = width;
+		      this.height = height; 
 	      
 	   }
 	   
@@ -157,64 +163,48 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 	   
 	   public void onDrawFrame(GL10 gl) {
 	      
-	      // ...
-	      
-	      
-		   gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	      
-	      // Clear the screen to black
-	      gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-	      
-	      
-	    	  // Position model so we can see it
-	    	  gl.glMatrixMode(GL10.GL_MODELVIEW);
-	    	  gl.glLoadIdentity();
-	 
-	    	  gl.glRotatef(twist, 0, 0, 1);
-	    	  gl.glTranslatef(0.0f,0.0f, distanceFromTable);
-	    	  gl.glRotatef(rotation, 0, 0, 1);
-	    	  gl.glRotatef(incidentAngle, 1, 0, 0);
-	    //	  if (initialize){
-	    	  // Other drawing commands go here...
-	      
-	      
-	    	  // Set rotation angle based on the time
-	    	  //  long elapsed = System.currentTimeMillis() - startTime;
-	    	  //  gl.glRotatef(elapsed * (30f / 1000f), 0, 1, 0);
-	    	  //  gl.glRotatef(elapsed * (15f / 1000f), 1, 0, 0);
+		   gl.glMatrixMode(GL10.GL_PROJECTION);
+		   gl.glLoadIdentity();
+		   float ratio = (float) width / height;
+		   if(stage == LOAD_MODELS || stage == PATTERN1){
+			  // GLU.gluOrtho2D(gl, 0, width, 0, height);
+			   GLU.gluPerspective(gl, 17.5f, ratio, 0.1f, 1000f); 
+			   GLU.gluLookAt(gl, eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ);
+			      // Clear the screen to black
+			      gl.glClear(GL10.GL_COLOR_BUFFER_BIT
+			            | GL10.GL_DEPTH_BUFFER_BIT);
 
-	    
-	    	  // Draw the model
-	    	  
-	    	  //ok for now but change TODO
-	    	  if (stage == 1) circle.draw(gl);
-	    	  else if (stage == 2){
-	    		  circle.draw(gl);
-	    		  circle1.draw(gl);
-	    		  circle2.draw(gl);
-	    		  circle3.draw(gl);
-	    		  circle4.draw(gl);
-	    	  }
-	    
+			      // Position model so we can see it
+			      gl.glMatrixMode(GL10.GL_MODELVIEW);
+			      gl.glLoadIdentity();
+			      if(stage == PATTERN1)
+			    	  circle.draw(gl);
+		   }
+		   else{
+			   GLU.gluPerspective(gl, 18.2f, ratio, 0.1f, 1000f); 
+			   GLU.gluLookAt(gl, eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ);
+		   }
+
 	      
-	      
-	    	  // Keep track of number of frames drawn
-	    	  numFrames++;
-	    	  long fpsElapsed = System.currentTimeMillis() - fpsStartTime;
-	    	  if (fpsElapsed > 5 * 1000) { // every 5 seconds
-	    		  float fps = (numFrames * 1000.0F) / fpsElapsed;
-	    		  Log.d(TAG, "Frames per second: " + fps + " (" + numFrames
-	    				  + " frames in " + fpsElapsed + " ms)");
-	    		  fpsStartTime = System.currentTimeMillis();
-	    		  numFrames = 0;
-	    	  }
-	     // }
-	      
-	      
-	      
-	      
+//	      gl.glRotatef(xAngle, 1.0f, 0.0f, 0.0f);
+//          gl.glRotatef(yAngle, 0.0f, 1.0f, 0.0f);
+//          gl.glRotatef(zAngle, 0.0f, 0.0f, 1.0f);
+    	 // myObj.draw(gl);
 	      
 	   }
+
+
+
+	public void loadAllModels() {
+		//for now just one simple model
+		ObjectFactory factory = new ObjectFactory("/Objects");
+	      try {
+			myObj = factory.loadObject("TestBox2.obj", context);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
 	   
 	   
 	   

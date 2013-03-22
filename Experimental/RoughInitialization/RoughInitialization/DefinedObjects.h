@@ -1,5 +1,7 @@
 #include <opencv\cv.h>
 
+#define NUM_PROJECTORS (1)
+
 //Table X and Y length on image plane
 #define TABLE_X (480)
 #define TABLE_Y (480)

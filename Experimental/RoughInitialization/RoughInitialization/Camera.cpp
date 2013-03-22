@@ -201,7 +201,13 @@ cameraPerspective Camera::tryRotation(void){
 	GaussianBlur( grey, gauss, Size( 3, 3 ), 0, 0 );
 	namedWindow("new", CV_WINDOW_AUTOSIZE);
 
-	Canny(gauss, can, 10, 250, 3);
+		imshow("new", gauss);
+	waitKey();
+
+	Canny(gauss, can, 10, 210, 3);
+
+	imshow("new", can);
+	waitKey();
 
 
 	vector<vector<Point> > contours;
@@ -231,13 +237,13 @@ cameraPerspective Camera::tryRotation(void){
 
 	float thresholdNum = threshold( gauss, thre, i, 255.0, THRESH_OTSU);
 
-	thresholdNum -= 65.0;
+	thresholdNum -= 80.0;
 	threshold( gauss, thre, thresholdNum, 255.0, THRESH_BINARY);
 	//imshow("new", thre);
 	//waitKey();
 		imshow("new",thre);
 	while(waitKey() != 121){
-		i+=5.0;
+		i+=2.0;
 		threshold( gauss, thre, i, 255.0, THRESH_BINARY);
 		imshow("new",thre);
 	};

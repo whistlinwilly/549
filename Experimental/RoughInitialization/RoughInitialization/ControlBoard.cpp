@@ -1,7 +1,7 @@
 #include "ControlBoard.h"
 #include "Projector.h"
 #include "Camera.h"
-#include "Server.h"
+#include "ServerNetwork.h"
 #include <opencv\cv.h>
 #include <opencv2\opencv.hpp>
 #include <opencv\highgui.h>
@@ -16,7 +16,7 @@
 using namespace std;
 using namespace cv;
 
-Server* myServer;
+ServerNetwork* sn;
 
 void projInit( int event, int x, int y, int flags, void* param );
 void camRotationTest(void);
@@ -28,6 +28,9 @@ float myCenterX;
 float myCenterY;
 float myTwist;
 float myRot;
+static unsigned int projectorsConnected;
+
+static char* recvbuf = (char*)malloc(MAX_REC_BUF*sizeof(char));
 
 bool hasTrainingImage = false;
 std::vector<cv::Point> train;
@@ -51,7 +54,7 @@ ControlBoard::ControlBoard(){
 void ControlBoard::init(void){
 
 		
-
+	projectorsConnected = 0;
 
 
 	Mat myMat;
@@ -72,14 +75,24 @@ void ControlBoard::init(void){
 	//tCam.initFastCam();
 	//runMartinsInit();
 
-	myServer = new Server();
 
 	Mat newFrame = tCam.grabFrameWithPerspective(cp);
 	Mat trans, foreground;
-	tableBGsub = new BackgroundSubtractorMOG2(0,100,true);
+	tableBGsub = new BackgroundSubtractorMOG2(0,235,true);
 	tableBGsub->operator()(newFrame,foreground,0.001);
+
+	sn = new ServerNetwork();
+
+	while(projectorsConnected < NUM_PROJECTORS){
+		sn->acceptNewClient(projectorsConnected);
+		projectorsConnected++;
+	}
+
+	sn->sendToAll("0",5,0);
+	sn->receiveData(0,recvbuf);
+
 	myMat = getPerspectiveMapping();
-	tProj.renderFrame(Point2f(0,0));
+	//tProj.renderFrame(Point2f(0,0));
 	//tCam.initFastCam();
 	namedWindow("ROI",WINDOW_AUTOSIZE);
 	runObjectTracking();
@@ -638,16 +651,19 @@ Mat bgFrame, bgThresh, bgForeground;
 	bgFrame = tCam.grabFrameWithPerspective(cp);
 	tableBGsub->operator()(bgFrame,bgForeground,0.001);
 
-	myServer->sendString("0",1);
+	sn->sendToAll("1",5,0);
+	sn->receiveData(0,recvbuf);
 
-	myServer->confirm();
+//	myServer->sendString("0",1);
+
+//	myServer->confirm();
 
 	waitKey(100);
 
 	bgFrame = tCam.grabFrameWithPerspective(cp);
 
-	//imshow("FRAME GRABBED", bgFrame);
-	//waitKey();
+	imshow("FRAME GRABBED", bgFrame);
+	waitKey();
 
 	tableBGsub->operator()(bgFrame,bgForeground,0.001);
 
@@ -655,18 +671,18 @@ Mat bgFrame, bgThresh, bgForeground;
 
 	//tableBGsub->getBackgroundImage(back);
 
-	//imshow("BACKGROUND MODEL", bgForeground);
-	//waitKey();
+	imshow("BACKGROUND MODEL", bgForeground);
+	waitKey();
 
 	threshold(bgForeground, bThresh, 240.0, 255.0,THRESH_BINARY);
 
-	//imshow("BACKGROUND THRESHOLD", bThresh);
-	//waitKey();
+	imshow("BACKGROUND THRESHOLD", bThresh);
+	waitKey();
 
 	Canny(bThresh, bCan, 100, 250, 3);
 
-	//imshow("BACKGROUND CANNY", bCan);
-	//waitKey();
+	imshow("BACKGROUND CANNY", bCan);
+	waitKey();
 
 	//OLD CODE WITH THRESHOLDING
 	//test = tCam.getBackground(cp);
@@ -706,9 +722,9 @@ Mat bgFrame, bgThresh, bgForeground;
 	findContours( bCan, contour, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE, Point(0, 0) );
 
 	for(int i=0; i<contour.size(); i++){
-		if(contour[i].size() > 200){
+		if(contour[i].size() > 160){
 			myRect = fitEllipse(contour[i]);
-		if(myRect.size.area() > 1000.0){
+		if(myRect.size.area() > 600.0){
 			width += myRect.size.width;
 			height += myRect.size.height;
 			num++;
@@ -822,8 +838,8 @@ Mat bgFrame, bgThresh, bgForeground;
 
 		s.append(",");
 
-		myServer->sendString(s.c_str(), 100);
-	myServer->confirm();
+		//myServer->sendString(s.c_str(), 100);
+	//myServer->confirm();
 
 	imshow("CONTOUR", bgFrame);
 	waitKey();

@@ -1,5 +1,5 @@
-﻿Build started 3/19/2013 6:52:40 PM.
-     1>Project "C:\Users\549\github\549\Experimental\Server\Server\Server.vcxproj" on node 2 (build target(s)).
+﻿Build started 3/21/2013 11:47:46 PM.
+     1>Project "C:\Users\549\Documents\GitHub\549\Experimental\Server\Server\Server.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Server.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
@@ -14,8 +14,8 @@
        FinalizeBuildStatus:
          Deleting file "Debug\Server.unsuccessfulbuild".
          Touching "Debug\Server.lastbuildstate".
-     1>Done Building Project "C:\Users\549\github\549\Experimental\Server\Server\Server.vcxproj" (build target(s)).
+     1>Done Building Project "C:\Users\549\Documents\GitHub\549\Experimental\Server\Server\Server.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.06
+Time Elapsed 00:00:00.10

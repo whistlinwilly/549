@@ -84,16 +84,20 @@
     <ClCompile Include="ControlBoard.cpp" />
     <ClCompile Include="ImageManip.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NetworkServices.cpp" />
     <ClCompile Include="Projector.cpp" />
     <ClCompile Include="Server.cpp" />
+    <ClCompile Include="ServerNetwork.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ControlBoard.h" />
     <ClInclude Include="DefinedObjects.h" />
     <ClInclude Include="ImageManip.h" />
+    <ClInclude Include="NetworkServices.h" />
     <ClInclude Include="Projector.h" />
     <ClInclude Include="Server.h" />
+    <ClInclude Include="ServerNetwork.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

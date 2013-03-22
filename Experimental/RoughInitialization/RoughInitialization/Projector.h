@@ -4,7 +4,7 @@
 
 //FOV of projector
 #ifndef PROJ_FOV
-#define PROJ_FOV (20.5)
+#define PROJ_FOV (18.2)
 #endif 
 
 //SDL constants for opengl image plane on second display
