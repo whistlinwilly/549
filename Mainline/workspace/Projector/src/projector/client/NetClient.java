@@ -26,22 +26,23 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
     public static final int BUFFER_SIZE = 16;
     
     private static final String TAG = "NetClient";
-	private static final int PATTERN1 = 1;
-	private static final int LOAD_MODELS = 0;
+	   private static final int LOAD_MODELS = 0;
+	   private static final int PATTERN1 = 1;
+	   private static final int CONFIRM_PATTERN = 2;
     
     public volatile Socket socket = null;
     public String host = null;
     public int port;
     
     public boolean connected;
-    public byte[] inBuffer= new byte[64];
+    public byte[] inBuffer= new byte[128];
     public String inString = null;
     public String outString;
     public byte[] outBuffer = new byte[1];
     
     public volatile boolean isListening;
     private boolean isCommand;
-    private boolean waitingToReceive = false;
+    private boolean waitingToReceive = true;
     
     private float[] receiveVals = new float[10];
     private String[] receiveValsString;
@@ -103,18 +104,20 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
     	switch (command){
     	
     	//initialization command
-    	case MainActivity.INIT:
+    	case LOAD_MODELS:
     		activity.mGLView.renderer.setStage(0);
     		waitingToReceive = false;
     		break;
     		
     	//initialization coordinates
-    	case MainActivity.INITCOORDS:
+    	case PATTERN1:
     		activity.mGLView.renderer.setStage(1);
+    		waitingToReceive = false;
     		break;
     		
     	//object description of what is in SDCard
-    	case MainActivity.OBJECT:
+    	case CONFIRM_PATTERN:
+    		activity.mGLView.renderer.setStage(2);
     		break;
     		
     	//stop this projector (should exit thread and close socket)
@@ -148,11 +151,13 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
     public void parseData(String inString, MainActivity activity){
     	receiveValsString = inString.split(",");
 		Log.i(TAG, "Vals Received: " + receiveValsString[0] + "," + receiveValsString[1]  + "," + receiveValsString[2]  + "," + receiveValsString[3]  + "," + receiveValsString[4]  + "," + receiveValsString[5]);
-		for (int i=0; i < 6; i++) {
+		for (int i=0; i < 9; i++) {
 			receiveVals[i] = Float.parseFloat(receiveValsString[i]);
 			Log.i(TAG, "FLOAT VALUE[" + i + "]: " + receiveVals[i]);
 		}
 		activity.mGLView.renderer.setValues(receiveVals);
+		waitingToReceive = false;
+		isCommand = true;
     }
     
     public void receiveMessageFromServer(MainActivity activity){
@@ -223,8 +228,18 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
 		        			if(stage == LOAD_MODELS){
 		        				params[0].mGLView.renderer.loadAllModels();
 		        				stage = PATTERN1;
+		        				sendMessageToServer("CONFIRM");
 		        			}
-		        			sendMessageToServer("CONFIRM");
+		        			else if(stage == PATTERN1){
+		        				stage = CONFIRM_PATTERN;
+		        				isCommand = false;
+		        				sendMessageToServer("CONFIRM");
+		        			}
+		        			else if(stage == CONFIRM_PATTERN){
+		        				sendMessageToServer("CONFIRM");
+		        			}
+
+	        				
 		        			waitingToReceive = true;
 		        		}
 		        		else

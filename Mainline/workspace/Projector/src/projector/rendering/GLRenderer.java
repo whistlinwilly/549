@@ -30,8 +30,10 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 	   
 	   private static final int LOAD_MODELS = 0;
 	   private static final int PATTERN1 = 1;
+	   private static final int CONFIRM_PATTERN = 2;
 	   
-	   private final GLCircle circle = new GLCircle(0,0,1,100);
+	   private final GLCircle bigCircle = new GLCircle(0,0,2,100);
+	   private final GLCircle smallCircle = new GLCircle(0,3,0.6f,100);
 	   private float distanceFromTable, incidentAngle, rotation, deltaX, deltaY, twist;
 	   
 	   private long startTime;
@@ -139,12 +141,15 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 
 	   public void setValues(float[] vals){
 		   if (vals != null && vals.length > 5){
-			   distanceFromTable = vals[0];
-			   incidentAngle = vals[1];
-			   rotation = vals[2];
-			   deltaX = vals[3];
-			   deltaY = vals[4];
-			   twist = vals[5];
+			   eyeX = vals[0];
+			   eyeY = vals[1];
+			   eyeZ = vals[2];
+			   centerX = vals[3];
+			   centerY = vals[4];
+			   centerZ = vals[5];
+			   upX = vals[6];
+			   upY = vals[7];
+			   upZ = vals[8];
 			   Log.i(TAG, "Values BAHHHH: " + distanceFromTable + "," + incidentAngle + "," + rotation + "," + deltaX + "," + deltaY + "," + twist);
 		   }
 	   }
@@ -177,12 +182,21 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 			      // Position model so we can see it
 			      gl.glMatrixMode(GL10.GL_MODELVIEW);
 			      gl.glLoadIdentity();
-			      if(stage == PATTERN1)
-			    	  circle.draw(gl);
+			      if(stage == PATTERN1){
+			    	  bigCircle.draw(gl);
+			    	  smallCircle.draw(gl);
+			      }
 		   }
 		   else{
-			   GLU.gluPerspective(gl, 18.2f, ratio, 0.1f, 1000f); 
+			   GLU.gluPerspective(gl, 17.5f, ratio, 0.1f, 1000f); 
 			   GLU.gluLookAt(gl, eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ);
+			   gl.glClear(GL10.GL_COLOR_BUFFER_BIT
+			            | GL10.GL_DEPTH_BUFFER_BIT);
+
+			      // Position model so we can see it
+			      gl.glMatrixMode(GL10.GL_MODELVIEW);
+			      gl.glLoadIdentity();
+			   bigCircle.draw(gl);
 		   }
 
 	      

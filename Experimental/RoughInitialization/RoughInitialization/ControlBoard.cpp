@@ -59,6 +59,16 @@ void ControlBoard::init(void){
 
 	Mat myMat;
 
+		sn = new ServerNetwork();
+
+	while(projectorsConnected < NUM_PROJECTORS){
+		sn->acceptNewClient(projectorsConnected);
+		projectorsConnected++;
+	}
+
+	sn->sendToAll("0",5,0);
+	sn->receiveData(0,recvbuf);
+
 	//FROM MY TABLE INIT
 	RotatedRect myRect;
 	cameraPerspective test;
@@ -80,16 +90,6 @@ void ControlBoard::init(void){
 	Mat trans, foreground;
 	tableBGsub = new BackgroundSubtractorMOG2(0,235,true);
 	tableBGsub->operator()(newFrame,foreground,0.001);
-
-	sn = new ServerNetwork();
-
-	while(projectorsConnected < NUM_PROJECTORS){
-		sn->acceptNewClient(projectorsConnected);
-		projectorsConnected++;
-	}
-
-	sn->sendToAll("0",5,0);
-	sn->receiveData(0,recvbuf);
 
 	myMat = getPerspectiveMapping();
 	//tProj.renderFrame(Point2f(0,0));
@@ -624,6 +624,8 @@ Mat getPerspectiveMapping(void){
 	std::vector<std::vector<cv::Point> > contour;
 	RotatedRect myRect;
 
+	circleData* cdat = new circleData;
+
 
 	float width = 0;
 	float height = 0;
@@ -663,7 +665,7 @@ Mat bgFrame, bgThresh, bgForeground;
 	bgFrame = tCam.grabFrameWithPerspective(cp);
 
 	imshow("FRAME GRABBED", bgFrame);
-	waitKey();
+//	waitKey();
 
 	tableBGsub->operator()(bgFrame,bgForeground,0.001);
 
@@ -672,17 +674,17 @@ Mat bgFrame, bgThresh, bgForeground;
 	//tableBGsub->getBackgroundImage(back);
 
 	imshow("BACKGROUND MODEL", bgForeground);
-	waitKey();
+//	waitKey();
 
-	threshold(bgForeground, bThresh, 240.0, 255.0,THRESH_BINARY);
+	threshold(bgForeground, bThresh, 245.0, 255.0,THRESH_BINARY);
 
 	imshow("BACKGROUND THRESHOLD", bThresh);
-	waitKey();
+//	waitKey();
 
-	Canny(bThresh, bCan, 100, 250, 3);
+	Canny(bThresh, bCan, 100, 250, 5);
 
 	imshow("BACKGROUND CANNY", bCan);
-	waitKey();
+//	waitKey();
 
 	//OLD CODE WITH THRESHOLDING
 	//test = tCam.getBackground(cp);
@@ -718,6 +720,170 @@ Mat bgFrame, bgThresh, bgForeground;
 
 	waitKey();*/
 
+	float camCenterX;
+	float camCenterY;
+	float camDistance;
+	float camAngle;
+	float camRot;
+	float camTwist;
+	float c1Dist;
+	float c2Dist;
+	float camRatio;
+
+	Mat twoCircles = extractDoubleCircleData(cdat, bCan, 100, 600, 20, bgFrame);
+	imshow("CIRCLES", twoCircles);
+//	waitKey();
+
+	if(cdat->c1w > cdat->c2w){
+		camCenterX = cdat->c1x;
+		camCenterY = cdat->c1y;
+		camDistance = (cdat->c1w / 4.0 / TABLE_X * TABLE_WIDTH) * DEFAULT_DISTANCE;
+		camRatio = cdat->c1w / cdat->c1h;
+	}
+	else{
+		camCenterX = cdat->c2x;
+		camCenterY = cdat->c2y;
+		camDistance = (cdat->c2w / 4.0 / TABLE_X * TABLE_WIDTH) * DEFAULT_DISTANCE;
+		camRatio = cdat->c2w / cdat->c2h;
+	}
+
+	//float tantan = ;
+	//float tantan2 = ;
+
+	camTwist = atan((cdat->c1x - cdat->c2x) / (cdat->c1y - cdat->c2y)) / (2*M_PI) * -360.0;
+	camRot = (cdat->c1r + cdat->c2r) / 2.0;
+	float camAngleRad = acos(camRatio);
+	camAngle = 90 + (acos(camRatio) / (2*M_PI) * -360.0);
+
+	float eyeX = (camCenterX - (TABLE_X / 2.0)) / TABLE_X * TABLE_WIDTH;
+	float deltX = sin(camRot * (2 * M_PI) / -360.0);
+	float distFromCenter = camDistance * cos(camAngle * (2 * M_PI) / 360.0);
+	float eyeDeltaX = distFromCenter * deltX;
+
+	float eyeY = ((TABLE_Y / 2.0) - camCenterY) / TABLE_Y * TABLE_WIDTH;
+	float deltY = cos(camRot * (2 * M_PI) / -360.0);
+	float eyeDeltaY = distFromCenter * deltY;
+
+	float eyeZ = -camDistance * sin(camAngle * (2 * M_PI) / -360.0);
+
+	camCenterX = eyeX;
+	camCenterY = eyeY;
+
+	eyeX = eyeX - eyeDeltaX;
+	eyeY = eyeY + eyeDeltaY;
+
+	float vecX = camCenterX - eyeX;
+	float vecY = camCenterY - eyeY;
+	float vecZ = 0.0 - eyeZ;
+
+	vecX = vecX / sqrt(pow(vecX, 2) + pow(vecY, 2) + pow(vecZ, 2));
+	vecY = vecY / sqrt(pow(vecX, 2) + pow(vecY, 2) + pow(vecZ, 2));
+	vecZ = vecZ / sqrt(pow(vecX, 2) + pow(vecY, 2) + pow(vecZ, 2));
+
+//FOR INTERMEDIATE CALCS
+    //float x = -vecZ;
+    //float y = 0.0
+    //float z = vecX;
+
+ //   float x = -(vecY*vecX);
+ //   float y = -(-vecZ*vecZ)+(vecX*vecX);
+	//float z = (-vecZ*vecY);
+
+    //vector.x = vecY;
+    //vector.y = -vecX;
+    //vector.z = 0.0;
+
+    float x = (-vecX*vecZ);
+    float y = -(vecY*vecZ);
+    float z = (vecY*vecY)-(-vecX*vecX);
+
+	stringstream ss (stringstream::in | stringstream::out);
+		
+	ss << eyeX;
+
+	std::string s = ss.str();
+
+	s.append(",");
+
+	ss.str("");
+	ss.clear();
+	
+	ss << eyeY;
+
+	s.append(ss.str());
+
+	s.append(",");
+
+	ss.str("");
+	ss.clear();
+
+	ss << eyeZ;
+
+	s.append(ss.str());
+
+	s.append(",");
+
+	ss.str("");
+	ss.clear();
+
+	ss << camCenterX;
+
+	s.append(ss.str());
+	s.append(",");
+
+	ss.str("");
+	ss.clear();
+
+	ss << camCenterY;
+
+	s.append(ss.str());
+
+	s.append(",");
+
+	ss.str("");
+	ss.clear();
+
+	twist = 0;
+	ss << twist;
+
+	s.append(ss.str());
+
+	s.append(",");
+
+	ss.str("");
+	ss.clear();
+
+	ss << x;
+
+	s.append(ss.str());
+
+	s.append(",");
+
+	ss.str("");
+	ss.clear();
+
+	ss << y;
+
+	s.append(ss.str());
+
+	s.append(",");
+
+		ss.str("");
+	ss.clear();
+
+	ss << z;
+
+	s.append(ss.str());
+
+	s.append(",");
+
+	char *cstr = new char[s.length() + 1];
+	strcpy(cstr, s.c_str());
+
+	sn->sendToAll(cstr,s.length(),0);
+	sn->receiveData(0,recvbuf);
+
+	sn->sendToAll("2",5,0);
 
 	findContours( bCan, contour, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE, Point(0, 0) );
 
@@ -767,7 +933,7 @@ Mat bgFrame, bgThresh, bgForeground;
 	//width -=5.0;
 
 
-	distanceFromTable = (width / 2 / -TABLE_X * TABLE_WIDTH) * DEFAULT_DISTANCE;
+	distanceFromTable = (width / 4.0 / -TABLE_X * TABLE_WIDTH) * DEFAULT_DISTANCE;
 
 	//distanceFromTable = width / 2.0 / 640.0 * TABLE_WIDTH;
 
@@ -782,61 +948,7 @@ Mat bgFrame, bgThresh, bgForeground;
 		centerX = 0;
 		centerY = 0;
 
-		stringstream ss (stringstream::in | stringstream::out);
-		ss << distanceFromTable;
-
-		std::string s = ss.str();
-
-		s.append(",");
-
-		ss.str("");
-		ss.clear();
-
-		ss << oldIncidentAngle;
-
-		s.append(ss.str());
-
-		s.append(",");
-
-		ss.str("");
-		ss.clear();
-
-		oldrot = 0;
-		ss << oldrot;
-
-		s.append(ss.str());
-
-		s.append(",");
-
-		ss.str("");
-		ss.clear();
-
-		curX = 0;
-		ss << curX;
-
-		s.append(ss.str());
-
-		s.append(",");
-
-		ss.str("");
-		ss.clear();
-
-		curY = 0;
-		ss << curY;
-
-		s.append(ss.str());
-
-		s.append(",");
-
-		ss.str("");
-		ss.clear();
-
-		twist = 0;
-		ss << twist;
-
-		s.append(ss.str());
-
-		s.append(",");
+		
 
 		//myServer->sendString(s.c_str(), 100);
 	//myServer->confirm();

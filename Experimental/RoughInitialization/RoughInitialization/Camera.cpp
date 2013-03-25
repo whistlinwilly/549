@@ -204,7 +204,7 @@ cameraPerspective Camera::tryRotation(void){
 		imshow("new", gauss);
 	waitKey();
 
-	Canny(gauss, can, 10, 210, 3);
+	Canny(gauss, can, 20, 60, 3);
 
 	imshow("new", can);
 	waitKey();
@@ -233,12 +233,11 @@ cameraPerspective Camera::tryRotation(void){
 
 	cvtColor( rotated, grey, CV_RGB2GRAY);
 
-	GaussianBlur( grey, gauss, Size( 3, 3 ), 0, 0 );
+	GaussianBlur( grey, gauss, Size( 1, 1 ), 0, 0 );
 
-	float thresholdNum = threshold( gauss, thre, i, 255.0, THRESH_OTSU);
+	i = 10.0;
 
-	thresholdNum -= 80.0;
-	threshold( gauss, thre, thresholdNum, 255.0, THRESH_BINARY);
+	threshold( gauss, thre, i, 255.0, THRESH_BINARY);
 	//imshow("new", thre);
 	//waitKey();
 		imshow("new",thre);
@@ -346,13 +345,16 @@ cameraPerspective Camera::findCorners(void){
 
 	warpPerspective(myObj.pic,nullMat,homey,myObj.pic.size());
 
-	myObj.pic = nullMat;
+	Rect roi = Rect(0,0,TABLE_X,TABLE_Y);
+
+	myObj.pic = nullMat(roi);
 	myObj.perspectiveWarp = homey;
 	myObj.tCorners[0] = corners[0];
 	myObj.tCorners[1] = corners[1];
 	myObj.tCorners[2] = corners[2];
 	myObj.tCorners[3] = corners[3];
-	imshow("camRotation", nullMat);
+
+	imshow("camRotation", myObj.pic);
 	//waitKey();
 	return myObj;
 }
@@ -378,7 +380,7 @@ Mat Camera::grabFrame(){
 }
 
 Mat Camera::grabFrameWithPerspective(cameraPerspective cp){
-	Mat m, rot, warp, mirror;
+	Mat m, rot, warp, mirror, roiMat;
 
 	m = grabFrame();
 
@@ -386,7 +388,13 @@ Mat Camera::grabFrameWithPerspective(cameraPerspective cp){
 	warpAffine(m, rot, rot_mat, m.size(), INTER_CUBIC);
 	warpPerspective(rot,warp,myObj.perspectiveWarp,rot.size());
 
-	flip(warp, mirror, 1);
+	Rect roi = Rect(0,0,TABLE_X,TABLE_Y);
+
+	roiMat = warp(roi);
+
+	flip(roiMat, mirror, 1);
+
+	
 
 	return mirror.clone();
 }
