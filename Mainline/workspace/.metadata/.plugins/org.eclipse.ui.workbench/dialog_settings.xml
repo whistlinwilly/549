@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<section name="ZipFileImportWizard">
+	</section>
 	<section name="ZipFileExportWizard">
 		<item value="true" key="WizardZipFileResourceExportPage1.STORE_CREATE_STRUCTURE_ID"/>
 		<item value="true" key="WizardZipFileResourceExportPage1.STORE_COMPRESS_CONTENTS_ID"/>
@@ -7,8 +9,6 @@
 			<item value="C:\Users\549\Desktop\android_gl2.zip"/>
 			<item value="C:\Users\549\Desktop\android_gl.zip"/>
 		</list>
-	</section>
-	<section name="ZipFileImportWizard">
 	</section>
 	<section name="ImportExportAction">
 		<item value="org.eclipse.ui.wizards.import.ExternalProject" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>

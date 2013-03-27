@@ -29,7 +29,7 @@ class GLCircle {
    private final int numPoints;
 
    
-   public GLCircle(int x, int y, float radius, int points) {
+   public GLCircle(float x, float y, float radius, int points) {
 
 	   numPoints = points + 2;
       
@@ -50,7 +50,7 @@ class GLCircle {
     	  
     	  vertices[i*3] =  (int)(x * one + one * radius * Math.cos(c));
     	  vertices[i*3 + 1] = (int)(y * one + one * radius * Math.sin(s));
-    	  vertices[i*3 + 2] = 0;
+    	  vertices[i*3 + 2] = (int)(0.0f * one);
     	  
       }
       

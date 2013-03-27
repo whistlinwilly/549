@@ -731,7 +731,7 @@ Mat bgFrame, bgThresh, bgForeground;
 	float camRatio;
 
 	Mat twoCircles = extractDoubleCircleData(cdat, bCan, 100, 600, 20, bgFrame);
-	imshow("CIRCLES", twoCircles);
+	imshow("CIRCLES", twoCircles); 
 //	waitKey();
 
 	if(cdat->c1w > cdat->c2w){
@@ -739,22 +739,24 @@ Mat bgFrame, bgThresh, bgForeground;
 		camCenterY = cdat->c1y;
 		camDistance = (cdat->c1w / 4.0 / TABLE_X * TABLE_WIDTH) * DEFAULT_DISTANCE;
 		camRatio = cdat->c1w / cdat->c1h;
+		camRot = cdat->c1r;
 	}
 	else{
 		camCenterX = cdat->c2x;
 		camCenterY = cdat->c2y;
 		camDistance = (cdat->c2w / 4.0 / TABLE_X * TABLE_WIDTH) * DEFAULT_DISTANCE;
 		camRatio = cdat->c2w / cdat->c2h;
+		camRot = cdat->c2r;
 	}
 
 	//float tantan = ;
 	//float tantan2 = ;
 
-	camTwist = atan((cdat->c1x - cdat->c2x) / (cdat->c1y - cdat->c2y)) / (2*M_PI) * -360.0;
-	camRot = (cdat->c1r + cdat->c2r) / 2.0;
+	camTwist = atan((cdat->c1x - cdat->c2x) / (cdat->c1y - cdat->c2y));
+	float camTwistDegrees = atan((cdat->c1x - cdat->c2x) / (cdat->c1y - cdat->c2y)) / (2*M_PI) * -360.0;
+	
 	float camAngleRad = acos(camRatio);
 	camAngle = 90 + (acos(camRatio) / (2*M_PI) * -360.0);
-
 	float eyeX = (camCenterX - (TABLE_X / 2.0)) / TABLE_X * TABLE_WIDTH;
 	float deltX = sin(camRot * (2 * M_PI) / -360.0);
 	float distFromCenter = camDistance * cos(camAngle * (2 * M_PI) / 360.0);
@@ -772,30 +774,95 @@ Mat bgFrame, bgThresh, bgForeground;
 	eyeX = eyeX - eyeDeltaX;
 	eyeY = eyeY + eyeDeltaY;
 
+	camTwist = (180 + camTwistDegrees) - camRot;
+	camTwist = camTwist * (2 * M_PI) / 360.0;
+
+	/*
+	* this part of the code calculates the "up" vector for the opengl camera position
+	* first we find the vector from the camera to the focal point in the table plane
+	* by crossing this vector with a (0,0,1) vector rotated about the first vector by twist degrees
+	* we obtain a vector pointing out the right side, perpendicular to the look at vector
+	* finally we cross this third right side vector with the original "look at" vector to obtain one
+	* perpendicular to them both - that is the "up" vector we need
+	*/
+
 	float vecX = camCenterX - eyeX;
 	float vecY = camCenterY - eyeY;
 	float vecZ = 0.0 - eyeZ;
 
-	vecX = vecX / sqrt(pow(vecX, 2) + pow(vecY, 2) + pow(vecZ, 2));
-	vecY = vecY / sqrt(pow(vecX, 2) + pow(vecY, 2) + pow(vecZ, 2));
-	vecZ = vecZ / sqrt(pow(vecX, 2) + pow(vecY, 2) + pow(vecZ, 2));
+	// normalized look at vector
+	float newVecX = vecX / sqrt(pow(vecX, 2) + pow(vecY, 2) + pow(vecZ, 2));
+	float newVecY = vecY / sqrt(pow(vecX, 2) + pow(vecY, 2) + pow(vecZ, 2));
+	float newVecZ = vecZ / sqrt(pow(vecX, 2) + pow(vecY, 2) + pow(vecZ, 2));
 
-//FOR INTERMEDIATE CALCS
-    //float x = -vecZ;
-    //float y = 0.0
-    //float z = vecX;
+	vecX = newVecX;
+	vecY = newVecY;
+	vecZ = newVecZ;
 
- //   float x = -(vecY*vecX);
- //   float y = -(-vecZ*vecZ)+(vecX*vecX);
-	//float z = (-vecZ*vecY);
+	// upwards z vector
+	float zVecX = 0.0;
+	float zVecY = 0.0;
+	float zVecZ = 1.0;
 
-    //vector.x = vecY;
-    //vector.y = -vecX;
-    //vector.z = 0.0;
+	float cosTheta = (float)cos(camTwist);
+	float sinTheta = (float)sin(camTwist);
 
-    float x = (-vecX*vecZ);
-    float y = -(vecY*vecZ);
-    float z = (vecY*vecY)-(-vecX*vecX);
+	// x position of the new rotated vector
+	float x   = (cosTheta + (1 - cosTheta) * vecX * vecX)		* zVecX;
+	x  += ((1 - cosTheta) * vecX * vecY - vecZ * sinTheta)	* zVecY;
+	x  += ((1 - cosTheta) * vecX * vecZ + vecY * sinTheta)	* zVecZ;
+
+	// y position of the new rotated vector
+	float y  = ((1 - cosTheta) * vecX * vecY + vecZ * sinTheta)	* zVecX;
+	y += (cosTheta + (1 - cosTheta) * vecY * vecY)		* zVecY;
+	y += ((1 - cosTheta) * vecY * vecZ - vecX * sinTheta)	* zVecZ;
+
+	// z position of the new rotated vector
+	float z  = ((1 - cosTheta) * vecX * vecZ - vecY * sinTheta)	* zVecX;
+	z  += ((1 - cosTheta) * vecY * vecZ + vecX * sinTheta)	* zVecY;
+	z  += (cosTheta + (1 - cosTheta) * vecZ * vecZ)		* zVecZ;
+
+	newVecX = x / sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
+	newVecY = y / sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
+	newVecZ = z / sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
+
+	x = newVecX;
+	y = newVecY;
+	z = newVecZ;
+
+	//lookat X zUp
+
+	float rightX = vecY*z - vecZ*y;
+	float rightY = vecZ*x - vecX*z;
+	float rightZ = vecX*y - vecY*x;
+
+	newVecX = rightX / sqrt(pow(rightX, 2) + pow(rightY, 2) + pow(rightZ, 2));
+	newVecY = rightY / sqrt(pow(rightX, 2) + pow(rightY, 2) + pow(rightZ, 2));
+	newVecZ = rightZ / sqrt(pow(rightX, 2) + pow(rightY, 2) + pow(rightZ, 2));
+
+	rightX = newVecX;
+	rightY = newVecY;
+	rightZ = newVecZ;
+
+
+	//right X lookat
+
+	float upX = rightY*vecZ - rightZ*vecY;
+	float upY = rightZ*vecX - rightX*vecZ;
+	float upZ = rightX*vecY - rightY*vecX;
+	
+	newVecX = upX / sqrt(pow(upX, 2) + pow(upY, 2) + pow(upZ, 2));
+	newVecY = upY / sqrt(pow(upX, 2) + pow(upY, 2) + pow(upZ, 2));
+	newVecZ = upZ / sqrt(pow(upX, 2) + pow(upY, 2) + pow(upZ, 2));
+
+	upX = newVecX;
+	upY = newVecY;
+	upZ = newVecZ;
+
+	//old way of calculating in one step (reduced equations, but no z twist)
+    //float x = (-vecX*vecZ);
+    //float y = -(vecY*vecZ);
+    //float z = (vecY*vecY)-(-vecX*vecX);
 
 	stringstream ss (stringstream::in | stringstream::out);
 		
@@ -853,7 +920,7 @@ Mat bgFrame, bgThresh, bgForeground;
 	ss.str("");
 	ss.clear();
 
-	ss << x;
+	ss << upX;
 
 	s.append(ss.str());
 
@@ -862,7 +929,7 @@ Mat bgFrame, bgThresh, bgForeground;
 	ss.str("");
 	ss.clear();
 
-	ss << y;
+	ss << upY;
 
 	s.append(ss.str());
 
@@ -871,7 +938,7 @@ Mat bgFrame, bgThresh, bgForeground;
 		ss.str("");
 	ss.clear();
 
-	ss << z;
+	ss << upZ;
 
 	s.append(ss.str());
 
