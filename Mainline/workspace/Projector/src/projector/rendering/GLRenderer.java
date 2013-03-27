@@ -33,7 +33,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 	   private static final int CONFIRM_PATTERN = 2;
 	   
 	   private final GLCircle bigCircle = new GLCircle(0,0,2,100);
-	   private final GLCircle smallCircle = new GLCircle(0,3,0.6f,100);
+	   private final GLCircle smallCircle = new GLCircle(0,3,0.5f,100);
 	   
 	   //North / West
 	   private final GLCircle circ00 = new GLCircle(0,0,0.5f,100);

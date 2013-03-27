@@ -665,7 +665,7 @@ Mat bgFrame, bgThresh, bgForeground;
 	bgFrame = tCam.grabFrameWithPerspective(cp);
 
 	imshow("FRAME GRABBED", bgFrame);
-//	waitKey();
+	waitKey();
 
 	tableBGsub->operator()(bgFrame,bgForeground,0.001);
 
@@ -674,17 +674,17 @@ Mat bgFrame, bgThresh, bgForeground;
 	//tableBGsub->getBackgroundImage(back);
 
 	imshow("BACKGROUND MODEL", bgForeground);
-//	waitKey();
+	waitKey();
 
 	threshold(bgForeground, bThresh, 245.0, 255.0,THRESH_BINARY);
 
 	imshow("BACKGROUND THRESHOLD", bThresh);
-//	waitKey();
+	waitKey();
 
 	Canny(bThresh, bCan, 100, 250, 5);
 
 	imshow("BACKGROUND CANNY", bCan);
-//	waitKey();
+	waitKey();
 
 	//OLD CODE WITH THRESHOLDING
 	//test = tCam.getBackground(cp);
@@ -732,20 +732,20 @@ Mat bgFrame, bgThresh, bgForeground;
 
 	Mat twoCircles = extractDoubleCircleData(cdat, bCan, 100, 600, 20, bgFrame);
 	imshow("CIRCLES", twoCircles); 
-//	waitKey();
+	waitKey();
 
 	if(cdat->c1w > cdat->c2w){
 		camCenterX = cdat->c1x;
 		camCenterY = cdat->c1y;
 		camDistance = (cdat->c1w / 4.0 / TABLE_X * TABLE_WIDTH) * DEFAULT_DISTANCE;
-		camRatio = cdat->c1w / cdat->c1h;
+		camRatio = cdat->c2w / cdat->c2h;
 		camRot = cdat->c1r;
 	}
 	else{
 		camCenterX = cdat->c2x;
 		camCenterY = cdat->c2y;
 		camDistance = (cdat->c2w / 4.0 / TABLE_X * TABLE_WIDTH) * DEFAULT_DISTANCE;
-		camRatio = cdat->c2w / cdat->c2h;
+		camRatio = cdat->c1w / cdat->c1h;
 		camRot = cdat->c2r;
 	}
 
@@ -756,7 +756,7 @@ Mat bgFrame, bgThresh, bgForeground;
 	float camTwistDegrees = atan((cdat->c1x - cdat->c2x) / (cdat->c1y - cdat->c2y)) / (2*M_PI) * -360.0;
 	
 	float camAngleRad = acos(camRatio);
-	camAngle = 90 + (acos(camRatio) / (2*M_PI) * -360.0);
+	camAngle = (asin(camRatio) / (2*M_PI) * 360);
 	float eyeX = (camCenterX - (TABLE_X / 2.0)) / TABLE_X * TABLE_WIDTH;
 	float deltX = sin(camRot * (2 * M_PI) / -360.0);
 	float distFromCenter = camDistance * cos(camAngle * (2 * M_PI) / 360.0);
@@ -766,7 +766,7 @@ Mat bgFrame, bgThresh, bgForeground;
 	float deltY = cos(camRot * (2 * M_PI) / -360.0);
 	float eyeDeltaY = distFromCenter * deltY;
 
-	float eyeZ = -camDistance * sin(camAngle * (2 * M_PI) / -360.0);
+	float eyeZ = camDistance * sin(camAngle * (2 * M_PI) / 360.0);
 
 	camCenterX = eyeX;
 	camCenterY = eyeY;
