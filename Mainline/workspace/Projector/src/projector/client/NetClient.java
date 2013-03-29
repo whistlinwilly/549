@@ -26,9 +26,12 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
     public static final int BUFFER_SIZE = 16;
     
     private static final String TAG = "NetClient";
+    
 	   private static final int LOAD_MODELS = 0;
 	   private static final int PATTERN1 = 1;
-	   private static final int CONFIRM_PATTERN = 2;
+	   private static final int PATTERN2 = 2;
+	   private static final int CONFIRM_PATTERN = 3;
+	   private static final int STOP = 4;
     
     public volatile Socket socket = null;
     public String host = null;
@@ -115,13 +118,19 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
     		waitingToReceive = false;
     		break;
     		
+       	//initialization coordinates
+       	case PATTERN2:
+       		activity.mGLView.renderer.setStage(2);
+       		waitingToReceive = false;
+       		break;
+    		
     	//object description of what is in SDCard
     	case CONFIRM_PATTERN:
-    		activity.mGLView.renderer.setStage(2);
+    		activity.mGLView.renderer.setStage(3);
     		break;
     		
     	//stop this projector (should exit thread and close socket)
-    	case MainActivity.STOP:
+    	case STOP:
     		if (connected) {
     			Log.i(TAG, "Socket is closing...");
     			try {
@@ -135,10 +144,6 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
     		else {
     			Log.e(TAG, "Socket was already closed!");
     		}
-    		break;
-    		
-    	//pause this projector (used during init for other projectors, should render black screen)
-    	case MainActivity.PAUSE:
     		break;
     		
     	//command not found	
@@ -231,6 +236,10 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
 		        				sendMessageToServer("CONFIRM");
 		        			}
 		        			else if(stage == PATTERN1){
+		        				stage = PATTERN2;
+		        				sendMessageToServer("CONFIRM");
+		        			}
+		        			else if(stage == PATTERN2){
 		        				stage = CONFIRM_PATTERN;
 		        				isCommand = false;
 		        				sendMessageToServer("CONFIRM");

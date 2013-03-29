@@ -12,6 +12,7 @@
 #define HEIGHT 800
 #define BPP 4
 #define DEPTH 32
+#define RATIO 0.111
 
 //Distance for second test patter (from center)
 #define X_DIST (7)
@@ -19,7 +20,7 @@
 
 //Distance from image plane for first orthographic projection
 #ifndef DEFAULT_DISTANCE
-#define DEFAULT_DISTANCE (24.0)
+#define DEFAULT_DISTANCE (40.0)
 #endif 
 
 class Projector

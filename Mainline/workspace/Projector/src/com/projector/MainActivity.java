@@ -13,11 +13,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
-	public static final int INIT = 0;
-    public static final int INITCOORDS = 1;
-    public static final int OBJECT = 2;
-    public static final int STOP = 3;
-    public static final int PAUSE = 4;
+
 	public volatile GLView mGLView;
 	private NetClient netClient;
 	private static final String TAG = "NetClient";

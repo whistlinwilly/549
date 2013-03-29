@@ -30,8 +30,11 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 	   
 	   private static final int LOAD_MODELS = 0;
 	   private static final int PATTERN1 = 1;
-	   private static final int CONFIRM_PATTERN = 2;
-	   
+	   private static final int PATTERN2 = 2;
+	   private static final int CONFIRM_PATTERN = 3;
+	   private static final int STOP = 4;
+
+	   private final GLCircle tinyCircle = new GLCircle(0,0,0.125f,100);
 	   private final GLCircle bigCircle = new GLCircle(0,0,2,100);
 	   private final GLCircle smallCircle = new GLCircle(0,3,0.6f,100);
 	   
@@ -79,7 +82,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 	private int height;
 	private float eyeX = 0.0f;
 	private float eyeY = 0.0f;
-	private float eyeZ = 24.0f;
+	private float eyeZ = 35.0f;
 	private float centerX = 0.0f;
 	private float centerY = 0.0f;
 	private float centerZ = 0.0f;
@@ -90,7 +93,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 	   public GLRenderer(Context context) {
 	      this.context = context;
 	      this.stage = 0;
-	      this.distanceFromTable = -24.0f;
+	      this.distanceFromTable = -35.0f;
 	      this.incidentAngle = 0.0f;
 	      this.deltaX = 0.0f;
 	      this.deltaY = 0.0f;
@@ -203,7 +206,6 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 		   gl.glMatrixMode(GL10.GL_PROJECTION);
 		   gl.glLoadIdentity();
 		   float ratio = (float) width / height;
-		   if(stage == LOAD_MODELS || stage == PATTERN1){
 			  // GLU.gluOrtho2D(gl, 0, width, 0, height);
 			   //used to be 17.5
 			   GLU.gluPerspective(gl, 17.0f, ratio, 0.1f, 1000f); 
@@ -216,64 +218,70 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 			      gl.glMatrixMode(GL10.GL_MODELVIEW);
 			      gl.glLoadIdentity();
 			      if(stage == PATTERN1){
+			    	  tinyCircle.draw(gl);
+			      }
+			      if(stage == PATTERN2){
 			    	  bigCircle.draw(gl);
 			    	  smallCircle.draw(gl);
 			      }
-		   }
-		   else{
-			   GLU.gluPerspective(gl, 17.0f, ratio, 0.1f, 1000f); 
-			   GLU.gluLookAt(gl, eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ);
-			   gl.glClear(GL10.GL_COLOR_BUFFER_BIT
-			            | GL10.GL_DEPTH_BUFFER_BIT);
+			      if(stage == CONFIRM_PATTERN){
+				      //CIRCLE GRID TEST PATTERN
+				      float matAmbient[] = new float[] { 1, 0, 0, 1 };
+				      float matDiffuse[] = new float[] { 1, 0, 0, 1 };
+				      gl.glMaterialfv(GL10.GL_FRONT_AND_BACK, GL10.GL_AMBIENT,
+				            matAmbient, 0);
+				      gl.glMaterialfv(GL10.GL_FRONT_AND_BACK, GL10.GL_DIFFUSE,
+				            matDiffuse, 0);
+				      
+				      circ00.draw(gl);
+				      
+				      matAmbient = new float[] { 0, 0, 1, 1 };
+				      matDiffuse = new float[] { 0, 0, 1, 1 };
+				      gl.glMaterialfv(GL10.GL_FRONT_AND_BACK, GL10.GL_AMBIENT,
+				            matAmbient, 0);
+				      gl.glMaterialfv(GL10.GL_FRONT_AND_BACK, GL10.GL_DIFFUSE,
+				            matDiffuse, 0);
+			    	  
+			    	  circn20.draw(gl);
+				      circn40.draw(gl);
+				      circn22.draw(gl);
+				      circn24.draw(gl);
+				      circn42.draw(gl);
+				      circn44.draw(gl);
+				      circ02.draw(gl);
+				      circ04.draw(gl);
+				      circ20.draw(gl);
+				      circ40.draw(gl);
+				      circ22.draw(gl);
+				      circ24.draw(gl);
+				      circ42.draw(gl);
+				      circ44.draw(gl);
+				      circ0n2.draw(gl);
+				      circ0n4.draw(gl);
+				      circ2n2.draw(gl);
+				      circ2n4.draw(gl);
+				      circ4n2.draw(gl);
+				      circ4n4.draw(gl);
+				      circn2n2.draw(gl);
+				      circn4n2.draw(gl);
+				      circn2n4.draw(gl);
+				      circn4n4.draw(gl);
+				      matAmbient = new float[] { 1, 1, 1, 1 };
+				      matDiffuse = new float[] { 1, 1, 1, 1 };
+				      gl.glMaterialfv(GL10.GL_FRONT_AND_BACK, GL10.GL_AMBIENT,
+				            matAmbient, 0);
+				      gl.glMaterialfv(GL10.GL_FRONT_AND_BACK, GL10.GL_DIFFUSE,
+				            matDiffuse, 0);
+				      myObj.draw(gl);
+			      }
 
-			      // Position model so we can see it
-			      gl.glMatrixMode(GL10.GL_MODELVIEW);
-			      gl.glLoadIdentity();
 			      
 			  //    myObj.draw(gl);
 			      
-			      //CIRCLE GRID TEST PATTERN
-			      float matAmbient[] = new float[] { 1, 0, 0, 1 };
-			      float matDiffuse[] = new float[] { 1, 0, 0, 1 };
-			      gl.glMaterialfv(GL10.GL_FRONT_AND_BACK, GL10.GL_AMBIENT,
-			            matAmbient, 0);
-			      gl.glMaterialfv(GL10.GL_FRONT_AND_BACK, GL10.GL_DIFFUSE,
-			            matDiffuse, 0);
+
 			      
-			      circ00.draw(gl);
 			      
-			      matAmbient = new float[] { 0, 0, 1, 1 };
-			      matDiffuse = new float[] { 0, 0, 1, 1 };
-			      gl.glMaterialfv(GL10.GL_FRONT_AND_BACK, GL10.GL_AMBIENT,
-			            matAmbient, 0);
-			      gl.glMaterialfv(GL10.GL_FRONT_AND_BACK, GL10.GL_DIFFUSE,
-			            matDiffuse, 0);
-			      
-			      circn20.draw(gl);
-			      circn40.draw(gl);
-			      circn22.draw(gl);
-			      circn24.draw(gl);
-			      circn42.draw(gl);
-			      circn44.draw(gl);
-			      circ02.draw(gl);
-			      circ04.draw(gl);
-			      circ20.draw(gl);
-			      circ40.draw(gl);
-			      circ22.draw(gl);
-			      circ24.draw(gl);
-			      circ42.draw(gl);
-			      circ44.draw(gl);
-			      circ0n2.draw(gl);
-			      circ0n4.draw(gl);
-			      circ2n2.draw(gl);
-			      circ2n4.draw(gl);
-			      circ4n2.draw(gl);
-			      circ4n4.draw(gl);
-			      circn2n2.draw(gl);
-			      circn4n2.draw(gl);
-			      circn2n4.draw(gl);
-			      circn4n4.draw(gl);
-		   }
+		   
 
 	      
 //	      gl.glRotatef(xAngle, 1.0f, 0.0f, 0.0f);
@@ -289,7 +297,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 		//for now just one simple model
 		ObjectFactory factory = new ObjectFactory("/Objects");
 	      try {
-			myObj = factory.loadObject("iPhoneBox.obj", context);
+			myObj = factory.loadObject("shell.obj", context);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
