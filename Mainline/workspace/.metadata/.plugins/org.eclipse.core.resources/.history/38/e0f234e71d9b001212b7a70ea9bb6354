@@ -1,0 +1,136 @@
+/***
+ * Excerpted from "Hello, Android!",
+ * published by The Pragmatic Bookshelf.
+ * Copyrights apply to this code. It may not be used to create training material, 
+ * courses, books, articles, and the like. Contact us if you are in doubt.
+ * We make no guarantees that this code is fit for any purpose. 
+ * Visit http://www.pragmaticprogrammer.com/titles/eband for more book information.
+***/
+
+package org.example.opengl;
+
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.widget.Toast;
+
+public class OpenGL extends Activity {
+   GLView view;
+   @Override
+   public void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      view = new GLView(this);
+      setContentView(view);
+      view.renderer.mainActivity = this;
+      
+   }
+
+   @Override
+   protected void onPause() {
+       super.onPause();
+       view.onPause();
+   }
+
+   @Override
+   protected void onResume() {
+       super.onResume();
+       view.onResume();
+   }
+   
+   @Override
+   public boolean onKeyDown(int keyCode, KeyEvent event) {
+       switch (keyCode) {
+       case KeyEvent.KEYCODE_1:
+    	   view.renderer.setObjectTexture(0, 0);
+           return true;
+       case KeyEvent.KEYCODE_2:
+    	   view.renderer.setObjectTexture(0, 1);
+           return true;
+       case KeyEvent.KEYCODE_3:
+    	   view.renderer.setObjectTexture(0, 2);
+           return true;
+           case KeyEvent.KEYCODE_A:
+        	   view.setValue(view.X_ANGLE, -7.0f);
+               return true;
+           case KeyEvent.KEYCODE_D:
+        	   view.setValue(view.X_ANGLE, 7.0f);
+               return true;
+           case KeyEvent.KEYCODE_W:
+        	   view.setValue(view.Y_ANGLE, 7.0f);
+               return true;
+           case KeyEvent.KEYCODE_S:
+        	   view.setValue(view.Y_ANGLE, -7.0f);
+               return true;
+           case KeyEvent.KEYCODE_Q:
+        	   view.setValue(view.Z_ANGLE, -7.0f);
+               return true;
+           case KeyEvent.KEYCODE_E:
+        	   view.setValue(view.Z_ANGLE, 7.0f);
+               return true;
+           case KeyEvent.KEYCODE_Z:
+        	   view.setValue(view.Z_DIST, -7.0f);
+               return true;
+           case KeyEvent.KEYCODE_X:
+        	   view.setValue(view.Z_DIST, 7.0f);
+               return true;
+           case KeyEvent.KEYCODE_DPAD_LEFT:
+        	   view.setValue(view.X_DIST, -7.0f);
+               return true;
+           case KeyEvent.KEYCODE_DPAD_RIGHT:
+        	   view.setValue(view.X_DIST, 7.0f);
+               return true;
+           case KeyEvent.KEYCODE_DPAD_UP:
+        	   view.setValue(view.Y_DIST, 7.0f);
+               return true;
+           case KeyEvent.KEYCODE_DPAD_DOWN:
+        	   view.setValue(view.Y_DIST, -7.0f);
+        	   return true;
+           case KeyEvent.KEYCODE_U:
+        	   view.setValue(view.Y_TRANS, 0.5f);
+        	   return true;
+           case KeyEvent.KEYCODE_J:
+        	   view.setValue(view.Y_TRANS, -0.5f);
+        	   return true;
+           case KeyEvent.KEYCODE_H:
+        	   view.setValue(view.X_TRANS, -0.5f);
+        	   return true;
+           case KeyEvent.KEYCODE_K:
+        	   view.setValue(view.X_TRANS, 0.5f);
+        	   return true;
+           case KeyEvent.KEYCODE_Y:
+        	   view.setValue(view.SCALE, 0.2f);
+        	   return true;
+           case KeyEvent.KEYCODE_I:
+        	   view.setValue(view.SCALE, -0.2f);
+        	   return true;
+           default:
+               super.onKeyUp(keyCode, event);
+               return false;
+       }
+   }
+   
+   public void init(){
+	   
+	 try {
+		Animation myAni = view.renderer.ani.loadAnimation("anitest.dae");
+		myAni.xLocationAtTime(0.5f);
+	} catch (Exception e){
+		e.printStackTrace();
+	}
+	   
+     int siteObj = view.renderer.loadObject("SiteMap.obj");
+     int siteTex = view.renderer.loadTexture("Site.bmp");
+     int siteTex2 = view.renderer.loadTexture("Site2.bmp");
+     int siteTex3 = view.renderer.loadTexture("Site3.bmp");
+     if(siteObj >= 0){
+    	 view.renderer.setObjectTexture(siteObj, siteTex);
+   	  	 view.renderer.show(siteObj);
+     }
+   }
+}

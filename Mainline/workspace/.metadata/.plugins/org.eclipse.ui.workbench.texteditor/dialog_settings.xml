@@ -13,18 +13,20 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="//&#x09;&#x09;&#x09;      float matAmbient[] = new float[] { 1, 0, 0, 1 };" key="selection"/>
+		<item value="public" key="selection"/>
 		<list key="findhistory">
+			<item value="private"/>
+			<item value="LOC"/>
 			<item value="//&#x09;&#x09;&#x09;      float matAmbient[] = new float[] { 1, 0, 0, 1 };"/>
 			<item value="gluPer"/>
 			<item value="receive"/>
 			<item value="allObjects"/>
 			<item value=".nextFl"/>
 			<item value="scanner.ne"/>
-			<item value="//switch on the received data"/>
-			<item value="  gl.glEnable(GL10.GL_LIGHTING);"/>
 		</list>
 		<list key="replacehistory">
+			<item value="public"/>
+			<item value="ROT"/>
 		</list>
 	</section>
 </section>

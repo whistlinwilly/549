@@ -1,0 +1,50 @@
+package org.example.opengl;
+
+public class Animation {
+	
+	boolean hasLocation = false;
+	boolean hasRotation = false;
+	boolean hasScale = false;
+	
+	
+	//LOCATION DATA FOR XYZ
+	float[] xLocIn;
+	float[] xLocOut;
+	float[] xLocIntan;
+	float[] xLocOuttan;
+	float[] yLocIn;
+	float[] yLocOut;
+	float[] yLocIntan;
+	float[] yLocOuttan;
+	float[] zLocIn;
+	float[] zLocOut;
+	float[] zLocIntan;
+	float[] zLocOuttan;
+	
+	//ROTATION DATA FOR XYZ
+	float[] xRotIn;
+	float[] xRotOut;
+	float[] xRotIntan;
+	float[] xRotOuttan;
+	float[] yRotIn;
+	float[] yRotOut;
+	float[] yRotIntan;
+	float[] yRotOuttan;
+	float[] zRotIn;
+	float[] zRotOut;
+	float[] zRotIntan;
+	float[] zRotOuttan;
+
+
+	public float xLocationAtTime(float time){
+		
+		float xStart = xLocOut[0];
+		float xEnd = xLocOut[1];
+		
+		float xStartTan = x
+		
+		
+		return 0.0f;
+	}
+
+}

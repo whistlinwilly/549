@@ -15,7 +15,6 @@
 <fullyQualifiedTypeName name="projector.main.MainActivity"/>
 <fullyQualifiedTypeName name="android.os.Environment"/>
 <fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="java.util.regex.Pattern"/>
 <fullyQualifiedTypeName name="android.R"/>
@@ -23,8 +22,15 @@
 <fullyQualifiedTypeName name="java.nio.Buffer"/>
 <fullyQualifiedTypeName name="java.nio.ByteBuffer"/>
 <fullyQualifiedTypeName name="android.view.KeyEvent"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="android.widget.Toast"/>
 <fullyQualifiedTypeName name="java.lang.Math"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="javax.xml.parsers.DocumentBuilderFactory"/>
+<fullyQualifiedTypeName name="javax.xml.parsers.DocumentBuilder"/>
+<fullyQualifiedTypeName name="org.w3c.dom.Document"/>
+<fullyQualifiedTypeName name="org.w3c.dom.NodeList"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="org.w3c.dom.Element"/>
+<fullyQualifiedTypeName name="org.w3c.dom.Node"/>
 </qualifiedTypeNameHistroy>
