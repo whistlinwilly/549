@@ -21,7 +21,11 @@ ServerNetwork* sn;
 void projInit( int event, int x, int y, int flags, void* param );
 void camRotationTest(void);
 Mat getPointMapping(void);
-Mat getPerspectiveMapping(void);
+Mat getPerspectiveMapping(int projNum);
+int shiftPerspective(int keyPress);
+void upFromTwist(float centerX, float centerY, float eyeX, float eyeY, float eyeZ, float camTwist, float* up);
+void sendString(float eyeX, float eyeY, float eyeZ, float centerX, float centerY, float centerZ, float upX, float upY, float upZ, int projNum);
+
 float myDistanceFromTable;
 float myIncidence;
 float myCenterX;
@@ -29,6 +33,7 @@ float myCenterY;
 float myTwist;
 float myRot;
 static unsigned int projectorsConnected;
+proDat projData[NUM_PROJECTORS];
 
 static char* recvbuf = (char*)malloc(MAX_REC_BUF*sizeof(char));
 
@@ -69,6 +74,9 @@ void ControlBoard::init(void){
 	sn->sendToAll("0",5,0);
 	sn->receiveData(0,recvbuf);
 
+	sn->sendToAll("0",5,1);
+	sn->receiveData(1,recvbuf);
+
 	//FROM MY TABLE INIT
 	RotatedRect myRect;
 	cameraPerspective test;
@@ -91,7 +99,36 @@ void ControlBoard::init(void){
 	tableBGsub = new BackgroundSubtractorMOG2(0,235,true);
 	tableBGsub->operator()(newFrame,foreground,0.001);
 
-	myMat = getPerspectiveMapping();
+	myMat = getPerspectiveMapping(0);
+	sn->sendToAll("0",5,0);
+	sn->receiveData(0,recvbuf);
+
+	myMat = getPerspectiveMapping(1);
+	sn->sendToAll("0",5,1);
+	sn->receiveData(1,recvbuf);
+
+
+
+	sn->sendToAll("3",5,0);
+	sn->receiveData(0,recvbuf);
+
+	//while(shiftPerspective(waitKey()) != -1)
+	//	sn->sendToAll("3",5,0);
+
+	sn->sendToAll("3",5,1);
+	sn->receiveData(1,recvbuf);
+
+	projData[0].camTwist += 10.0f;
+
+	float newUp[3];
+
+	upFromTwist(projData[0].centerX,projData[0].centerY, projData[0].eyeX, projData[0].eyeY, projData[0].eyeZ, projData[0].camTwist, newUp);
+
+	sendString(projData[0].eyeX, projData[0].eyeY, projData[0].eyeZ, projData[0].centerX,projData[0].centerY, projData[0].centerZ, newUp[0], newUp[1], newUp[2], 0);
+
+
+
+
 	//tProj.renderFrame(Point2f(0,0));
 	//tCam.initFastCam();
 	namedWindow("ROI",WINDOW_AUTOSIZE);
@@ -102,6 +139,13 @@ void ControlBoard::init(void){
 
 	//myMat = getPointMapping();
 
+}
+
+int shiftPerspective(int keyPress){
+	if(keyPress == 29){
+	}
+
+	return 0;
 }
 
 bool byX(Point2f pt1, Point2f pt2) {
@@ -611,7 +655,7 @@ int found = 0;
 	return homey;
 }
 
-Mat getPerspectiveMapping(void){
+Mat getPerspectiveMapping(int projNum){
 
 	//OBJECT TRACKING VARIABLES
 	Mat background;
@@ -653,8 +697,8 @@ Mat bgFrame, bgThresh, bgForeground;
 	bgFrame = tCam.grabFrameWithPerspective(cp);
 	tableBGsub->operator()(bgFrame,bgForeground,0.001);
 
-	sn->sendToAll("1",5,0);
-	sn->receiveData(0,recvbuf);
+	sn->sendToAll("1",5,projNum);
+	sn->receiveData(projNum,recvbuf);
 
 //	myServer->sendString("0",1);
 
@@ -665,7 +709,7 @@ Mat bgFrame, bgThresh, bgForeground;
 	bgFrame = tCam.grabFrameWithPerspective(cp);
 
 	imshow("FRAME GRABBED", bgFrame);
-	waitKey();
+	//waitKey();
 
 	tableBGsub->operator()(bgFrame,bgForeground,0.001);
 
@@ -674,17 +718,17 @@ Mat bgFrame, bgThresh, bgForeground;
 	//tableBGsub->getBackgroundImage(back);
 
 	imshow("BACKGROUND MODEL", bgForeground);
-	waitKey();
+	//waitKey();
 
 	threshold(bgForeground, bThresh, 245.0, 255.0,THRESH_BINARY);
 
 	imshow("BACKGROUND THRESHOLD", bThresh);
-	waitKey();
+	//waitKey();
 
 	Canny(bThresh, bCan, 100, 250, 5);
 
 	imshow("BACKGROUND CANNY", bCan);
-	waitKey();
+	//waitKey();
 
 	Point2f point[1];
 	findCircles(point, bCan, 1, 15, 10, 10);
@@ -733,15 +777,15 @@ Mat bgFrame, bgThresh, bgForeground;
 	float c2Dist;
 	float camRatio;
 
-	sn->sendToAll("2",5,0);
-	sn->receiveData(0,recvbuf);
+	sn->sendToAll("2",5,projNum);
+	sn->receiveData(projNum,recvbuf);
 
 	waitKey(100);
 
 	bgFrame = tCam.grabFrameWithPerspective(cp);
 
 	imshow("FRAME GRABBED", bgFrame);
-	waitKey();
+	//waitKey();
 
 	tableBGsub->operator()(bgFrame,bgForeground,0.001);
 
@@ -750,21 +794,21 @@ Mat bgFrame, bgThresh, bgForeground;
 	//tableBGsub->getBackgroundImage(back);
 
 	imshow("BACKGROUND MODEL", bgForeground);
-	waitKey();
+	//waitKey();
 
 	threshold(bgForeground, bThresh, 245.0, 255.0,THRESH_BINARY);
 
 	imshow("BACKGROUND THRESHOLD", bThresh);
-	waitKey();
+	//waitKey();
 
 	Canny(bThresh, bCan, 100, 250, 5);
 
 	imshow("BACKGROUND CANNY", bCan);
-	waitKey();
+	//waitKey();
 
 	Mat twoCircles = extractDoubleCircleData(cdat, bCan, 80, 600, 7, bgFrame);
 	imshow("CIRCLES", twoCircles); 
-	waitKey();
+	//waitKey();
 
 	if(cdat->c1w > cdat->c2w){
 		camCenterX = cdat->c1x;
@@ -810,6 +854,122 @@ Mat bgFrame, bgThresh, bgForeground;
 	camTwist = (180 - camRot) - camTwistDegrees;
 	camTwist = camTwist * (2 * M_PI) / 360.0;
 
+	float up[3];
+	
+	upFromTwist(centerX, centerY, eyeX, eyeY, eyeZ, camTwist, up);
+
+	sendString(eyeX, eyeY, eyeZ, centerX, centerY, 0.0f, up[0], up[1], up[2], projNum);
+
+	
+
+	//old way of calculating in one step (reduced equations, but no z twist)
+    //float x = (-vecX*vecZ);
+    //float y = -(vecY*vecZ);
+    //float z = (vecY*vecY)-(-vecX*vecX);
+
+	
+	projData[projNum].eyeX = eyeX;
+	projData[projNum].eyeY = eyeY;
+	projData[projNum].eyeZ = eyeZ;
+	projData[projNum].centerX = centerX;
+	projData[projNum].centerY = centerY;
+	projData[projNum].centerZ = 0.0f;
+	projData[projNum].upX = up[0];
+	projData[projNum].upY = up[1];
+	projData[projNum].upZ = up[2];
+	projData[projNum].camTwist = camTwist;
+
+	return Mat();
+}
+
+void sendString(float eyeX, float eyeY, float eyeZ, float centerX, float centerY, float centerZ, float upX, float upY, float upZ, int projNum){
+	stringstream ss (stringstream::in | stringstream::out);
+		
+	ss << eyeX;
+
+	std::string s = ss.str();
+
+	s.append(",");
+
+	ss.str("");
+	ss.clear();
+	
+	ss << eyeY;
+
+	s.append(ss.str());
+
+	s.append(",");
+
+	ss.str("");
+	ss.clear();
+
+	ss << eyeZ;
+
+	s.append(ss.str());
+
+	s.append(",");
+
+	ss.str("");
+	ss.clear();
+
+	ss << centerX;
+
+	s.append(ss.str());
+	s.append(",");
+
+	ss.str("");
+	ss.clear();
+
+	ss << centerY;
+
+	s.append(ss.str());
+
+	s.append(",");
+
+	ss.str("");
+	ss.clear();
+
+	ss << centerZ;
+
+	s.append(ss.str());
+
+	s.append(",");
+
+	ss.str("");
+	ss.clear();
+
+	ss << upX;
+
+	s.append(ss.str());
+
+	s.append(",");
+
+	ss.str("");
+	ss.clear();
+
+	ss << upY;
+
+	s.append(ss.str());
+
+	s.append(",");
+
+		ss.str("");
+	ss.clear();
+
+	ss << upZ;
+
+	s.append(ss.str());
+
+	s.append(",");
+
+	char *cstr = new char[s.length() + 1];
+	strcpy(cstr, s.c_str());
+
+	sn->sendToAll(cstr,s.length(),projNum);
+	sn->receiveData(projNum,recvbuf);
+}
+
+void upFromTwist(float centerX, float centerY, float eyeX, float eyeY, float eyeZ, float camTwist, float* up){
 	/*
 	* this part of the code calculates the "up" vector for the opengl camera position
 	* first we find the vector from the camera to the focal point in the table plane
@@ -819,8 +979,8 @@ Mat bgFrame, bgThresh, bgForeground;
 	* perpendicular to them both - that is the "up" vector we need
 	*/
 
-	float vecX = camCenterX - eyeX;
-	float vecY = camCenterY - eyeY;
+	float vecX = centerX - eyeX;
+	float vecY = centerY - eyeY;
 	float vecZ = 0.0 - eyeZ;
 
 	// normalized look at vector
@@ -892,98 +1052,15 @@ Mat bgFrame, bgThresh, bgForeground;
 	upY = newVecY;
 	upZ = newVecZ;
 
-	//old way of calculating in one step (reduced equations, but no z twist)
-    //float x = (-vecX*vecZ);
-    //float y = -(vecY*vecZ);
-    //float z = (vecY*vecY)-(-vecX*vecX);
+	up[0] = upX;
+	up[1] = upY;
+	up[2] = upZ;
+}
 
-	stringstream ss (stringstream::in | stringstream::out);
-		
-	ss << eyeX;
 
-	std::string s = ss.str();
-
-	s.append(",");
-
-	ss.str("");
-	ss.clear();
-	
-	ss << eyeY;
-
-	s.append(ss.str());
-
-	s.append(",");
-
-	ss.str("");
-	ss.clear();
-
-	ss << eyeZ;
-
-	s.append(ss.str());
-
-	s.append(",");
-
-	ss.str("");
-	ss.clear();
-
-	ss << camCenterX;
-
-	s.append(ss.str());
-	s.append(",");
-
-	ss.str("");
-	ss.clear();
-
-	ss << camCenterY;
-
-	s.append(ss.str());
-
-	s.append(",");
-
-	ss.str("");
-	ss.clear();
-
-	twist = 0;
-	ss << twist;
-
-	s.append(ss.str());
-
-	s.append(",");
-
-	ss.str("");
-	ss.clear();
-
-	ss << upX;
-
-	s.append(ss.str());
-
-	s.append(",");
-
-	ss.str("");
-	ss.clear();
-
-	ss << upY;
-
-	s.append(ss.str());
-
-	s.append(",");
-
-		ss.str("");
-	ss.clear();
-
-	ss << upZ;
-
-	s.append(ss.str());
-
-	s.append(",");
-
-	char *cstr = new char[s.length() + 1];
-	strcpy(cstr, s.c_str());
-
-	sn->sendToAll(cstr,s.length(),0);
-	sn->receiveData(0,recvbuf);
-
-	sn->sendToAll("3",5,0);
+	//Everything from here to the end of the file was very important at one point, hesitant to delete it
+	/*
+	sn->sendToAll("3",5,projNum);
 
 	findContours( bCan, contour, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE, Point(0, 0) );
 
@@ -1347,4 +1424,4 @@ tProj.renderInitPattern2(distanceFromTable, incidentAngle, rot, centerX, centerY
 
 	return Mat();
 
-}
+} */

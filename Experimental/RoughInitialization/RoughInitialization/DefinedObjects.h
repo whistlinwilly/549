@@ -1,6 +1,6 @@
 #include <opencv\cv.h>
 
-#define NUM_PROJECTORS (1)
+#define NUM_PROJECTORS (2)
 
 //Table X and Y length on image plane
 #define TABLE_X (480)
@@ -37,4 +37,13 @@ typedef struct{
 	cv::Mat perspectiveWarp;
 
 }cameraPerspective;
+#endif
+
+#ifndef PRODAT
+typedef struct{
+	float eyeX, eyeY, eyeZ;
+	float centerX, centerY, centerZ;
+	float upX, upY, upZ;
+	float camTwist;
+}proDat;
 #endif

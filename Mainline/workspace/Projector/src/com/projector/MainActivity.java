@@ -30,10 +30,11 @@ public class MainActivity extends Activity {
 		//Toast.makeText(this, "USE TEXT TO FOCUS PROJECTOR", Toast.LENGTH_LONG).show();
 		try {
 			//starts the networking thread
-			netClient = new NetClient("10.0.1.2", 6881);
+			netClient = new NetClient("10.0.1.4", 6881);
 			netClient.execute(this);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+			Toast.makeText(this, "NETWORKING BROKE IT", Toast.LENGTH_LONG).show();
 		}
 	}
 	

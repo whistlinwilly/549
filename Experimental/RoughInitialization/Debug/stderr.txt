@@ -1,1 +1,0 @@
-OpenCV Error: Assertion failed (src.cols > 0 && src.rows > 0) in unknown function, file ..\..\..\src\opencv\modules\imgproc\src\imgwarp.cpp, line 3272

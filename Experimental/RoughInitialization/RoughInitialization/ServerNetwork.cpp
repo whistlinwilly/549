@@ -35,7 +35,7 @@ ServerNetwork::ServerNetwork()
     }
 
 	// Get IP Address of website by the domain name, we do this by contacting(??) the Domain Name Server
-    if ((hostent = gethostbyname("10.0.1.2")) == NULL)  // "localhost"  www.google.com
+    if ((hostent = gethostbyname("10.0.1.4")) == NULL)  // "localhost"  www.google.com
     {
       //  printf("Failed to resolve website name to an ip address\n");
         WSACleanup();
