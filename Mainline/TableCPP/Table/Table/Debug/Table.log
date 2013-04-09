@@ -1,0 +1,80 @@
+﻿Build started 4/6/2013 7:38:17 PM.
+     1>Project "C:\Users\549\github\549\Mainline\TableCPP\Table\Table\Table.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "Debug\Table.unsuccessfulbuild".
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\glew-1.9.0\include\GL" /IC:\opencv\build\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\Table.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\glew-1.9.0\include\GL" /IC:\opencv\build\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Table.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Camera.cpp ImageManip.cpp Initialization.cpp Mapper.cpp NetworkServices.cpp ServerNetwork.cpp Table.cpp Tracker.cpp
+         Tracker.cpp
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\tracker.cpp(3): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Table.cpp
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(4): warning C4627: '#include "Initialization.h"': skipped when looking for precompiled header use
+                 Add directive to 'StdAfx.h' or rebuild precompiled header
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(10): error C2065: 'Initialization' : undeclared identifier
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(10): error C2065: 'tableInit' : undeclared identifier
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(10): error C2061: syntax error : identifier 'Initialization'
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(11): error C2065: 'tableInit' : undeclared identifier
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(11): error C2227: left of '->init' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(12): error C2065: 'tableInit' : undeclared identifier
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(12): error C2227: left of '->connectToProjectors' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(13): error C2065: 'tableInit' : undeclared identifier
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(13): error C2227: left of '->camRotation' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(14): error C2065: 'tableInit' : undeclared identifier
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(14): error C2227: left of '->bgSubtraction' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(15): error C2065: 'tableInit' : undeclared identifier
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(15): error C2227: left of '->readInit1' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(16): error C2065: 'tableInit' : undeclared identifier
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(16): error C2227: left of '->bgSubtraction' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(17): error C2065: 'tableInit' : undeclared identifier
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(17): error C2227: left of '->readInit2' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(18): error C2065: 'tableInit' : undeclared identifier
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\table.cpp(18): error C2227: left of '->computeAndSendPerspectives' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+         ServerNetwork.cpp
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\servernetwork.cpp(1): warning C4627: '#include "ServerNetwork.h"': skipped when looking for precompiled header use
+                 Add directive to 'StdAfx.h' or rebuild precompiled header
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\servernetwork.cpp(155): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         NetworkServices.cpp
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\networkservices.cpp(1): warning C4627: '#include "NetworkServices.h"': skipped when looking for precompiled header use
+                 Add directive to 'StdAfx.h' or rebuild precompiled header
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\networkservices.cpp(13): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Mapper.cpp
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\mapper.cpp(1): warning C4627: '#include "Mapper.h"': skipped when looking for precompiled header use
+                 Add directive to 'StdAfx.h' or rebuild precompiled header
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\mapper.cpp(2): warning C4627: '#include "DefinedObjects.h"': skipped when looking for precompiled header use
+                 Add directive to 'StdAfx.h' or rebuild precompiled header
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\mapper.cpp(24): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Initialization.cpp
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\initialization.cpp(1): warning C4627: '#include "Initialization.h"': skipped when looking for precompiled header use
+                 Add directive to 'StdAfx.h' or rebuild precompiled header
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\initialization.cpp(2): warning C4627: '#include "ImageManip.h"': skipped when looking for precompiled header use
+                 Add directive to 'StdAfx.h' or rebuild precompiled header
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\initialization.cpp(3): warning C4627: '#include "ServerNetwork.h"': skipped when looking for precompiled header use
+                 Add directive to 'StdAfx.h' or rebuild precompiled header
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\initialization.cpp(4): warning C4627: '#include "Mapper.h"': skipped when looking for precompiled header use
+                 Add directive to 'StdAfx.h' or rebuild precompiled header
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\initialization.cpp(5): warning C4627: '#include "Camera.h"': skipped when looking for precompiled header use
+                 Add directive to 'StdAfx.h' or rebuild precompiled header
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\initialization.cpp(126): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ImageManip.cpp
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\imagemanip.cpp(1): warning C4627: '#include "ImageManip.h"': skipped when looking for precompiled header use
+                 Add directive to 'StdAfx.h' or rebuild precompiled header
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\imagemanip.cpp(129): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Camera.cpp
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\camera.cpp(1): warning C4627: '#include "Camera.h"': skipped when looking for precompiled header use
+                 Add directive to 'StdAfx.h' or rebuild precompiled header
+     1>c:\users\549\github\549\mainline\tablecpp\table\table\camera.cpp(756): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Generating Code...
+     1>Done Building Project "C:\Users\549\github\549\Mainline\TableCPP\Table\Table\Table.vcxproj" (build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.85

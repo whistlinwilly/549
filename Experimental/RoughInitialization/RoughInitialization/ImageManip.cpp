@@ -1,4 +1,4 @@
-#include "ImageManip.h"
+#include "stdafx.h"
 
 using namespace cv;
 

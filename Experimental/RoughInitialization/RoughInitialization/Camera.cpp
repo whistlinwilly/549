@@ -1,4 +1,4 @@
-#include "Camera.h"
+#include "stdafx.h"
 #include <opencv\cv.h>
 #include <opencv\highgui.h>
 
@@ -365,7 +365,7 @@ Point2f Camera::findPoint(Mat bg, cameraPerspective cp){
 
 int Camera::initFastCam(){
 	try{
-		fastCam.open(0);
+		fastCam.open(1);
 	}
 	catch(Exception e){
 		exit(0);

@@ -30,11 +30,13 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 	   
 	   private static final int LOAD_MODELS = 0;
 	   private static final int PATTERN1 = 1;
-	   private static final int CONFIRM_PATTERN = 2;
+	   private static final int PATTERN2 = 2;
+	   private static final int CONFIRM_PATTERN = 3;
 	   
 	   private final GLCircle bigCircle = new GLCircle(0,0,2,100);
 	   private final GLCircle smallCircle = new GLCircle(0,3,0.5f,100);
-	   
+	   private final GLCircle smallBigCircle = new GLCircle(0,0,0.2f,100);
+	   private final GLCircle smallSmallCircle = new GLCircle(0,3,0.2f,100);
 	   //North / West
 	   private final GLCircle circ00 = new GLCircle(0,0,0.5f,100);
 	   private final GLCircle circn20 = new GLCircle(-2,0,0.5f,100);
@@ -203,7 +205,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 		   gl.glMatrixMode(GL10.GL_PROJECTION);
 		   gl.glLoadIdentity();
 		   float ratio = (float) width / height;
-		   if(stage == LOAD_MODELS || stage == PATTERN1){
+		   if(stage == LOAD_MODELS || stage == PATTERN1 || stage == PATTERN2){
 			  // GLU.gluOrtho2D(gl, 0, width, 0, height);
 			   //used to be 17.5
 			   GLU.gluPerspective(gl, 17.0f, ratio, 0.1f, 1000f); 
@@ -216,8 +218,12 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 			      gl.glMatrixMode(GL10.GL_MODELVIEW);
 			      gl.glLoadIdentity();
 			      if(stage == PATTERN1){
+			    	  smallBigCircle.draw(gl);
+			    	  smallSmallCircle.draw(gl);
+			      }
+			      else if (stage == PATTERN2){
 			    	  bigCircle.draw(gl);
-			    	  smallCircle.draw(gl);
+					  smallCircle.draw(gl);
 			      }
 		   }
 		   else{

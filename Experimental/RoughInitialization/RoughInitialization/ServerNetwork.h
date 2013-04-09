@@ -40,5 +40,8 @@ public:
 
 	// receive incoming data
     int receiveData(unsigned int client_id, char * recvbuf);
+
+	//parse received data
+	void parseReceived(char *string);
 };
 

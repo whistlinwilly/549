@@ -16,8 +16,7 @@ public class MainActivity extends Activity {
 	public static final int INIT = 0;
     public static final int INITCOORDS = 1;
     public static final int OBJECT = 2;
-    public static final int STOP = 3;
-    public static final int PAUSE = 4;
+    public static final int STOP = 4;
 	public volatile GLView mGLView;
 	private NetClient netClient;
 	private static final String TAG = "NetClient";
@@ -34,7 +33,7 @@ public class MainActivity extends Activity {
 		//Toast.makeText(this, "USE TEXT TO FOCUS PROJECTOR", Toast.LENGTH_LONG).show();
 		try {
 			//starts the networking thread
-			netClient = new NetClient("10.0.1.2", 6881);
+			netClient = new NetClient("10.0.1.187", 6881);
 			netClient.execute(this);
 		} catch (InterruptedException e) {
 			e.printStackTrace();

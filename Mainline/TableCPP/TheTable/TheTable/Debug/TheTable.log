@@ -1,0 +1,27 @@
+﻿Build started 4/9/2013 3:30:48 AM.
+     1>Project "C:\Users\549\github\549\Mainline\TableCPP\TheTable\TheTable\TheTable.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\TheTable.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         All outputs are up-to-date.
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\549\github\549\Mainline\TableCPP\TheTable\Debug\TheTable.exe" /NOLOGO /LIBPATH:C:\opencv\build\x86\vc10\lib /LIBPATH:"C:\Users\549\Documents\SDL-devel-1.2.15-VC\SDL-1.2.15\lib\x86" /LIBPATH:"C:\glew-1.9.0\lib" opencv_core243d.lib opencv_imgproc243d.lib opencv_highgui243d.lib opencv_ml243d.lib opencv_video243d.lib opencv_features2d243d.lib opencv_calib3d243d.lib opencv_nonfree243d.lib SDL.lib SDLmain.lib opengl32.lib glu32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\TheTable.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\549\github\549\Mainline\TableCPP\TheTable\Debug\TheTable.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\549\github\549\Mainline\TableCPP\TheTable\Debug\TheTable.lib" /MACHINE:X86 Debug\Camera.obj
+         Debug\ImageManip.obj
+         Debug\Initialization.obj
+         Debug\Mapper.obj
+         Debug\NetworkServices.obj
+         Debug\ServerNetwork.obj
+         Debug\Table.obj
+         Debug\Tracker.obj
+         LINK : C:\Users\549\github\549\Mainline\TableCPP\TheTable\Debug\TheTable.exe not found or not built by the last incremental link; performing full link
+         TheTable.vcxproj -> C:\Users\549\github\549\Mainline\TableCPP\TheTable\Debug\TheTable.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\549\github\549\Mainline\TableCPP\TheTable\Debug\TheTable.exe;#1" /manifest Debug\TheTable.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Debug\TheTable.unsuccessfulbuild".
+         Touching "Debug\TheTable.lastbuildstate".
+     1>Done Building Project "C:\Users\549\github\549\Mainline\TableCPP\TheTable\TheTable\TheTable.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.33
