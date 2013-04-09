@@ -1,8 +1,0 @@
-package org.example.opengl;
-
-public class Animation {
-	float[] xLocIn;
-	float[] xLocOut;
-	float[] xLocIntan;
-	float[] xLocOuttan;
-}
