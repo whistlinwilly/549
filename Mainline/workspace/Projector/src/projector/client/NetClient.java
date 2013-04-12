@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import com.projector.MainActivity;
 
@@ -22,14 +23,9 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
     /**
      * Maximum size of buffer
      */
-	private static final int MAX_REC_BUF = 20;
-    public static final int BUFFER_SIZE = 16;
+    public static final int BUFFER_SIZE = 100;
     
     private static final String TAG = "NetClient";
-	private static final int LOAD_MODELS = 0;
-	private static final int PATTERN1 = 1;
-	private static final int PATTERN2 = 2;
-	private static final int CONFIRM_PATTERN = 3;
 	   
     
     public volatile Socket socket = null;
@@ -38,17 +34,16 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
     
     public boolean connected;
     public byte[] inBuffer= new byte[128];
-    public String inString = null;
+    public volatile String inString = null;
     public String outString;
     public byte[] outBuffer = new byte[1];
     
     public volatile boolean isListening;
-    private boolean isCommand;
+    public volatile boolean messageReady;
     private boolean waitingToReceive = true;
     
     private float[] receiveVals = new float[10];
     private String[] receiveValsString;
-	private int stage = -1;
 	
     /**
      * Constructor with Host, Port and MAC Address
@@ -62,73 +57,46 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
         this.port = port;
         connected = false;
         isListening = false;
-        isCommand = true;
         
     }
 
-    public void connectWithServer(MainActivity activity) throws InterruptedException {
-    	try {
-    		activity.mGLView.renderer.setStage(0);
-            InetAddress serverAddr = InetAddress.getByName(this.host);
-            Log.d(TAG, "C: Connecting...");
+    public void connectWithServer(MainActivity activity) throws InterruptedException, IOException {
+    		try {	
+    			InetAddress serverAddr = InetAddress.getByName(this.host);
             
-            //connect to server (table) socket
-            Log.i(TAG, "ALL DA CONNECTINGGGGGGG");
-            socket = new Socket(serverAddr, this.port);
-            socket.setTcpNoDelay(true);
-            Log.i(TAG,  "PAST DA CONNECTINGGGGGGG");
-            if(socket != null){
-            	connected = true;
-            	Log.i(TAG, "Socket Created");
-            }
-            
-
-        } catch (Exception e) {
-        	try {
+	            //connect to server (table) socket
+	            socket = new Socket(serverAddr, this.port);
+	            socket.setTcpNoDelay(true);
+	            
+	            
+	            if(socket != null){
+	            	connected = true;
+	            	Log.i(TAG, "Socket Created");
+	            }
+	            
+	            //remove when making network sweep
+	            else System.exit(0);
+	
+	        } catch (Exception e) {
+	        	//couldn't connect, so retry
 				socket.close();
 				connected = false;
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-        }
+	        }
  
     }
 
     
-    public void parseCommand(String inString, MainActivity activity){
+    public void parseReceived(String inString, MainActivity activity){
     	int command;
     	String commandString = new String(inString.substring(0, 1));
     	command = Integer.parseInt(commandString);
-    	Log.i(TAG, "RECEIVED A COMMAND FROM SERVER: " + commandString);
     	
-    	//switch on the received command
-    	switch (command){
-    	
-    	//initialization command
-    	case LOAD_MODELS:
-    		activity.mGLView.renderer.setStage(0);
-    		waitingToReceive = false;
-    		break;
-    		
-    	//initialization coordinates
-    	case PATTERN1:
-    		activity.mGLView.renderer.setStage(1);
-    		waitingToReceive = false;
-    		break;
-    		
-    	case PATTERN2:
-    		activity.mGLView.renderer.setStage(2);
-    		waitingToReceive = false;
-    		break;
-    	//object description of what is in SDCard
-    	case CONFIRM_PATTERN:
-    		activity.mGLView.renderer.setStage(3);
-    		waitingToReceive = false;
-    		break;
+    	if (command != MainActivity.STOP){
+    		activity.stage = command;
+    	}
     		
     	//stop this projector (should exit thread and close socket)
-    	case MainActivity.STOP:
+    	else { 
     		if (connected) {
     			Log.i(TAG, "Socket is closing...");
     			try {
@@ -142,13 +110,8 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
     		else {
     			Log.e(TAG, "Socket was already closed!");
     		}
-    		break;
+    	}
     		
-    	//command not found	
-    	default:
-    		Log.e(TAG, "Command not recognized!");
-    		break;
-    	}	
     }
 
     public void parseData(String inString, MainActivity activity){
@@ -160,25 +123,19 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
 		}
 		activity.mGLView.renderer.setValues(receiveVals);
 		waitingToReceive = false;
-		isCommand = true;
     }
     
     public void receiveMessageFromServer(MainActivity activity){
     	try {
 			if(socket.getInputStream().read(inBuffer) != 0){
-				inString = new String(inBuffer, 0, inBuffer.length);
-				Log.i(TAG, "Buffer: " + inBuffer);
-				Log.i(TAG, "String: " + inString);
-				Log.i(TAG, "isCommand: " + isCommand);
 				
-				if (isCommand) {
-					Log.i(TAG, "Parsing Command...");
-					parseCommand(inString, activity);
-				}
-				else {
-					Log.i(TAG, "Parsing Data...");
-					parseData(inString, activity);
-				}
+				//set waiting to receive to false
+				waitingToReceive = false;
+				
+				//get the received string and tell the main thread its ready
+				inString = new String(inBuffer, 0, inBuffer.length);
+				parseReceived(inString, activity);
+				
 			}
 			else {
 				Log.i(TAG, "Waiting on message...");
@@ -224,29 +181,10 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
 				
 		    	//while connected to server
 				isListening = true;
-				stage = LOAD_MODELS;
 		        while (isListening) {
 		        	if (socket.isConnected()){
 		        		if(!waitingToReceive){
-		        			if(stage == LOAD_MODELS){
-		        				params[0].mGLView.renderer.loadAllModels();
-		        				stage = PATTERN1;
-		        				sendMessageToServer("CONFIRM");
-		        			}
-		        			else if(stage == PATTERN1){
-		        				stage = PATTERN2;
-		        				sendMessageToServer("CONFIRM");
-		        			}
-		        			else if (stage == PATTERN2){
-		        				stage = CONFIRM_PATTERN;
-		        				isCommand = false;
-		        				sendMessageToServer("CONFIRM");
-		        			}
-		        			else if(stage == CONFIRM_PATTERN){
-		        				sendMessageToServer("CONFIRM");
-		        			}
-
-	        				
+		        			sendMessageToServer("CONFIRM");
 		        			waitingToReceive = true;
 		        		}
 		        		else
@@ -258,6 +196,9 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return params[0];
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		return params[0];
 	}

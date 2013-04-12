@@ -13,8 +13,7 @@
 
 
 Mapper::Mapper(){
-	cDatSmall = new circleData();
-	cDatBig = new circleData();
+	cDat = new circleData();
 
 }
 float Mapper::xToInches(float pixels){
@@ -41,26 +40,50 @@ float Mapper::toDegrees(float radians){
 	return ((radians/(2*M_PI))*360.0);
 }
 
-void Mapper::computeProjectorData(){
+void Mapper::loadProjectorData(int projNum){
 	float deltX;
 	float deltY;
 	float distFromCenter;
 	float eyeDeltaX;
 	float eyeDeltaY;
+	float distanceFromTable;
+	float incidentAngle;
+	float twist;
+	float rotation;
+	float eyeX, eyeY, eyeZ;
+	float centerX, centerY, centerZ;
+	float up[3];
+	float rotationAdd;
 
-	if (cDatBig->c1w > cDatBig->c2w){
-		isFirst = 1;
-		if (cDatBig->c1x > cDatBig->c2x){
+
+			//billys crap
+	float correctionValue = 1.0f;
+	float correctedCenter[2];
+	float correctionVector[2];
+	float correctionRatio;
+	float modRot;
+	rotationAdd = 0;
+
+	if (cDat->c1w > cDat->c2w){
+		if (cDat->c1x > cDat->c2x){
 				rotationAdd = 180.00;
 		}
-		centerX = cDatBig->c1x;
-		centerY = cDatBig->c1y;
+		centerX = cDat->c1x;
+		centerY = cDat->c1y;
 		centerZ = 0;
-		distanceFromTable = ((cDatBig->c1w) / 4.0 / TABLE_X * TABLE_WIDTH) * DEFAULT_DISTANCE;
+
+
+
+
+		distanceFromTable = xToInches((cDat->c1w) / 2.5) * DEFAULT_DISTANCE;
 		//subtract from 360 and subtract 90 to make rotation starting from +x
-		rotation = 360.0 - (cDatBig->c1r + 90) + rotationAdd;
+		rotation = 360.0 - (cDat->c1r + 90) + rotationAdd;
 		if (rotation > 360.0) rotation -= 360.0;
-		incidentAngle = 360.0*(asin(cDatBig->c1w/cDatBig->c1h)/(2*M_PI));
+		incidentAngle = 360.0*(asin(cDat->c1w/cDat->c1h)/(2*M_PI));
+
+		modRot = (rotation + 180.00);
+		if (modRot > 360.0) modRot -= 360.0;
+
 		eyeX = (centerX - (TABLE_X / 2.0)) / TABLE_X * TABLE_WIDTH;
 		eyeY = ((TABLE_Y / 2.0) - centerY) / TABLE_Y * TABLE_HEIGHT;
 		eyeZ = distanceFromTable*(sin(toRads(incidentAngle)));
@@ -71,34 +94,47 @@ void Mapper::computeProjectorData(){
 		eyeDeltaY = distFromCenter * deltY;
 		centerX = eyeX;
 		centerY = eyeY;
+
+		//focal shift correction
+		correctionVector[0] = cos(toRads(modRot));
+		correctionVector[1] = sin(toRads(modRot));
+		correctionRatio = 1.0 - sin(toRads(incidentAngle));
+		correctedCenter[0] = centerX - correctionVector[0] * correctionValue * correctionRatio;
+		correctedCenter[1] = centerY - correctionVector[1] * correctionValue * correctionRatio;
+		centerX = correctedCenter[0];
+		centerY = correctedCenter[1];
+
 		eyeX = eyeX + eyeDeltaX;
 		eyeY = eyeY + eyeDeltaY;
 
-		if (cDatBig->c1y > cDatBig->c2y){
-			twist = 90 - toDegrees(atan((cDatBig->c2x - cDatBig->c1x)/(cDatBig->c1y - cDatBig->c2y)));
-			//twist = toDegrees(-atan((cDatBig->c2y - cDatBig->c1y)/(cDatBig->c2x - cDatBig->c1x)) - toRads(rotation));
+		if (cDat->c1y > cDat->c2y){
+			twist = 90 - toDegrees(atan((cDat->c2x - cDat->c1x)/(cDat->c1y - cDat->c2y)));
+	
 		}
 		else {
-			twist = 270 - toDegrees(atan((cDatBig->c2x - cDatBig->c1x)/(cDatBig->c1y - cDatBig->c2y)));
+			twist = 270 - toDegrees(atan((cDat->c2x - cDat->c1x)/(cDat->c1y - cDat->c2y)));
 		}
 		twist -= 180.00;
 		twist -= rotation;
-		//twist = toDegrees(-atan((cDatBig->c1y - cDatBig->c2y)/(cDatBig->c1x - cDatBig->c2x)) - toRads(rotation));
+	
 		
 	}
 	else {
-		isFirst = 0;
-		if (cDatBig->c2x > cDatBig->c1x){
+		if (cDat->c2x > cDat->c1x){
 				rotationAdd = 180.00;
 		}
-		centerX = cDatBig->c2x;
-		centerY = cDatBig->c2y;
+		centerX = cDat->c2x;
+		centerY = cDat->c2y;
 		centerZ = 0;
-		distanceFromTable = ((cDatBig->c2w) / 4.0 / TABLE_X * TABLE_WIDTH) * DEFAULT_DISTANCE;
+		distanceFromTable = xToInches((cDat->c2w) / 2.5) * DEFAULT_DISTANCE;
 		//subtract from 360 and subtract 90 to make rotation starting from +x
-		rotation = 360.0 - (cDatBig->c2r + 90.0) + rotationAdd;
+		rotation = 360.0 - (cDat->c2r + 90.0) + rotationAdd;
 		if (rotation > 360.0) rotation -= 360.0;
-		incidentAngle = 360*(asin(cDatBig->c2w/cDatBig->c2h)/(2*M_PI));
+
+		modRot = rotation + 180.00;
+		if (modRot > 360.0) modRot -= 360.0;
+
+		incidentAngle = 360*(asin(cDat->c2w/cDat->c2h)/(2*M_PI));
 		eyeX = (centerX - (TABLE_X / 2.0)) / TABLE_X * TABLE_WIDTH;
 		eyeY = ((TABLE_Y / 2.0) - centerY) / TABLE_Y * TABLE_HEIGHT;
 		eyeZ = distanceFromTable*(sin(toRads(incidentAngle)));
@@ -109,46 +145,48 @@ void Mapper::computeProjectorData(){
 		eyeDeltaY = distFromCenter * deltY;
 		centerX = eyeX;
 		centerY = eyeY;
+
+		//focal shift correction
+		correctionVector[0] = cos(toRads(modRot));
+		correctionVector[1] = sin(toRads(modRot));
+		correctionRatio = 1.0 - sin(toRads(incidentAngle));
+		correctedCenter[0] = centerX - correctionVector[0] * correctionValue * correctionRatio;
+		correctedCenter[1] = centerY - correctionVector[1] * correctionValue * correctionRatio;
+		centerX = correctedCenter[0];
+		centerY = correctedCenter[1];
+
 		eyeX = eyeX + eyeDeltaX;
 		eyeY = eyeY + eyeDeltaY;
 
-		if (cDatBig->c2y > cDatBig->c1y){
-			twist = 90 - toDegrees(atan((cDatBig->c1x - cDatBig->c2x)/(cDatBig->c2y - cDatBig->c1y)));
-			//twist = toDegrees(-atan((cDatBig->c2y - cDatBig->c1y)/(cDatBig->c2x - cDatBig->c1x)) - toRads(rotation));
+		if (cDat->c2y > cDat->c1y){
+			twist = 90 - toDegrees(atan((cDat->c1x - cDat->c2x)/(cDat->c2y - cDat->c1y)));
+	
 		}
 		else {
-			twist = 270 - toDegrees(atan((cDatBig->c1x - cDatBig->c2x)/(cDatBig->c2y - cDatBig->c1y)));
+			twist = 270 - toDegrees(atan((cDat->c1x - cDat->c2x)/(cDat->c2y - cDat->c1y)));
 		}
 		twist -= 180.00;
 		twist -= rotation;
 	}
 
-	//make rotation full 360 capable
-		/*if (cDatBig->c1w > cDatBig->c2w){
-			if (cDatBig->c1x > cDatBig->c2x){
-				rotation += 180.00;
-			}
-			else twist += 180.00;
-		}
-		else {
-			if (cDatBig->c2x > cDatBig->c1x){
-				rotation += 180.00;
-			}
-			else twist += 180.00;
-		}*/
+	upFromTwist(centerX, centerY, eyeX, eyeY, eyeZ, twist, up);
+
+	//load up proDat
+	proDat[projNum].centerX = centerX;
+	proDat[projNum].centerY = centerY;
+	proDat[projNum].centerZ = centerZ;
+	proDat[projNum].eyeX = eyeX;
+	proDat[projNum].eyeY = eyeY;
+	proDat[projNum].eyeZ = eyeZ;
+	proDat[projNum].upX = up[0];
+	proDat[projNum].upY = up[1];
+	proDat[projNum].upZ = up[2];
+
 
 }
 
-void Mapper::computeUpVector(){
 
-	//calculate up vector including twist
-	upFromTwist();
-
-	//build coordinate string to send
-	buildString();
-}
-
-void Mapper::upFromTwist(){
+void Mapper::upFromTwist(float centerX, float centerY, float eyeX, float eyeY, float eyeZ, float twist, float *up){
 	/*
 	* this part of the code calculates the "up" vector for the opengl camera position
 	* first we find the vector from the camera to the focal point in the table plane
@@ -158,6 +196,7 @@ void Mapper::upFromTwist(){
 	* perpendicular to them both - that is the "up" vector we need
 	*/
 
+	float upX, upY, upZ;
 	float vecX = centerX - eyeX;
 	float vecY = centerY - eyeY;
 	float vecZ = 0.0 - eyeZ;
@@ -227,16 +266,18 @@ void Mapper::upFromTwist(){
 	newVecY = upY / sqrt(pow(upX, 2) + pow(upY, 2) + pow(upZ, 2));
 	newVecZ = upZ / sqrt(pow(upX, 2) + pow(upY, 2) + pow(upZ, 2));
 
-	upX = newVecX;
-	upY = newVecY;
-	upZ = newVecZ;
+	up[0] = upX;
+	up[1] = upY;
+	up[2] = upZ;
 
 }
 
-void Mapper::buildString(){
+char* Mapper::buildString(int projNum){
 	stringstream ss (stringstream::in | stringstream::out);
-
-	ss << eyeX;
+	std::string s;
+	char *coordString;
+	
+	ss << "2";
 
 	s = ss.str();
 
@@ -245,7 +286,7 @@ void Mapper::buildString(){
 	ss.str("");
 	ss.clear();
 
-	ss << eyeY;
+	ss << proDat[projNum].eyeX;
 
 	s.append(ss.str());
 
@@ -254,7 +295,7 @@ void Mapper::buildString(){
 	ss.str("");
 	ss.clear();
 
-	ss << eyeZ;
+	ss << proDat[projNum].eyeY;
 
 	s.append(ss.str());
 
@@ -263,15 +304,7 @@ void Mapper::buildString(){
 	ss.str("");
 	ss.clear();
 
-	ss << centerX;
-
-	s.append(ss.str());
-	s.append(",");
-
-	ss.str("");
-	ss.clear();
-
-	ss << centerY;
+	ss << proDat[projNum].eyeZ;
 
 	s.append(ss.str());
 
@@ -280,7 +313,15 @@ void Mapper::buildString(){
 	ss.str("");
 	ss.clear();
 
-	ss << centerZ;
+	ss << proDat[projNum].centerX;
+
+	s.append(ss.str());
+	s.append(",");
+
+	ss.str("");
+	ss.clear();
+
+	ss << proDat[projNum].centerY;
 
 	s.append(ss.str());
 
@@ -289,7 +330,7 @@ void Mapper::buildString(){
 	ss.str("");
 	ss.clear();
 
-	ss << upX;
+	ss << proDat[projNum].centerZ;
 
 	s.append(ss.str());
 
@@ -298,7 +339,7 @@ void Mapper::buildString(){
 	ss.str("");
 	ss.clear();
 
-	ss << upY;
+	ss << proDat[projNum].upX;
 
 	s.append(ss.str());
 
@@ -307,7 +348,16 @@ void Mapper::buildString(){
 	ss.str("");
 	ss.clear();
 
-	ss << upZ;
+	ss << proDat[projNum].upY;
+
+	s.append(ss.str());
+
+	s.append(",");
+
+	ss.str("");
+	ss.clear();
+
+	ss << proDat[projNum].upZ;
 
 	s.append(ss.str());
 
@@ -315,11 +365,6 @@ void Mapper::buildString(){
 
 	coordString = new char[s.length() + 1];
 	strcpy(coordString, s.c_str());
-}
 
-void Mapper::clearGlobals(){
-	cDatBig = NULL;
-	cDatSmall = NULL;
-	s.clear();
-	coordString = NULL;
+	return coordString;
 }

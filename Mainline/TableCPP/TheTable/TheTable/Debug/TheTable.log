@@ -1,13 +1,86 @@
-﻿Build started 4/9/2013 3:30:48 AM.
+﻿Build started 4/12/2013 3:23:55 AM.
      1>Project "C:\Users\549\github\549\Mainline\TableCPP\TheTable\TheTable\TheTable.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\TheTable.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         All outputs are up-to-date.
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\opencv\build\include /I"C:\glew-1.9.0\include\GL" /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Camera.cpp ImageManip.cpp Initialization.cpp Mapper.cpp Table.cpp main.cpp
+         Camera.cpp
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(111): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(111): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(112): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(112): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(121): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(121): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(122): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(122): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(143): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(147): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(270): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(270): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(271): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(271): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(311): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(322): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(516): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(516): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(516): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(516): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(533): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(541): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(601): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(624): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(659): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(682): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+         Generating Code...
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(182): warning C4715: 'Camera::init' : not all control paths return a value
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\camera.cpp(373): warning C4715: 'Camera::initFastCam' : not all control paths return a value
+         Compiling...
+         main.cpp
+         Table.cpp
+         Mapper.cpp
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(20): warning C4244: 'return' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(24): warning C4244: 'return' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(28): warning C4244: 'return' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(32): warning C4244: 'return' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(36): warning C4244: 'return' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(40): warning C4244: 'return' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(78): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(78): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(80): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(82): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(84): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(87): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(88): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(101): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(129): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(129): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(131): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(134): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(137): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(138): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(139): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(152): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\mapper.cpp(202): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+         Initialization.cpp
+         ImageManip.cpp
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\imagemanip.cpp(17): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\imagemanip.cpp(19): warning C4018: '>' : signed/unsigned mismatch
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\imagemanip.cpp(59): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\imagemanip.cpp(61): warning C4018: '>' : signed/unsigned mismatch
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\imagemanip.cpp(71): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\imagemanip.cpp(71): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\imagemanip.cpp(71): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\imagemanip.cpp(87): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\imagemanip.cpp(87): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\imagemanip.cpp(87): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\imagemanip.cpp(105): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\549\github\549\mainline\tablecpp\thetable\thetable\imagemanip.cpp(116): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+         Generating Code...
        Link:
          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\549\github\549\Mainline\TableCPP\TheTable\Debug\TheTable.exe" /NOLOGO /LIBPATH:C:\opencv\build\x86\vc10\lib /LIBPATH:"C:\Users\549\Documents\SDL-devel-1.2.15-VC\SDL-1.2.15\lib\x86" /LIBPATH:"C:\glew-1.9.0\lib" opencv_core243d.lib opencv_imgproc243d.lib opencv_highgui243d.lib opencv_ml243d.lib opencv_video243d.lib opencv_features2d243d.lib opencv_calib3d243d.lib opencv_nonfree243d.lib SDL.lib SDLmain.lib opengl32.lib glu32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\TheTable.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\549\github\549\Mainline\TableCPP\TheTable\Debug\TheTable.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\549\github\549\Mainline\TableCPP\TheTable\Debug\TheTable.lib" /MACHINE:X86 Debug\Camera.obj
          Debug\ImageManip.obj
          Debug\Initialization.obj
+         Debug\main.obj
          Debug\Mapper.obj
          Debug\NetworkServices.obj
          Debug\ServerNetwork.obj
@@ -24,4 +97,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.33
+Time Elapsed 00:00:09.27

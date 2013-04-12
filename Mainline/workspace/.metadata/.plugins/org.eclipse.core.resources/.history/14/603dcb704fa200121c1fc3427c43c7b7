@@ -1,0 +1,22 @@
+package com.projector;
+
+
+public class Initialization{
+
+	
+	//the initialization's stage
+	int stage;
+	
+	//construct the initialization object
+	public Initialization(MainActivity activity){
+		
+		//set renderer and initialization stage
+		activity.mGLView.renderer.setStage(0);
+		this.stage = 0;
+		
+		
+	}
+	
+	
+	
+}

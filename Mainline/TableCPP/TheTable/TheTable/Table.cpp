@@ -2,30 +2,49 @@
 //
 
 #include "Initialization.h"
+#include "Table.h"
 
 
-int main(int argc, char* argv[])
-{
+Table::Table(char* ip, int port, int camNum){
+	sn = new ServerNetwork(ip, port);
+	tCam.initFastCam(camNum);
+	recvbuf = (char*)malloc(MAX_REC_BUF*sizeof(char));
+	tableBGsub = new BackgroundSubtractorMOG2(0, 400, true);
+	projectorsConnected = 0;
+}
+
+void Table::initialize(){
 	Initialization* tableInit = new Initialization();
 
-	tableInit->init(1);
-	tableInit->connectToProjectors("10.0.1.187", 6881);
-	tableInit->camRotation();
-	tableInit->readInit1(0);
-	tableInit->readInit2(0);
-	tableInit->computeAndSendPerspectives(0);
+	//connect all the projectors
+	tableInit->connectToProjectors(sn);
 
-	tableInit->mapper->clearGlobals();
+	//make camera shit perfect and receive a cameraperspective
+	cp = tableInit->camRotation(tCam);
 
-	tableInit->readInit1(1);
-	tableInit->readInit2(1);
-	tableInit->computeAndSendPerspectives(1);
+	//set background subtractor
+	frame = tCam.grabFrameWithPerspective(cp);
+	tableBGsub->operator()(frame, foreground, 0.001);
 
-	tableInit->sn->sendToAll("3",5,0);
-	tableInit->sn->receiveData(0,tableInit->recvbuf);
-	tableInit->sn->sendToAll("3",5,1);
-	tableInit->sn->receiveData(1,tableInit->recvbuf);
+	//read init pattern for each projector
+	for (int i=0; i<NUM_PROJECTORS; i++){
+		tableInit->readInitPattern(i, tableBGsub, tCam, sn);
+		tableInit->computePerspective(i, sn);
+		sn->sendToAll("0", 5, i);
+		sn->receiveData(i, recvbuf);
+	}
 
-	return 0;
+	//send every projector their perspectives
+	tableInit->sendPerspectives(sn);
+
+	sn->sendToAll("4",5,0);
+	sn->receiveData(0, recvbuf);
+	sn->sendToAll("4",5,1);
+	sn->receiveData(1,recvbuf);
 }
+
+void Table::run(){
+}
+
+
 

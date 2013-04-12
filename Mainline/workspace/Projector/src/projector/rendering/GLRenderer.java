@@ -2,21 +2,36 @@ package projector.rendering;
 
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.util.ArrayList;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
+import javax.xml.parsers.ParserConfigurationException;
 
+import projector.rendering.Animation;
+import projector.rendering.AnimationFactory;
+import projector.rendering.Object;
+import org.xml.sax.SAXException;
+
+import com.projector.MainActivity;
+
+import projector.client.NetClient;
 import projector.rendering.ObjectFactory;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLU;
+import android.opengl.GLUtils;
 import android.opengl.Matrix;
+import android.os.Environment;
 import android.os.SystemClock;
 import android.util.Log;
 
@@ -26,13 +41,19 @@ import android.util.Log;
  */
 public class GLRenderer implements GLSurfaceView.Renderer {
 	   private static final String TAG = "GLRenderer";
+	   
+	   //animation variables
+	   float animationPoint = 0.0f;
+	   float animationDuration = 4.0f;
+	   private int numAnimations = 0;
+	   
+	   //texture variables
+	   private int numTextures = 0;
+	   /** The texture pointer */
+	   private int[] textures = new int[10];
+	   
 	   private final Context context;
-	   
-	   private static final int LOAD_MODELS = 0;
-	   private static final int PATTERN1 = 1;
-	   private static final int PATTERN2 = 2;
-	   private static final int CONFIRM_PATTERN = 3;
-	   
+	   private final MainActivity activity;
 	   private final GLCircle bigCircle = new GLCircle(0,0,2,100);
 	   private final GLCircle smallCircle = new GLCircle(0,3,0.5f,100);
 	   private final GLCircle smallBigCircle = new GLCircle(0,0,0.2f,100);
@@ -72,39 +93,78 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 	   
 	   private float distanceFromTable, incidentAngle, rotation, deltaX, deltaY, twist;
 	   
-	   private long startTime;
-	   private long fpsStartTime;
-	   private long numFrames;
-	   private volatile int stage;
+	private long startTime;
+	private long fpsStartTime;
+	private long numFrames;
+	   
+	private int numObjects = 0;
 	private Object myObj;
 	private int width;
 	private int height;
-	private float eyeX = 0.0f;
-	private float eyeY = 0.0f;
-	private float eyeZ = 24.0f;
+	
+	public float xAngle = 0.0f;
+   public float yAngle = 0;
+   public float zAngle = 0;
+   
+   public float xDist = 0.0f;
+   public float yDist = 0.0f;
+   public float zDist = -10.0f;
+   
+   public float xTrans = 0.0f;
+   public float yTrans = 0.0f;
+   public float scale = 1.0f;
+	   
+	//initialization variables
+	public float eyeX = 0.0f;
+	public float eyeY = 0.0f;
+	public float eyeZ = 24.0f;
 	private float centerX = 0.0f;
 	private float centerY = 0.0f;
 	private float centerZ = 0.0f;
 	private float upX = 0.0f;
 	private float upY = 1.0f;
 	private float upZ = 0.0f;
+	private NetClient netClient;
+	private GL10 gl;
 
-	   public GLRenderer(Context context) {
+	ObjectFactory factory = new ObjectFactory("/Objects");
+	AnimationFactory ani = new AnimationFactory("/Animations");
+	private ArrayList<Object> objects = new ArrayList<Object>();
+	private ArrayList<Animation> animations = new ArrayList<Animation>();
+	   
+	   public GLRenderer(Context context, MainActivity activity, NetClient netClient) {
+		  this.activity = activity;
 	      this.context = context;
-	      this.stage = 0;
 	      this.distanceFromTable = -24.0f;
 	      this.incidentAngle = 0.0f;
 	      this.deltaX = 0.0f;
 	      this.deltaY = 0.0f;
 	      this.rotation = 0.0f;
 	      this.twist = 0.0f;
+	      this.netClient = netClient;
 	   }
 
+	   public float[] parseData(){
+			String receiveValsString[];
+			float[] receiveVals = new float[10];
+			
+			if (activity.stage == MainActivity.RENDER_MAPPED){
+				receiveValsString = netClient.inString.split(",");
+				Log.i(TAG, "Vals Received: " + receiveValsString[0] + "," + receiveValsString[1]  + "," + receiveValsString[2]  + "," + receiveValsString[3]  + "," + receiveValsString[4]  + "," + receiveValsString[5]);
+				for (int i=0; i < 10; i++) {
+					receiveVals[i] = Float.parseFloat(receiveValsString[i]);
+					Log.i(TAG, "FLOAT VALUE[" + i + "]: " + receiveVals[i]);
+				}
+			}
+			
+			return receiveVals;
+		}
 	   
 	   
 	   public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-	      
-		   boolean SEE_THRU = true;
+		   
+		   this.gl = gl;
+		   boolean SEE_THRU = false;
 		      
 		      
 		      startTime = System.currentTimeMillis();
@@ -114,9 +174,9 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 
 		      
 		      // Define the lighting
-		      float lightAmbient[] = new float[] { 0.2f, 0.2f, 0.2f, 1 };
+		      float lightAmbient[] = new float[] { 1.0f, 1.0f, 1.0f, 1 };
 		      float lightDiffuse[] = new float[] { 1, 1, 1, 1 };
-		      float[] lightPos = new float[] { 1, 1, 1, 1 };
+		      float[] lightPos = new float[] { 0, 2, 3, 1 };
 		      gl.glEnable(GL10.GL_LIGHTING);
 		      gl.glEnable(GL10.GL_LIGHT0);
 		      gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_AMBIENT, lightAmbient, 0);
@@ -159,31 +219,118 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 		      
 		      
 		      // Enable textures
-		   //   gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
-		   //   gl.glEnable(GL10.GL_TEXTURE_2D);
-
-		      // Load the cube's texture from a bitmap
-		   //   GLCube.loadTexture(gl, context, R.drawable.android);
+		     gl.glEnable(GL10.GL_TEXTURE_2D);
 	      
-	      
+		     activity.init();
 	   }
 	   
-	   public void setStage(int stage){
-		   this.stage = stage;
-		   Log.i(TAG, "STAGE: " + this.stage);
+	
+	   public int loadTexture(String fileName){
+		   Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Textures/" + fileName);
+		   
+		   gl.glGenTextures(1, textures, numTextures);
+		   
+				// ...and bind it to our array
+			gl.glBindTexture(GL10.GL_TEXTURE_2D, textures[numTextures]);
+				
+				// create nearest filtered texture
+			gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_NEAREST);
+			gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_NEAREST);
+
+			
+				//Different possible texture parameters, e.g. GL10.GL_CLAMP_TO_EDGE
+//				gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_WRAP_S,GL10.GL_CLAMP_TO_EDGE);
+//				gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_WRAP_T, GL10.GL_CLAMP_TO_EDGE);
+				
+				// Use Android GLUtils to specify a two-dimensional texture image from our bitmap 
+			GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap, 0);
+				
+				// Clean up
+			bitmap.recycle();
+			
+			return numTextures++;
 	   }
+	   
+	   public int loadObject(String fileName){
+		      try {
+		    	  objects.add(factory.loadObject(fileName, context));
+		    	  return numObjects++;
+		  	} catch (FileNotFoundException e) {
+		  		// TODO Auto-generated catch block
+		  		e.printStackTrace();
+		  	}
+			return -1;  
+	   }
+	   
+	   public int loadAnimation(String fileName){
+		      try {
+		    	  animations.add(ani.loadAnimation(fileName));
+		    	  return numAnimations ++;
+		  	} catch (FileNotFoundException e) {
+		  		// TODO Auto-generated catch block
+		  		e.printStackTrace();
+		  	} catch (ParserConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SAXException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return -1;  
+	}
+	   
+	   public void show(int objNum){
+		   Object obj;
+		   if(objNum < numObjects){
+			   obj = objects.get(objNum);
+			   obj.draw = true;
+		   }
+		   
+	   }
+	   
+	   public void hide(int objNum){
+		   Object obj;
+		   if(objNum < numObjects){
+			   obj = objects.get(objNum);
+			   obj.draw = false;
+		   }
+		   
+	   }
+	   
+	   public void setObjectTexture(int objNum, int texNum){
+		   Object obj;
+		   if(objNum < numObjects){
+			   obj = objects.get(objNum);
+			   obj.texNum = texNum;
+		   }
+	   }
+	   
+	   public void playAnimation(int objNum, int aniNum, int times, int duration){
+		   Object obj;
+		   if(objNum < numObjects){
+			   obj = objects.get(objNum);
+			   obj.aniNum = aniNum;
+			   obj.aniTimesToPlay = -1;
+			   obj.aniDuration = 10.0f;
+		   }
+	   }
+	   
+	   
 
 	   public void setValues(float[] vals){
 		   if (vals != null && vals.length > 5){
-			   eyeX = vals[0];
-			   eyeY = vals[1];
-			   eyeZ = vals[2];
-			   centerX = vals[3];
-			   centerY = vals[4];
-			   centerZ = vals[5];
-			   upX = vals[6];
-			   upY = vals[7];
-			   upZ = vals[8];
+			   eyeX = vals[1];
+			   eyeY = vals[2];
+			   eyeZ = vals[3];
+			   centerX = vals[4];
+			   centerY = vals[5];
+			   centerZ = vals[6];
+			   upX = vals[7];
+			   upY = vals[8];
+			   upZ = vals[9];
 			   Log.i(TAG, "Values BAHHHH: " + distanceFromTable + "," + incidentAngle + "," + rotation + "," + deltaX + "," + deltaY + "," + twist);
 		   }
 	   }
@@ -201,14 +348,18 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 	   
 	   
 	   public void onDrawFrame(GL10 gl) {
-	      
+		  
+		   Log.i("DrawFrame", "Stage: " + activity.stage);
 		   gl.glMatrixMode(GL10.GL_PROJECTION);
 		   gl.glLoadIdentity();
-		   float ratio = (float) width / height;
-		   if(stage == LOAD_MODELS || stage == PATTERN1 || stage == PATTERN2){
+		   float ratio1 = (float) width / height;
+		   
+		   if(activity.stage == MainActivity.IDLE || activity.stage == MainActivity.RENDER_CIRCLES){
+			   
+			   gl.glDisable(GL10.GL_TEXTURE_2D);
 			  // GLU.gluOrtho2D(gl, 0, width, 0, height);
 			   //used to be 17.5
-			   GLU.gluPerspective(gl, 17.0f, ratio, 0.1f, 1000f); 
+			   GLU.gluPerspective(gl, 17.0f, ratio1, 0.1f, 1000f); 
 			   GLU.gluLookAt(gl, eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ);
 			      // Clear the screen to black
 			      gl.glClear(GL10.GL_COLOR_BUFFER_BIT
@@ -217,17 +368,14 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 			      // Position model so we can see it
 			      gl.glMatrixMode(GL10.GL_MODELVIEW);
 			      gl.glLoadIdentity();
-			      if(stage == PATTERN1){
-			    	  smallBigCircle.draw(gl);
-			    	  smallSmallCircle.draw(gl);
-			      }
-			      else if (stage == PATTERN2){
+			      if (activity.stage == MainActivity.RENDER_CIRCLES){
 			    	  bigCircle.draw(gl);
 					  smallCircle.draw(gl);
 			      }
 		   }
-		   else{
-			   GLU.gluPerspective(gl, 17.0f, ratio, 0.1f, 1000f); 
+		   else if(activity.stage == MainActivity.RENDER_MAPPED || activity.stage == MainActivity.FINAL_RENDERING){
+			   if (activity.stage == MainActivity.RENDER_MAPPED) setValues(parseData());
+			   GLU.gluPerspective(gl, 17.0f, ratio1, 0.1f, 1000f); 
 			   GLU.gluLookAt(gl, eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ);
 			   gl.glClear(GL10.GL_COLOR_BUFFER_BIT
 			            | GL10.GL_DEPTH_BUFFER_BIT);
@@ -279,14 +427,38 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 			      circn4n2.draw(gl);
 			      circn2n4.draw(gl);
 			      circn4n4.draw(gl);
+		   
+		   
 		   }
+		   else if (activity.stage == MainActivity.RUN)   
+			   	gl.glEnable(GL10.GL_TEXTURE_2D);
+			    GLU.gluPerspective(gl, 17.0f, ratio1, 0.1f, 1000f); 
+			    Log.e("RENDERING", "RENDERING!!!!!");
+			    GLU.gluLookAt(gl, 10.0f, -10.0f, 12.0f, -2.0f, 2.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+			    
+			      
+			      // Clear the screen to black
+			    gl.glClear(GL10.GL_COLOR_BUFFER_BIT
+			            | GL10.GL_DEPTH_BUFFER_BIT);
 
-	      
+			      // Position model so we can see it
+			    gl.glMatrixMode(GL10.GL_MODELVIEW);
+			    gl.glLoadIdentity();
+			      
+			      
+			      
+			   for(Object curObject: objects){
+		     	  if(curObject.draw){
+		     		  gl.glBindTexture(GL10.GL_TEXTURE_2D, textures[curObject.texNum]);
+		     		  curObject.draw(gl);
+		     	  }
+			   }
+
+	      netClient.messageReady = false;
 //	      gl.glRotatef(xAngle, 1.0f, 0.0f, 0.0f);
 //          gl.glRotatef(yAngle, 0.0f, 1.0f, 0.0f);
 //          gl.glRotatef(zAngle, 0.0f, 0.0f, 1.0f);
     	 // myObj.draw(gl);
-	      
 	   }
 
 

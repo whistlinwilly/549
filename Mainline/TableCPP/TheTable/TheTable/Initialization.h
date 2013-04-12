@@ -10,28 +10,20 @@ using namespace cv;
 class Initialization
 {
 public:
+	Initialization();
 	Mapper *mapper;
-	Mapper *mapper2;
-	ServerNetwork* sn;
-	Camera tCam;
-	BackgroundSubtractorMOG2* tableBGsub;
 	unsigned int projectorsConnected;
-	char* recvbuf;
 	char* curWindow;
+	char* recvbuf;
 	CameraPerspective cp;
 	Mat bgFrame;
 	Mat bgForeground;
-	Mat foreground;
-	Mat frame;
-	Mat thresh;
 
-	Initialization();
-	void init(int camNumber);
-	void connectToProjectors(char* ip, int port);
-	void camRotation(void);
-	void bgSubtraction(void);
-	void readInit1(int projNum);
-	void readInit2(int projNum);
-	void computeAndSendPerspectives(int projNum);
+	void connectToProjectors(ServerNetwork* sn);
+	CameraPerspective camRotation(Camera tCam);
+	void bgSubtraction(BackgroundSubtractorMOG2* BGsub, Camera tCam);
+	void readInitPattern(int projNum, BackgroundSubtractorMOG2* BGsub, Camera tCam, ServerNetwork *sn);
+	void computePerspective(int projNum, ServerNetwork* sn);
+	void sendPerspectives(ServerNetwork* sn);
 };
 

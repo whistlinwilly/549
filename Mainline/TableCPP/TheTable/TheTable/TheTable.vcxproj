@@ -72,12 +72,14 @@
     <ClInclude Include="Mapper.h" />
     <ClInclude Include="NetworkServices.h" />
     <ClInclude Include="ServerNetwork.h" />
+    <ClInclude Include="Table.h" />
     <ClInclude Include="Tracker.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ImageManip.cpp" />
     <ClCompile Include="Initialization.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Mapper.cpp" />
     <ClCompile Include="NetworkServices.cpp" />
     <ClCompile Include="ServerNetwork.cpp" />

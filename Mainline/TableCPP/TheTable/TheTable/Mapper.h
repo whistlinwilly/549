@@ -7,23 +7,10 @@ class Mapper
 public:
 	Mapper();
 
-	float distanceFromTable;
-	float incidentAngle;
-	float twist;
-	float rotation;
 	ProDat proDat[NUM_PROJECTORS];
-	circleData* cDatSmall;
-	circleData* cDatBig;
-	float eyeX, eyeY, eyeZ;
-	float centerX, centerY, centerZ;
-	float upX, upY, upZ;
-	int isFirst;
-	float rotationAdd;
+	circleData* cDat;
 
-	std::string s;
-	char *coordString;
 
-	void clearGlobals(void);
 	float xToInches(float pixels);
 	float yToInches(float pixels);
 	float xToPixels(float inches);
@@ -31,9 +18,7 @@ public:
 	float toRads(float degrees);
 	float toDegrees(float radians);
 
-	void resetGlobals(void);
-	void computeProjectorData(void);
-	void computeUpVector(void);
-	void upFromTwist();
-	void buildString();
+	void loadProjectorData(int projNum);
+	void upFromTwist(float centerX, float centerY, float eyeX, float eyeY, float eyeZ, float twist, float *up);
+	char* buildString(int projNum);
 };

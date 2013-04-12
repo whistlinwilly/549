@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import projector.rendering.Surface;
+
+
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
@@ -31,6 +34,16 @@ public class ObjectFactory {
 	boolean readingTextures = false;
 	boolean readingNormals = false;
 	boolean readingFaces = false;
+	
+	boolean hasVertices  = false;
+	boolean hasTextures = false;
+	boolean hasNormals = false;
+	
+	byte[] indexArray = new byte[3];
+	
+	int numFaces = 0;
+	
+	
 	boolean DEBUG = true;
 	
 	Object newObj;
@@ -47,12 +60,18 @@ public class ObjectFactory {
 		normals = new ArrayList<Float>();
 		newSurfaces = new ArrayList<Surface>();
 		allObjects = new ArrayList<Object>();
+		indexArray[0] = (byte) 0;
+		indexArray[1] = (byte) 1;
+		indexArray[2] = (byte) 2;
 	}
 	
 	public Object loadObject(String fileName, Context context) throws FileNotFoundException{
 		
 		String line = null;
-		int vertexIndex1 = 0, textureIndex = 0, normalIndex = 0, vertexIndex2 = 0, vertexIndex3 = 0, vertexIndex4 = 0;
+		int vertexIndex1 = 0, vertexIndex2 = 0, vertexIndex3 = 0;
+		int textureIndex1 = 0, textureIndex2 = 0, textureIndex3 = 0;
+		int normalIndex1 = 0, normalIndex2 = 0, normalIndex3 = 0;
+		Surface newSurface = null;
 		
 		//SD Card is mounted
 		if(Environment.MEDIA_MOUNTED.equals(state) || Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)){
@@ -64,6 +83,7 @@ public class ObjectFactory {
 					if(input.hasNext(Pattern.compile("v"))){
 						if(!readingVertices){
 							readingVertices = true;
+							hasVertices = true;
 							Log.w("Object Factory", "Found Vertex Section, Now Parsing");
 						}
 						//input.useDelimiter(" ");
@@ -82,11 +102,12 @@ public class ObjectFactory {
 						if(!readingTextures && readingVertices){
 							Log.w("Object Factory", "Found Texture Section, Now Parsing");
 							readingTextures = true;
+							hasTextures = true;
 						}
 						input.next();
 						
 						float x = Float.parseFloat(input.next());
-						float y = Float.parseFloat(input.next());
+						float y = 1.0f - Float.parseFloat(input.next());
 						
 						textures.add(x);
 						textures.add(y);
@@ -97,6 +118,7 @@ public class ObjectFactory {
 						if(!readingNormals && readingVertices){
 							Log.w("Object Factory", "Found Normal Section, Now Parsing");
 							readingNormals = true;
+							hasNormals = true;
 						}
 						input.next();
 						
@@ -115,49 +137,88 @@ public class ObjectFactory {
 							Log.w("Object Factory", "Found Face Section, Now Parsing");
 							readingFaces = true;
 						}
+						
 						input.next();
 						String face = input.next();
 						String numbers[] = face.split("/");
 						if(numbers[0].length() > 0)
 							vertexIndex1 = Integer.parseInt(numbers[0]);
+						if(numbers[1].length() > 0)
+							textureIndex1 = Integer.parseInt(numbers[1]);
+						if(numbers[2].length() > 0)
+							normalIndex1 = Integer.parseInt(numbers[2]);
 						face = input.next();
 						numbers = face.split("/");
 						if(numbers[0].length() > 0)
 							vertexIndex2 = Integer.parseInt(numbers[0]);
+						if(numbers[1].length() > 0)
+							textureIndex2 = Integer.parseInt(numbers[1]);
+						if(numbers[2].length() > 0)
+							normalIndex2 = Integer.parseInt(numbers[2]);
 						face = input.next();
 						numbers = face.split("/");
 						if(numbers[0].length() > 0)
 							vertexIndex3 = Integer.parseInt(numbers[0]);
-						if(input.hasNext(Pattern.compile(".*/.*"))){
-							face = input.next();
-							numbers = face.split("/");
-							vertexIndex4 = Integer.parseInt(numbers[0]);
-						}
-						Surface newSurface;
-						if(vertexIndex4 > 0){
-						//	vertexIndex1 -= totalVertices;
-						//	vertexIndex2 -= totalVertices;
-						//	vertexIndex3 -= totalVertices;
-						//	vertexIndex4 -= totalVertices;
-							Log.w("Object Factory", "Found New Quad Face " + vertexIndex1 + "/" + vertexIndex2 + "/" + vertexIndex3 + "/" + vertexIndex4);
-							newSurface = new Surface(--vertexIndex1, --vertexIndex2, --vertexIndex3, --vertexIndex4);
-						}
-						else{
-							Log.w("Object Factory", "Found New Tri Face " + vertexIndex1 + "/" + vertexIndex2 + "/" + vertexIndex3);
-							newSurface = new Surface(--vertexIndex1, --vertexIndex2, --vertexIndex3);
-						}
-					
-					newSurface.index = ByteBuffer.allocateDirect(newSurface.indices.length);
-					newSurface.index.put(newSurface.indices);
-					newSurface.index.position(0);
+						if(numbers[1].length() > 0)
+							textureIndex3 = Integer.parseInt(numbers[1]);
+						if(numbers[2].length() > 0)
+							normalIndex3 = Integer.parseInt(numbers[2]);
+						
+						Log.w("Object Factory", "Found New Tri Face " + vertexIndex1 + "/" + vertexIndex2 + "/" + vertexIndex3);
+						
+						newSurface = new Surface();
+						
+						ByteBuffer bb = ByteBuffer.allocateDirect(3 * 3 * 4); //3 points * 3 floats each * sizeof(float)
+						bb.order(ByteOrder.nativeOrder());
+						newSurface.vertices = bb.asFloatBuffer();
+						
+						vertexIndex1--;
+						vertexIndex2--;
+						vertexIndex3--;
+						
+						newSurface.vertices.put(vertices.get(3 * vertexIndex1));
+						newSurface.vertices.put(vertices.get(3 * vertexIndex1 + 1));
+						newSurface.vertices.put(vertices.get(3 * vertexIndex1 + 2));
+						newSurface.vertices.put(vertices.get(3 * vertexIndex2));
+						newSurface.vertices.put(vertices.get(3 * vertexIndex2 + 1));
+						newSurface.vertices.put(vertices.get(3 * vertexIndex2 + 2));
+						newSurface.vertices.put(vertices.get(3 * vertexIndex3));
+						newSurface.vertices.put(vertices.get(3 * vertexIndex3 + 1));
+						newSurface.vertices.put(vertices.get(3 * vertexIndex3 + 2));
+						newSurface.vertices.position(0);
+						
+						ByteBuffer tbb = ByteBuffer.allocateDirect(2 * 3 * 4);
+						tbb.order(ByteOrder.nativeOrder());
+						newSurface.textures = tbb.asFloatBuffer();
+						
+						textureIndex1--;
+						textureIndex2--;
+						textureIndex3--;
+						
+						newSurface.textures.put(textures.get(2 * textureIndex1));
+						newSurface.textures.put(textures.get(2 * textureIndex1 + 1));
+						newSurface.textures.put(textures.get(2 * textureIndex2));
+						newSurface.textures.put(textures.get(2 * textureIndex2 + 1));
+						newSurface.textures.put(textures.get(2 * textureIndex3));
+						newSurface.textures.put(textures.get(2 * textureIndex3 + 1));
+						newSurface.textures.position(0);
+
+						newSurface.index = ByteBuffer.allocateDirect(indexArray.length);
+						newSurface.index.put(indexArray);
+						newSurface.index.position(0);
 					
 					newSurfaces.add(newSurface);
 					vertexIndex1 = 0;
 					vertexIndex2 = 0;
 					vertexIndex3 = 0;
-					vertexIndex4 = 0;
+					textureIndex1 = 0;
+					textureIndex2 = 0;
+					textureIndex3 = 0;
+					normalIndex1 = 0;
+					normalIndex2 = 0;
+					normalIndex3 = 0;
 					}
-					else if(input.hasNext(Pattern.compile("g"))){
+					else if(input.hasNext(Pattern.compile("o"))){
 						if(readingFaces){
 //FOR MULTI OBJECT
 //							Log.w("Object Factory", "Reached next group object:" + numObjects);
@@ -217,16 +278,28 @@ public class ObjectFactory {
 						Log.w("Object Factory", "GOT UNKNOWN LINE:" + lineIsThis);
 					}
 					else{
-						Log.w("Object Factory", "Finished Parsing...");
-						ByteBuffer bb = ByteBuffer.allocateDirect(vertices.size() * 4);
-						bb.order(ByteOrder.nativeOrder());
-						newObj.vertices = bb.asFloatBuffer();
-						
-						
-					for(int i = 0; i < vertices.size(); i++)
-						newObj.vertices.put(vertices.get(i));
+						//OLD VERSION OF FACE PARSING
+//						Log.w("Object Factory", "Finished Parsing...");
+//						ByteBuffer bb = ByteBuffer.allocateDirect(vertices.size() * 4);
+//						bb.order(ByteOrder.nativeOrder());
+//						newObj.vertices = bb.asFloatBuffer();
+//						
+//						
+//					for(int i = 0; i < vertices.size(); i++)
+//						newObj.vertices.put(vertices.get(i).floatValue());
+//					newObj.vertices.position(0);
+//					
+//					
+//					ByteBuffer tbb = ByteBuffer.allocateDirect(textures.size() * 4);
+//					tbb.order(ByteOrder.nativeOrder());
+//					newObj.textures = tbb.asFloatBuffer();
+//					
+//					
+//					for(int i = 0; i < textures.size(); i++)
+//						newObj.textures.put(textures.get(i).floatValue());
+//					newObj.textures.position(0);
 					
-					newObj.vertices.flip();
+				//	newObj.textures.flip();
 					
 					newObj.surfaces = new Surface[newSurfaces.size()];
 					

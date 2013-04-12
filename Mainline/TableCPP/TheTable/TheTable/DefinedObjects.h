@@ -1,12 +1,12 @@
 #include <opencv\cv.h>
 
-#define NUM_PROJECTORS (2)
+#define NUM_PROJECTORS (1)
 
 //Table X and Y length on image plane
 #define TABLE_X (480)
 #define TABLE_Y (480)
 
-#define DEFAULT_DISTANCE 24.5
+#define DEFAULT_DISTANCE 15.75
 
 //Error in pixels that corner of table can be off image plane
 #define X_INTERSECT_ERROR_MARGIN (200)
@@ -16,12 +16,12 @@
 
 //Width of table in inches
 #ifndef TABLE_WIDTH
-#define TABLE_WIDTH (19.0)
+#define TABLE_WIDTH (19.5)
 #endif 
 
 //Height of table in inches
 #ifndef TABLE_HEIGHT
-#define TABLE_HEIGHT (19.0)
+#define TABLE_HEIGHT (19.5)
 #endif 
 
 
