@@ -11,7 +11,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import com.projector.MainActivity;
+import projector.main.MainActivity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -52,7 +52,7 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
      * @param macAddress
      * @throws InterruptedException 
      */
-    public NetClient(String host, int port) throws InterruptedException {
+    public NetClient(String host, int port){
         this.host = host;
         this.port = port;
         connected = false;
@@ -121,7 +121,7 @@ public class NetClient extends AsyncTask<MainActivity, MainActivity, MainActivit
 			receiveVals[i] = Float.parseFloat(receiveValsString[i]);
 			Log.i(TAG, "FLOAT VALUE[" + i + "]: " + receiveVals[i]);
 		}
-		activity.mGLView.renderer.setValues(receiveVals);
+		activity.view.renderer.setValues(receiveVals);
 		waitingToReceive = false;
     }
     

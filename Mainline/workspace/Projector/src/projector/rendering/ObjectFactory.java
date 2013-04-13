@@ -10,9 +10,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-import projector.rendering.Surface;
-
-
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;

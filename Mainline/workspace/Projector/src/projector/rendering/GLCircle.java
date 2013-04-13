@@ -24,22 +24,22 @@ class GLCircle {
    private final IntBuffer mVertexBuffer;
    
    
-  // private final IntBuffer mTextureBuffer;
+   private final IntBuffer mTextureBuffer;
    
    private final int numPoints;
 
    
    public GLCircle(float x, float y, float radius, int points) {
-
+	   
 	   numPoints = points + 2;
       
-      long one = 65536;
-      long half = one / 2;
+      int one = 65536;
+      int half = one / 2;
       int[] vertices = new int[numPoints * 3];
       double c, s;
       
-      vertices[0] = (int)(x * one);
-      vertices[1] = (int)(y * one);
+      vertices[0] = (int)(x*one);
+      vertices[1] = (int)(y*one);
       vertices[2] = 0;
       
       for(int i=1; i < numPoints; i++){
@@ -63,7 +63,7 @@ class GLCircle {
 
       
       
-/*      int texCoords[] = {
+      int texCoords[] = {
             // FRONT
             0, one, one, one, 0, 0, one, 0,
             // BACK
@@ -75,7 +75,7 @@ class GLCircle {
             // TOP
             one, 0, 0, 0, one, one, 0, one,
             // BOTTOM
-            0, 0, 0, one, one, 0, one, one, };*/
+            0, 0, 0, one, one, 0, one, one, };
       
 
       
@@ -94,18 +94,22 @@ class GLCircle {
 
       
       // ...
-/*      ByteBuffer tbb = ByteBuffer.allocateDirect(texCoords.length * 4);
+      ByteBuffer tbb = ByteBuffer.allocateDirect(texCoords.length * 4);
       tbb.order(ByteOrder.nativeOrder());
       mTextureBuffer = tbb.asIntBuffer();
       mTextureBuffer.put(texCoords);
-      mTextureBuffer.position(0);*/
+      mTextureBuffer.position(0);
       
    }
    
 
    
    
-   public void draw(GL10 gl) { 
+
+
+
+
+public void draw(GL10 gl) { 
       gl.glVertexPointer(3, GL10.GL_FIXED, 0, mVertexBuffer);
       
       

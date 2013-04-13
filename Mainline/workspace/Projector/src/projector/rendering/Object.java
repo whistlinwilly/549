@@ -8,8 +8,6 @@ import java.util.List;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import projector.rendering.Surface;
-
 public class Object {
 	
 	int uid;

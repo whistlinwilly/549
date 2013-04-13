@@ -9,12 +9,11 @@
 
 package projector.rendering;
 
-import projector.client.NetClient;
-
-import com.projector.MainActivity;
-
 import android.content.Context;
 import android.opengl.GLSurfaceView;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.widget.Toast;
 
 public class GLView extends GLSurfaceView {
    public final GLRenderer renderer;
@@ -30,8 +29,18 @@ public class GLView extends GLSurfaceView {
    public final int X_TRANS = 9;
    public final int Y_TRANS = 10;
    public final int SCALE = 11;
+
+   public GLView(Context context) {
+      super(context);
+
+      // Uncomment this to turn on error-checking and logging
+      //setDebugFlags(DEBUG_CHECK_GL_ERROR | DEBUG_LOG_GL_CALLS);
+
+      renderer = new GLRenderer(context);
+      setRenderer(renderer);
+   }
    
- public void setValue(int switchCode, float value){
+   public void setValue(int switchCode, float value){
 	   
 	   switch(switchCode){
 		   case Z_DIST:
@@ -73,18 +82,5 @@ public class GLView extends GLSurfaceView {
 	   }
 	   
    }
-   
-   public GLView(Context context, MainActivity activity, NetClient netClient) {
-      super(context);
 
-      // Uncomment this to turn on error-checking and logging
-      //setDebugFlags(DEBUG_CHECK_GL_ERROR | DEBUG_LOG_GL_CALLS);
-      
-      
-      renderer = new GLRenderer(context, activity, netClient);
-      setRenderer(renderer);
-      
-      //only renders view when there is a change in drawing data
-      //setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
-   }
 }
